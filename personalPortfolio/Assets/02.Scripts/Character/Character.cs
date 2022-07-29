@@ -36,7 +36,9 @@ public abstract class Character : MonoBehaviour, IRecover, IDamaged
 
     [SerializeField]
     private int team; 
-    public int Team { get { return team; } set { team = value; SetTeamColor(); } } //팀을 넣으면 자동으로 색상 변경
+    public int Team { get { return team; } set { team = value; SetTeamColor();
+            
+        } } //팀을 넣으면 자동으로 색상 변경 및 레이어 설정
 
     #endregion
 
@@ -55,12 +57,13 @@ public abstract class Character : MonoBehaviour, IRecover, IDamaged
         CharacterSkinnedMesh = GetComponentsInChildren<SkinnedMeshRenderer>();
         CharaterMesh = GetComponentsInChildren<MeshRenderer>();
         mat = Resources.LoadAll<Material>("0.TeamColor/CharacterColor");
-       
+        
     }
 
     private void OnEnable()
     {
         hp = maxHp;
+
         SetTeamColor();
     }
 
@@ -76,6 +79,9 @@ public abstract class Character : MonoBehaviour, IRecover, IDamaged
         {
             CharaterMesh[i].material = mat[team];
         }
+
+        gameObject.layer = 6 + team;
+
     }
 
 
@@ -88,14 +94,15 @@ public abstract class Character : MonoBehaviour, IRecover, IDamaged
     { hp -= Damaged;
         if (hp <= 0)
         {
-            Die();
+            DieCh();
         }
 
     }
 
-    private void Die()
+    private void DieCh()
     {
         GetComponent<Animator>().SetTrigger("Die");
+        this.SendMessage("Die");
         AI[] allAI = FindObjectsOfType<AI>();
         foreach (AI targetAI in allAI)
         {

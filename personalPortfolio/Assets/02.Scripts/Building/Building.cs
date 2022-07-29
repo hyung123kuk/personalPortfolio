@@ -19,7 +19,7 @@ public class Building : MonoBehaviour , IDamaged  //능력없는 중립 건물이다.
 
     [SerializeField]
     private int team;
-    public int Team { get { return team; } set { team = value; } } //팀을 알아야 데미지가 들어간다.
+    public int Team { get { return team; } set { team = value; SetTeamColor();} } //팀설정, 색상설정, 레이어설정
 
     #endregion
 
@@ -28,22 +28,27 @@ public class Building : MonoBehaviour , IDamaged  //능력없는 중립 건물이다.
 
     private void Awake()
     {
+        
         BuildingMat = GetComponents<Material>();
         mat = Resources.LoadAll<Material>("0.TeamColor/BuildingColor");
+        
     }
 
     private void OnEnable()
     {
         hp = maxHp;
+
         SetTeamColor();
     }
 
     public void SetTeamColor() //팀 색상 설정
     {
+        
         for (int i = 0; i < mat.Length; i++)
         {
             BuildingMat[i] = mat[Team];
         }
+        gameObject.layer = 6 + team;
     }
 
 

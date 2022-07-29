@@ -10600,6 +10600,7 @@ GameObject:
   - component: {fileID: 1887142254524629295}
   - component: {fileID: 697148089}
   - component: {fileID: 2246542848967418851}
+  - component: {fileID: 5780583421394320123}
   - component: {fileID: 8470137681993168112}
   - component: {fileID: 6411283388602848768}
   m_Layer: 0
@@ -10718,7 +10719,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!195 &2246542848967418851
 NavMeshAgent:
@@ -10742,6 +10743,20 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!136 &5780583421394320123
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887142254515175569}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.8
+  m_Height: 2.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.2, z: 0}
 --- !u!114 &8470137681993168112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10767,12 +10782,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 536a6cf59bc007142ae071b8c9d76e4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 100
+  maxHp: 1000
   hp: 100
   attackDamage: 10
   defense: 0
-  speed: 5
+  speed: 3
   attackRange: 2
+  attackSpeed: 1
   team: 0
   attackDelay: 0.2
 --- !u!1 &1887142254515175757

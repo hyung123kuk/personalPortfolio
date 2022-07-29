@@ -12,6 +12,7 @@ public class Arrow : MonoBehaviour,IDamaged
     private MeshRenderer[] Mesh;
     private Material[] mat;
     private Transform tr;
+    private Collider myCol;
 
     Rigidbody rbody;
     private int team;
@@ -19,6 +20,7 @@ public class Arrow : MonoBehaviour,IDamaged
         set {   //팀을 설정하면 자동으로 색상 변경 하도록
             team = value;
             SetTeamColor();
+            gameObject.layer = 9 + team;
         }
     }
 
@@ -31,6 +33,7 @@ public class Arrow : MonoBehaviour,IDamaged
         Mesh = GetComponentsInChildren<MeshRenderer>();
         tr = GetComponent<Transform>();
         mat = Resources.LoadAll<Material>("0.TeamColor/Color");
+        myCol = GetComponent<Collider>();
     }
 
 
@@ -58,7 +61,7 @@ public class Arrow : MonoBehaviour,IDamaged
     {
         Target = target;
        
-        Vector3 vec = Target.transform.position - tr.position ;
+        Vector3 vec = Target.transform.position - tr.position + Vector3.up*1 ;
       
         rbody.AddForce(vec * ArrowSpeed, ForceMode.Impulse);
 
@@ -66,6 +69,27 @@ public class Arrow : MonoBehaviour,IDamaged
         tr.rotation *= Quaternion.Euler(new Vector3(0f, 90f, 0f));
     }
 
-    
 
+
+    private void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.GetComponent<AI>().state != IState.State.Die)
+        {
+            col.gameObject.SendMessage("Damaged", damage);
+            myCol.enabled = false;
+            Invoke("Disable", 2f);
+        }
+    }
+    private void Disable()
+    {
+        rbody.Sleep();
+        gameObject.SetActive(false);      
+
+    }
+
+    private void OnDisable()
+    {
+        myCol.enabled = true;
+
+    }
 }

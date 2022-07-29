@@ -38,7 +38,7 @@ public class PoolManager : MonoBehaviour
         {
             if (!arrow.activeSelf)
             {
-                arrow.SetActive(true);
+                
                 return arrow;
             }
         }

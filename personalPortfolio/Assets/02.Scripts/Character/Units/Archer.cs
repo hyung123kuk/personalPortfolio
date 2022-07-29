@@ -15,8 +15,10 @@ public class Archer : Character
         Arrow arrow = arrowObj.GetComponentInChildren<Arrow>();
         arrow.Team = Team;
         arrow.Damaged(AttackDamage);
+        arrow.gameObject.SetActive(true);
         arrow.transform.position = Pos.position;
         arrow.TargetSet(Targets[0]);
+        
         
         
     }

@@ -1472,9 +1472,12 @@ MonoBehaviour:
   maxHp: 0
   hp: 0
   attackDamage: 0
-  sheild: 0
+  defense: 0
   speed: 4
+  attackRange: 0
+  attackSpeed: 0
   team: 0
+  attackDelay: 0
 --- !u!1 &805325341438251157
 GameObject:
   m_ObjectHideFlags: 0

@@ -62,6 +62,8 @@ public class AI : MonoBehaviour, IState
                     break;
             }
         }
+        
+        nav.isStopped = true;
 
     }
 
@@ -179,6 +181,7 @@ public class AI : MonoBehaviour, IState
 
     public void Die()
     {
+        
         state = IState.State.Die;
     } 
 

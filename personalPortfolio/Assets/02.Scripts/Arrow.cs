@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour,IDamaged
 {
-    int damage;
+    public float ArrowSpeed;
 
+    int damage;
+    private GameObject Target;
     private SkinnedMeshRenderer[] SkinnedMesh;
     private MeshRenderer[] Mesh;
     private Material[] mat;
+    private Transform tr;
 
+    Rigidbody rbody;
     private int team;
     public int Team { get { return team; } 
         set {   //팀을 설정하면 자동으로 색상 변경 하도록
@@ -18,10 +22,14 @@ public class Arrow : MonoBehaviour,IDamaged
         }
     }
 
+
+
     public void Awake()
     {
+        rbody = GetComponent<Rigidbody>();
         SkinnedMesh = GetComponentsInChildren<SkinnedMeshRenderer>();
         Mesh = GetComponentsInChildren<MeshRenderer>();
+        tr = GetComponent<Transform>();
         mat = Resources.LoadAll<Material>("0.TeamColor/Color");
     }
 
@@ -46,6 +54,18 @@ public class Arrow : MonoBehaviour,IDamaged
 
     }//화살의 데미지 설정
 
+    public void TargetSet(GameObject target)
+    {
+        Target = target;
+       
+        Vector3 vec = Target.transform.position - tr.position ;
+      
+        rbody.AddForce(vec * ArrowSpeed, ForceMode.Impulse);
 
+        tr.LookAt(Target.transform);
+        tr.rotation *= Quaternion.Euler(new Vector3(0f, 90f, 0f));
+    }
+
+    
 
 }

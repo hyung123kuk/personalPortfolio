@@ -12,10 +12,11 @@ public class Archer : Character
     {
         transform.LookAt(Targets[0].transform); //Å¸°ÙÀ» ÃÄ´Ùº¸°í ½ð´Ù.
         GameObject arrowObj = PoolManager.poolManager.GetArrow();
-        Arrow arrow = arrowObj.GetComponent<Arrow>();
+        Arrow arrow = arrowObj.GetComponentInChildren<Arrow>();
         arrow.Team = Team;
         arrow.Damaged(AttackDamage);
         arrow.transform.position = Pos.position;
+        arrow.TargetSet(Targets[0]);
         
         
     }

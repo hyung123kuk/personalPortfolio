@@ -28,7 +28,11 @@ public abstract class Character : MonoBehaviour, IRecover, IDamaged
 
     [SerializeField]
     private int attackRange;
-    public int AttackRange { get { return attackRange; } set { attackRange = value; } } //이동속도
+    public int AttackRange { get { return attackRange; } set { attackRange = value; } } //공격범위
+
+    [SerializeField]
+    private float attackSpeed;
+    public float AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } } //공격범위
 
     [SerializeField]
     private int team; 

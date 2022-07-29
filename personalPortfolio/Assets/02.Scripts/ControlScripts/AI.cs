@@ -133,8 +133,11 @@ public class AI : MonoBehaviour, IState
     {
         if (attackPosible)
         {
+            
             ani.SetTrigger("Attack");
+            ani.SetFloat("AttackSpeed", character.AttackSpeed);
             nav.isStopped = true;
+            
         }
     }
 
@@ -144,6 +147,7 @@ public class AI : MonoBehaviour, IState
         {
             GameObject[] tr = { target };
             character.AttackTarget(tr);
+            AttackOff();
         }
     }
 

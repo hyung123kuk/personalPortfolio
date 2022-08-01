@@ -1,11 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+
 
 public abstract class Character : MonoBehaviour, IRecover, IDamaged
 // 모든 캐릭터들은 체력,공격력,방어력,이동속도을 가지고 있습니다.  회복 할수 있습니다 ,  데미지를 입습니다.
 {
     #region 최대체력, 체력, 공격력, 방어력, 이동속도, 공격범위, 팀
+    [Header("팀")]
+    [SerializeField]
+    private int team;
+    public int Team
+    {
+        get { return team; }
+        set
+        {
+            team = value; SetTeamColor();
+
+        }
+    } //팀을 넣으면 자동으로 색상 변경 및 레이어 설정
+
+    [Header("캐릭터 기본능력치")]
     [SerializeField]
     private int maxHp; 
     public int MaxHp { get { return maxHp; } set { maxHp = value; } } //최대체력
@@ -24,25 +40,20 @@ public abstract class Character : MonoBehaviour, IRecover, IDamaged
 
     [SerializeField]
     private int speed; 
-    public int Speed { get { return speed; } set { speed = value; } } //이동속도
+    public int Speed { get { return speed; } set { speed = value;} } //이동속도
+
+    [SerializeField]
+    private float attackSpeed;
+    public float AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } } //공격속도
 
     [SerializeField]
     private int attackRange;
     public int AttackRange { get { return attackRange; } set { attackRange = value; } } //공격범위
 
-    [SerializeField]
-    private float attackSpeed;
-    public float AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } } //공격범위
-
-    [SerializeField]
-    private int team; 
-    public int Team { get { return team; } set { team = value; SetTeamColor();
-            
-        } } //팀을 넣으면 자동으로 색상 변경 및 레이어 설정
-
+    public float attackDelay;
     #endregion
 
-    public float attackDelay;
+
 
 
     private SkinnedMeshRenderer[] CharacterSkinnedMesh;
@@ -58,15 +69,21 @@ public abstract class Character : MonoBehaviour, IRecover, IDamaged
         CharaterMesh = GetComponentsInChildren<MeshRenderer>();
         mat = Resources.LoadAll<Material>("0.TeamColor/CharacterColor");
         
+
     }
 
     private void OnEnable()
     {
         hp = maxHp;
-
         SetTeamColor();
+      
     }
 
+    public virtual void Start()
+    {
+        HeroSet();
+    }
+    public virtual void HeroSet() { } // 히어로 캐릭터는 스킬을 사용 할수 있도록 히어로 설정을 해준다.
 
 
     public void SetTeamColor() //팀 색상 설정
@@ -119,10 +136,24 @@ public abstract class Character : MonoBehaviour, IRecover, IDamaged
 
         foreach (GameObject target in Targets) //Damaged 인터페이스가 근거리일때는 적에게 데미지를, 원거리일때는 투사체에 데미지를 설정하는 역할을 한다.
         {
-            if(Vector3.Distance(target.transform.position,transform.position) < attackRange )
-            target.SendMessage("Damaged",attackDamage);
+            transform.LookAt(target.transform);
+            if(Vector3.Distance(target.transform.position,transform.position) <= attackRange+0.2f )
+                target.SendMessage("Damaged",attackDamage);
         }
     }
 
+
+    public void SpeedUp(float xSpeed, int _team) //같은 팀이면 공격속도,이동속도 가 증가합니다.
+    {
+        if (Team == _team)
+        {
+            AttackSpeed *= xSpeed;
+            Speed *= (int)xSpeed;
+            
+        }
+
+    }
+
+    
 
 }

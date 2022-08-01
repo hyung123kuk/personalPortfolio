@@ -2,21 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WarriorHero : CharacterHero
+public class WarriorHero : Warrior, IHeroSkill
 {
-    public override void Skill1(IDamaged[] Targets)
+    [Header("영웅 능력")]
+    [SerializeField]
+    private float skill1CoolTime;
+    public float Skill1CoolTime { get { return skill1CoolTime; } set { skill1CoolTime = value; } }
+    public float Skill1Duration;
+    public float skill1XSpeed; //스킬1 속도배수
+    public static event SkillManager.Buff WarriorBuff; //모든 Warrior스크립트에서 SpeedUp함수를 받았다.
+
+    [SerializeField]
+    private float skill2CoolTime;
+    public float Skill2CoolTime { get { return skill2CoolTime; } set { skill2CoolTime = value; } }
+
+
+
+    
+
+
+
+    public void Skill1() //모든 전사의 공격속도와 이동속도 증가
     {
-
-
-        
-        base.Skill1(Targets);
+        if (Hp >0)
+            WarriorBuff(skill1XSpeed,Team); //같은 팀 전사에게 버프 사용
     }
 
-    public override void Skill2(IDamaged[] Targets)
+    public void Skill2()
     {
+        
+    }
 
-
-
-        base.Skill2(Targets);
+    public override void HeroSet() //히어로 세팅
+    {
+        Debug.Log(SkillManager.skillManager);
+        SkillManager.skillManager.heros.Add(this);
     }
 }

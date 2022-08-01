@@ -25,7 +25,7 @@ public class AI : MonoBehaviour, IState
     public void OnEnable()
     {
         state = IState.State.Idle;
-        nav.speed = character.Speed;
+        
         nav.stoppingDistance = character.AttackRange;
         StartCoroutine(AIState());
     }
@@ -35,7 +35,10 @@ public class AI : MonoBehaviour, IState
     {
         while ( state !=IState.State.Die )
         {
+
+           
             yield return new WaitForSeconds(0.5f);
+
             if (state == IState.State.Die) //죽었으면 리턴
                 break;
             
@@ -45,6 +48,7 @@ public class AI : MonoBehaviour, IState
                 
                 if (target == null) //설정뒤에도 타겟이 없으면 적 캐릭터가 없는 것 이므로 continue한다.
                 {
+                    ani.SetFloat("Speed", 0);
                     nav.isStopped = true; //타겟이 없으면 멈춘다.
                     continue;
                 }
@@ -107,28 +111,41 @@ public class AI : MonoBehaviour, IState
 
     public void TargetSet(GameObject Target) //다른 적이 공격하면 그 공격한 적으로 타겟을 바꾼다. 네비 온
     {
+      
         target = Target;
         
     }
 
     public void StateSet()
     {
-        
-        float dist = Vector3.Distance(target.transform.position, transform.position);
 
-        if (dist < character.AttackRange) // 두 캐릭터의 거리가 공격거리 보다 짧다면 공격상태로 바뀐다.
-            state = IState.State.Attack;
-        else
+        if (target == null)
             state = IState.State.Idle;
+        else
+        {
+            float dist = Vector3.Distance(target.transform.position, transform.position);
 
+            if (dist < character.AttackRange) // 두 캐릭터의 거리가 공격거리 보다 짧다면 공격상태로 바뀐다.
+                state = IState.State.Attack;
+            else
+                state = IState.State.Idle;
+        }
     }
 
     public void Idle()
     {
-       
-        nav.isStopped = false;
-        nav.destination = target.transform.position;
-
+        if (target == null)
+        {
+            ani.SetFloat("Speed", 0);
+            nav.isStopped = true;
+        }
+        else
+        {
+            nav.isStopped = false;
+            nav.speed = character.Speed;
+            nav.destination = target.transform.position;
+            ani.SetFloat("Speed", nav.velocity.magnitude / character.Speed);
+        }
     }
 
     public void AttackState() //공격 상태일때
@@ -137,7 +154,7 @@ public class AI : MonoBehaviour, IState
         {
             
             ani.SetTrigger("Attack");
-            ani.SetFloat("AttackSpeed", character.AttackSpeed);
+            ani.SetFloat("AttackSpeed", character.AttackSpeed );
             nav.isStopped = true;
             
         }

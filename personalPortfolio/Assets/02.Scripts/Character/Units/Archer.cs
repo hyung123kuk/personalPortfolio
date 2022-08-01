@@ -6,7 +6,13 @@ public class Archer : Character
 {
     [SerializeField]
     Transform Pos;
-    
+
+    public override void Start()
+    {
+        base.Start();
+        ArcherHero.ArcherBuff += SpeedUp;
+    }
+
 
     public override void AttackTarget(GameObject[] Targets) //오버라이드로 궁수는 새로운 공격 함수 구성
     {

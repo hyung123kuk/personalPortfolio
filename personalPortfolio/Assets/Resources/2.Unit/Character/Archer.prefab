@@ -7979,14 +7979,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047bec8cbfcffb94dbe8d03f138f436d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  team: 1
   maxHp: 1000
   hp: 100
   attackDamage: 30
   defense: 0
   speed: 3
-  attackRange: 10
   attackSpeed: 1
-  team: 1
+  attackRange: 10
   attackDelay: 0.2
   Pos: {fileID: 783680254}
 --- !u!1 &1482663311322321542

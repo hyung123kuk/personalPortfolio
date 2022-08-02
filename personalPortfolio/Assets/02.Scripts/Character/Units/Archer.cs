@@ -28,4 +28,9 @@ public class Archer : Character
         
         
     }
+
+    public override void Upgrade()
+    {
+        throw new System.NotImplementedException();
+    }
 }

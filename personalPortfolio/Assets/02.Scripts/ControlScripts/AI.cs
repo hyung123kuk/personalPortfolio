@@ -36,8 +36,10 @@ public class AI : MonoBehaviour, IState
         while ( state !=IState.State.Die )
         {
 
-           
-            yield return new WaitForSeconds(0.5f);
+            
+            yield return new WaitForSeconds(0.3f);
+
+
 
             if (state == IState.State.Die) //죽었으면 리턴
                 break;
@@ -60,9 +62,12 @@ public class AI : MonoBehaviour, IState
             {
                 case IState.State.Idle: //일반 상태 였을때
                     Idle();
+
                     break;
                 case IState.State.Attack: //공격 상태 였을때
                     AttackState();
+                    
+                    
                     break;
             }
         }
@@ -99,7 +104,7 @@ public class AI : MonoBehaviour, IState
             if (EnemyBuilding.Team != character.Team && EnemyBuilding.Hp >0 )
             {
                 float Dis = Vector3.Distance(EnemyBuilding.transform.position, transform.position);
-                if (nearestDis > Dis)
+                if (nearestDis > Dis || nearestDis == null)
                 {
                     Tar = EnemyBuilding.gameObject;
                 }
@@ -155,6 +160,7 @@ public class AI : MonoBehaviour, IState
             
             ani.SetTrigger("Attack");
             ani.SetFloat("AttackSpeed", character.AttackSpeed );
+            ani.SetFloat("Speed", 0f);
             nav.isStopped = true;
             
         }

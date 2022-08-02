@@ -27,7 +27,8 @@ public class WarriorHero : Warrior, IHeroSkill
 
     public override void AttackTarget(GameObject[] Targets)
     {
-        
+        if (Hp <= 0)
+            return;
         foreach (Character Unit in SkillManager.skillManager.Units)
         {
             if (!SameTeam(Unit.Team) && AttackRangeFucn(Unit.transform, attackAngle, AttackRange))
@@ -41,15 +42,16 @@ public class WarriorHero : Warrior, IHeroSkill
 
     public void Skill1() //모든 전사의 공격속도와 이동속도 증가
     {
-        
-        if (Hp >0)
-            WarriorBuff(skill1XSpeed,Team); //같은 팀 전사에게 버프 사용
+        if (Hp <= 0)
+            return;
+        WarriorBuff(skill1XSpeed,Team); //같은 팀 전사에게 버프 사용
     }
 
     public void Skill2()
     {
-        
-        foreach(Character Unit in  SkillManager.skillManager.Units)
+        if (Hp <= 0)
+            return;
+        foreach (Character Unit in  SkillManager.skillManager.Units)
         {
             if( !SameTeam(Unit.Team) && AttackRangeFucn(Unit.transform , Skill2Angle, Skill2Range))
             {

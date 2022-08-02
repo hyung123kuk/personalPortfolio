@@ -34,6 +34,7 @@ public class Arrow : MonoBehaviour,IDamaged
         tr = GetComponent<Transform>();
         mat = Resources.LoadAll<Material>("0.TeamColor/Color");
         myCol = GetComponent<Collider>();
+        Invoke("Disable", 4f);
     }
 
 

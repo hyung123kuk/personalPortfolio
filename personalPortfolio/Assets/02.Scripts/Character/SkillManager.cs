@@ -41,7 +41,7 @@ public class SkillManager : MonoBehaviour
     {
         foreach(Character hero in heros)
         {
-            hero.SendMessage("Skill1");
+            hero.SendMessage("Skill1Ani"); // Player스크립트에서 발생한다.
         }
     }
 
@@ -49,7 +49,7 @@ public class SkillManager : MonoBehaviour
     {
         foreach (Character hero in heros)
         {
-            hero.SendMessage("Skill2");
+            hero.SendMessage("Skill2Ani");
         }
     }
 

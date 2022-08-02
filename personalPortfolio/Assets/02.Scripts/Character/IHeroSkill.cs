@@ -5,7 +5,8 @@ using UnityEngine;
 public interface IHeroSkill
 {
     public void Skill1();
+    public float Skill1CoolTime { get; set; }
     public void Skill2();
-    public void UnitSet();
+    public float Skill2CoolTime { get; set; }
 
 }

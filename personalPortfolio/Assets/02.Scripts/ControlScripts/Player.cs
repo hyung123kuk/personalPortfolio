@@ -61,12 +61,12 @@ public class Player : MonoBehaviour ,IState
         ani.SetTrigger("Attack");
     }
 
-    public void Skill1()
+    public void Skill1Ani()
     {
         ani.SetTrigger("Skill1");
     }
 
-    public void Skill2()
+    public void Skill2Ani()
     {
         ani.SetTrigger("Skill2");
     }

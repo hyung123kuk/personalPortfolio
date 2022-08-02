@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Building : MonoBehaviour , IDamaged  //능력없는 중립 건물이다.
+public abstract class Building : MonoBehaviour , IDamaged , IUpgrade
 {
-    #region 최대체력, 체력, 방어력, 팀, 죽은상태
+    #region 최대체력, 체력, 방어력, 팀
     [SerializeField]
     private int maxHp;
     public int MaxHp { get { return maxHp; } set { maxHp = value; } } //최대체력
@@ -21,15 +21,20 @@ public class Building : MonoBehaviour , IDamaged  //능력없는 중립 건물이다.
     private int team;
     public int Team { get { return team; } set { team = value; SetTeamColor();} } //팀설정, 색상설정, 레이어설정
 
+    public int Level { get; set; }
     #endregion
 
-    private Material[] BuildingMat;
+
+
+    private SkinnedMeshRenderer[] BuildingSkinnedMesh;
+    private MeshRenderer[] BuildingMesh;
     private Material[] mat;
 
     private void Awake()
     {
-        
-        BuildingMat = GetComponents<Material>();
+
+        BuildingSkinnedMesh = GetComponentsInChildren<SkinnedMeshRenderer>();
+        BuildingMesh = GetComponentsInChildren<MeshRenderer>();
         mat = Resources.LoadAll<Material>("0.TeamColor/BuildingColor");
         
     }
@@ -43,23 +48,44 @@ public class Building : MonoBehaviour , IDamaged  //능력없는 중립 건물이다.
 
     public void SetTeamColor() //팀 색상 설정
     {
-        
-        for (int i = 0; i < mat.Length; i++)
+
+        for (int i = 0; i < BuildingSkinnedMesh.Length; i++)
         {
-            BuildingMat[i] = mat[Team];
+            BuildingSkinnedMesh[i].material = mat[team];
         }
+        for (int i = 0; i < BuildingMesh.Length; i++)
+        {
+            BuildingMesh[i].material = mat[team];
+        }
+
         gameObject.layer = 6 + team;
     }
 
-
-    public void Damaged(int Damaged , int team =-1) //팀이 다르면 데미지 입는다. 기본적으로 팀없이 받는건 데미지를 입도록 했다.
-    { hp -= Damaged;
-        if (hp <= 0)
+    public void Damaged(int Damaged) //함수 오버로딩으로 SendMessage는 한개의 인수밖에 보낼수 없어 사용했습니다.
+    {
+        if (hp > 0)
         {
-            GetComponent<Animator>().SetTrigger("Die");
-            
+            hp -= Damaged + defense;
+            if (hp <= 0)
+            {
+               
+            }
         }
     }
 
-   
+    public void Damaged(int Damaged , int team =-1) //팀이 다르면 데미지 입는다. 기본적으로 팀없이 받는건 데미지를 입도록 했다.
+    {
+        if (hp > 0)
+        {
+            hp -= Damaged + defense;
+            if (hp <= 0)
+            {
+                
+            }
+        }
+    }
+    public void Recover(int recoverHp) //체력회복
+    { Hp += recoverHp; }
+
+    public abstract void Upgrade();
 }

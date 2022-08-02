@@ -24,8 +24,8 @@ public class Warrior : Character
         base.AttackTarget(Targets);
     }
 
-
-
-
-
+    public override void Upgrade()
+    {
+        throw new System.NotImplementedException();
+    }
 }

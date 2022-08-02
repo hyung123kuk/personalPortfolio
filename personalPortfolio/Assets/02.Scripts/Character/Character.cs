@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
-public abstract class Character : MonoBehaviour, IRecover, IDamaged
+public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
 // 모든 캐릭터들은 체력,공격력,방어력,이동속도을 가지고 있습니다.  회복 할수 있습니다 ,  데미지를 입습니다.
 {
     #region 최대체력, 체력, 공격력, 방어력, 이동속도, 공격범위, 팀
@@ -50,11 +50,13 @@ public abstract class Character : MonoBehaviour, IRecover, IDamaged
     private int attackRange;
     public int AttackRange { get { return attackRange; } set { attackRange = value; } } //공격범위
 
+    public int Level { get; set; }
+
     public float attackDelay;
     #endregion
 
 
-
+    
 
     private SkinnedMeshRenderer[] CharacterSkinnedMesh;
     private MeshRenderer[] CharaterMesh;
@@ -76,7 +78,7 @@ public abstract class Character : MonoBehaviour, IRecover, IDamaged
     {
         hp = maxHp;
         SetTeamColor();
-      
+        
     }
 
     public virtual void Start()
@@ -150,8 +152,6 @@ public abstract class Character : MonoBehaviour, IRecover, IDamaged
 
     public virtual void AttackTarget(GameObject[] Targets)
     {
-        
-
     }
 
     public void Attack() //AI 1인공격 함수 (애니메이션에서 공격)
@@ -171,6 +171,7 @@ public abstract class Character : MonoBehaviour, IRecover, IDamaged
 
     public void SpeedUp(float xSpeed, int _team) //같은 팀이면 공격속도,이동속도 가 증가합니다.
     {
+        
         if (Team == _team)
         {
             AttackSpeed *= xSpeed;
@@ -205,5 +206,5 @@ public abstract class Character : MonoBehaviour, IRecover, IDamaged
 
     }
 
-    
+    public abstract void Upgrade(); //업그레이드 가상함수 + 인터페이스 선언으로 각자 알아서 업그레이드를 하도록 한다.
 }

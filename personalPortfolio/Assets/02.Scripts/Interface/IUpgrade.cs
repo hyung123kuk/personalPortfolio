@@ -4,10 +4,8 @@ using UnityEngine;
 
 public interface IUpgrade 
 {
-
-    public void DamageUpgrade(int UpDamage);
-    public void SheildUpgrade(int UpShield);
-    public void HpUpgrade(int UpHp);
+    public int Level { get; set; }// 업그레이드 하려면 레벨이 있어야한다.
+    public abstract void Upgrade();
 
 
 }

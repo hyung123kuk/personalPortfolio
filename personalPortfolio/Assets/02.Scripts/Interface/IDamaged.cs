@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IDamaged
 {
-    public void Damaged(int Damaged); //데미지를 받는 함수이다.
+    public void Damaged(int Damaged,int team); //데미지를 받는 함수이다.
 
    
 

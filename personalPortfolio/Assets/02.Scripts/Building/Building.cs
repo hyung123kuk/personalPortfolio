@@ -52,7 +52,7 @@ public class Building : MonoBehaviour , IDamaged  //능력없는 중립 건물이다.
     }
 
 
-    public void Damaged(int Damaged) //공격 당함
+    public void Damaged(int Damaged , int team =-1) //팀이 다르면 데미지 입는다. 기본적으로 팀없이 받는건 데미지를 입도록 했다.
     { hp -= Damaged;
         if (hp <= 0)
         {

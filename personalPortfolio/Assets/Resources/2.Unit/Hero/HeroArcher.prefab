@@ -7179,13 +7179,13 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5442784291876442277}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 70
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &2735010030648210184
 CapsuleCollider:
@@ -7236,8 +7236,10 @@ MonoBehaviour:
   attackDelay: 0
   Pos: {fileID: 0}
   skill1CoolTime: 0
+  Skill1Duration: 0
   skill1XSpeed: 2
   skill2CoolTime: 0
+  SkillAngle: 70
 --- !u!1 &5442784291876442785
 GameObject:
   m_ObjectHideFlags: 0

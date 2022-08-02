@@ -56,7 +56,20 @@ public class Player : MonoBehaviour ,IState
         }
     }
 
+    public void AttackTarget()
+    {
+        ani.SetTrigger("Attack");
+    }
 
+    public void Skill1()
+    {
+        ani.SetTrigger("Skill1");
+    }
+
+    public void Skill2()
+    {
+        ani.SetTrigger("Skill2");
+    }
 
     public void Die()
     {

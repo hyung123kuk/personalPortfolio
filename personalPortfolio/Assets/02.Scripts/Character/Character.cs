@@ -81,9 +81,11 @@ public abstract class Character : MonoBehaviour, IRecover, IDamaged
 
     public virtual void Start()
     {
-        HeroSet();
+        UnitSet();
     }
-    public virtual void HeroSet() { } // 히어로 캐릭터는 스킬을 사용 할수 있도록 히어로 설정을 해준다.
+    public virtual void UnitSet() {
+        SkillManager.skillManager.Units.Add(this);
+    } //스킬매니저 유닛을 세팅한다.
 
 
     public void SetTeamColor() //팀 색상 설정
@@ -106,14 +108,29 @@ public abstract class Character : MonoBehaviour, IRecover, IDamaged
     {hp += recoverHp;}
 
     
-
-    public void Damaged(int Damaged) //공격 당함
-    { hp -= Damaged;
-        if (hp <= 0)
+    public void Damaged(int Damaged) //함수 오버로딩으로 SendMessage는 한개의 인수밖에 보낼수 없어 사용했습니다.
+    {
+        if (hp > 0)
         {
-            DieCh();
+            hp -= Damaged+defense;
+            if (hp <= 0)
+            {
+                DieCh();
+            }
         }
+    }
 
+    public void Damaged(int Damaged,int team  = -1) //팀이 다르면 데미지 입는다. 기본적으로 팀없이 받는건 데미지를 입도록 했다.
+    {
+        if (team != Team && hp > 0)
+        {
+            hp -= Damaged+ defense;
+            if (hp <= 0)
+            {
+                DieCh();
+            }
+
+        }
     }
 
     private void DieCh()
@@ -131,17 +148,26 @@ public abstract class Character : MonoBehaviour, IRecover, IDamaged
     }
 
 
-    public virtual void AttackTarget(GameObject[] Targets) //전사 공격
-    {        
+    public virtual void AttackTarget(GameObject[] Targets)
+    {
+        
 
-        foreach (GameObject target in Targets) //Damaged 인터페이스가 근거리일때는 적에게 데미지를, 원거리일때는 투사체에 데미지를 설정하는 역할을 한다.
-        {
-            transform.LookAt(target.transform);
-            if(Vector3.Distance(target.transform.position,transform.position) <= attackRange+0.2f )
-                target.SendMessage("Damaged",attackDamage);
-        }
     }
 
+    public void Attack() //AI 1인공격 함수 (애니메이션에서 공격)
+    {
+        if (GetComponent<AI>())
+        {
+            
+            if (GetComponent<AI>().target != null)
+            {
+                GameObject[] tr = { GetComponent<AI>().target };
+                AttackTarget(tr);
+                GetComponent<AI>().AttackOff();
+            }
+        }
+
+    }
 
     public void SpeedUp(float xSpeed, int _team) //같은 팀이면 공격속도,이동속도 가 증가합니다.
     {
@@ -155,5 +181,29 @@ public abstract class Character : MonoBehaviour, IRecover, IDamaged
     }
 
     
+    public bool SameTeam(int _team)  //팀이 같으면 True 다르면 False 반환하는 함수
+    {
+        if (team == _team)
+            return true;
+        else
+            return false;
+    }
+    public bool AttackRangeFucn(Transform _Target,float Angle =180f,float Range = -1) // 타겟이 공격범위 내에 있는지 확인하는 함수
+    {
+        if (Range == -1) // 만약에 공격 거리를 입력하지 않았다면 기본 공격거리를 사용한다.
+            Range = attackRange;
 
+
+
+        float angle  = Vector3.Angle(_Target.position - transform.position, transform.forward);
+
+        if (Vector3.Distance(_Target.position, transform.position) <= Range + 0.2f && ((angle <= Angle)))
+        {            
+            return true;
+        }
+        return false;
+
+    }
+
+    
 }

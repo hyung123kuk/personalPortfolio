@@ -10,6 +10,17 @@ public class PoolManager : MonoBehaviour
     GameObject Arrows;
     List<GameObject> ArrowPool = new List<GameObject>();
 
+    GameObject warriorPrefab;
+    GameObject Warriors;
+    List<GameObject> WarriorPool = new List<GameObject>();
+
+    GameObject archerPrefab;
+    GameObject Archers;
+    List<GameObject> ArcherPool = new List<GameObject>();
+
+
+
+
     public void Awake()
     {
         if (poolManager == null)    //싱글톤을 선언해 맵에 한개만 있도록 합니다.
@@ -18,8 +29,16 @@ public class PoolManager : MonoBehaviour
             Destroy(gameObject);
 
         arrowPrefab = Resources.Load<GameObject>("Arrow");
+        warriorPrefab = Resources.Load<GameObject>("2.Unit/Character/Worrior");
+        archerPrefab = Resources.Load<GameObject>("2.Unit/Character/Archer");
+
+
         Arrows = new GameObject("Arrows");
+        Warriors= new GameObject("Warriors");
+        Archers = new GameObject("Archers");
         ArrowMake(10);
+
+
     }
 
     public void ArrowMake(int count) //받은 count 만큼 화살을 만드는 함수입니다.

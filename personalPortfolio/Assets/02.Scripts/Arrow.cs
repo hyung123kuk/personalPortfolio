@@ -51,9 +51,10 @@ public class Arrow : MonoBehaviour,IDamaged
     }
 
 
-    public void Damaged(int Damaged)
+    public void Damaged(int Damaged, int team=-1) //팀이 다르면 데미지 입는다. 기본적으로 팀없이 받는건 데미지를 입도록 했다.
     {
-        damage = Damaged;
+        if(team != Team)
+            damage = Damaged;
 
     }//화살의 데미지 설정
 
@@ -73,12 +74,11 @@ public class Arrow : MonoBehaviour,IDamaged
 
     private void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.GetComponent<AI>().state != IState.State.Die)
-        {
+
             col.gameObject.SendMessage("Damaged", damage);
             myCol.enabled = false;
             Invoke("Disable", 2f);
-        }
+
     }
     private void Disable()
     {

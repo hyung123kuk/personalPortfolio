@@ -6,11 +6,14 @@ public class SkillManager : MonoBehaviour
 {
 
     public static SkillManager skillManager;
+    
 
     public delegate void Buff(float xSpeed,int _team);
+ 
 
 
     public List<Character> heros = new List<Character>();
+    public List<Character> Units = new List<Character>();
 
     public void Awake()
     {
@@ -21,12 +24,19 @@ public class SkillManager : MonoBehaviour
         
     }
 
+    //공격,스킬버튼을 누르면 히어로가 공격,스킬을 사용하도록 한다.
 
- 
+    public void AttackTarget()
+    {
+        foreach (Character hero in heros)
+        {
+            hero.AttackTarget(null);
+            hero.GetComponent<Player>().AttackTarget();
+        }
+    }
 
 
-    //스킬버튼을 누르면 히어로 에게 스킬 사용을 하도록한다
-    
+
     public void Skill1()
     {
         foreach(Character hero in heros)
@@ -42,6 +52,9 @@ public class SkillManager : MonoBehaviour
             hero.SendMessage("Skill2");
         }
     }
+
+
+
 
 
 }

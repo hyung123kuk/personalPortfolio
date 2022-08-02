@@ -14,6 +14,7 @@ public class ArcherHero : Archer, IHeroSkill
     [SerializeField]
     private float skill2CoolTime;
     public float Skill2CoolTime { get { return skill2CoolTime; } set { skill2CoolTime = value; } }
+    public float SkillAngle = 70;
 
 
 
@@ -25,10 +26,15 @@ public class ArcherHero : Archer, IHeroSkill
 
     public void Skill2()
     {
-       
+        List<Character> TargetList = new List<Character>();
+        
+
+
+
     }
-    public override void HeroSet() //히어로 세팅
+    public override void UnitSet() //히어로 세팅
     {
         SkillManager.skillManager.heros.Add(this);
+        base.UnitSet();
     }
 }

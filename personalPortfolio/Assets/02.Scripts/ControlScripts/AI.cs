@@ -160,15 +160,7 @@ public class AI : MonoBehaviour, IState
         }
     }
 
-    public void Attack() //AI 1인공격 함수 (애니메이션에서 공격)
-    {
-        if (target != null)
-        {
-            GameObject[] tr = { target };
-            character.AttackTarget(tr);
-            AttackOff();
-        }
-    }
+
 
     public void AttackOff()
     {

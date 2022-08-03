@@ -1491,14 +1491,18 @@ MonoBehaviour:
   defense: 0
   speed: 4
   attackSpeed: 0
-  attackRange: 0
+  attackRange: 4
   attackDelay: 0
+  BuidingTargetRange: 6
+  UnitTargetRange: 0
+  attackAngle: 80
   skill1CoolTime: 0
   Skill1Duration: 0
   skill1XSpeed: 2
   skill2CoolTime: 0
   Skill2Angle: 80
   Skill2Damage: 200
+  Skill2Range: 5
 --- !u!1 &805325341438251157
 GameObject:
   m_ObjectHideFlags: 0

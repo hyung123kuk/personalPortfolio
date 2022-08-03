@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Warrior : Character , IMelee 
 {
-    public int BuidingTargetRange = 5;
+    public int BuidingTargetRange = 6;
     public int UnitTargetRange;
 
 
     public override void Start()
     {
-        base.Start(); //스타트에 영웅 체크가 있다 영웅체크 먼저 한다음에 더해준다.
+        base.Start(); 
         WarriorHero.WarriorBuff += SpeedUp;
         UnitTargetRange = AttackRange;
     }
@@ -34,7 +34,8 @@ public class Warrior : Character , IMelee
     }
 
     public override void RangeSet()
-    {       
+    {
+        
         if (GetComponent<AI>().target.GetComponent<Building>())
         {
             AttackRange = BuidingTargetRange;

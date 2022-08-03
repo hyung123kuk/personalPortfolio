@@ -45,6 +45,14 @@ public abstract class Building : MonoBehaviour , IDamaged
 
         SetTeamColor();
     }
+    public virtual void Start()
+    {
+        BuildingSet();
+    }
+    public virtual void BuildingSet()
+    {
+        SkillManager.skillManager.Buildings.Add(this);
+    } //스킬매니저 빌딩을 세팅한다.
 
     public void SetTeamColor() //팀 색상 설정
     {

@@ -20,15 +20,14 @@ public class ArcherHero : Archer, IHeroSkill
 
     public void Skill1() //모든 궁수 이동속도 공격속도 상승
     {
-        if (Hp > 0)
-            ArcherBuff(skill1XSpeed, Team); //같은 팀 아처 에게 버프 사용
+        if (Hp <= 0)
+            return;
+        ArcherBuff(skill1XSpeed, Team , Skill1Duration); //같은 팀 아처 에게 버프 사용
     }
 
     public void Skill2()
     {
         List<Character> TargetList = new List<Character>();
-        
-
 
 
     }

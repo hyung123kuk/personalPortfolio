@@ -152,10 +152,12 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
 
     public virtual void AttackTarget(GameObject[] Targets)
     {
+
     }
 
     public void Attack() //AI 1인공격 함수 (애니메이션에서 공격)
     {
+        
         if (GetComponent<AI>())
         {
             
@@ -164,21 +166,29 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
                 GameObject[] tr = { GetComponent<AI>().target };
                 AttackTarget(tr);
                 GetComponent<AI>().AttackOff();
+                return;
             }
         }
 
+        
+        AttackTarget(null);
+
     }
 
-    public void SpeedUp(float xSpeed, int _team) //같은 팀이면 공격속도,이동속도 가 증가합니다.
+     public void SpeedUp(float xSpeed, int _team , float _duration) //같은 팀이면 공격속도,이동속도 가 증가합니다.
     {
-        
+        StartCoroutine(SpeedUpCoro(xSpeed, _team, _duration));
+    }
+    IEnumerator SpeedUpCoro(float xSpeed, int _team, float _duration)
+    {
         if (Team == _team)
         {
             AttackSpeed *= xSpeed;
             Speed *= (int)xSpeed;
-            
+            yield return new WaitForSeconds(_duration);
+            AttackSpeed /= xSpeed;
+            Speed /= (int)xSpeed;
         }
-
     }
 
     
@@ -189,7 +199,7 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
         else
             return false;
     }
-    public bool AttackRangeFucn(Transform _Target,float Angle =180f,float Range = -1) // 타겟이 공격범위 내에 있는지 확인하는 함수
+    public bool AttackRangeFucn(Transform _Target,float Angle =90f,float Range = -1) // 타겟이 공격범위 내에 있는지 확인하는 함수
     {
         if (Range == -1) // 만약에 공격 거리를 입력하지 않았다면 기본 공격거리를 사용한다.
             Range = attackRange;

@@ -8,12 +8,13 @@ public class SkillManager : MonoBehaviour
     public static SkillManager skillManager;
     
 
-    public delegate void Buff(float xSpeed,int _team);
+    public delegate void Buff(float xSpeed,int _team, float Duration);
  
 
 
     public List<Character> heros = new List<Character>();
     public List<Character> Units = new List<Character>();
+    public List<Building> Buildings = new List<Building>();
 
     public void Awake()
     {

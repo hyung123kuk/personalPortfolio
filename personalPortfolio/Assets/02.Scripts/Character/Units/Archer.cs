@@ -11,6 +11,7 @@ public class Archer : Character
     {
         base.Start();
         ArcherHero.ArcherBuff += SpeedUp;
+        
     }
 
 

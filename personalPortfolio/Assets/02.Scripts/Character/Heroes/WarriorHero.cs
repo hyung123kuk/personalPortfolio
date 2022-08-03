@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class WarriorHero : Warrior, IHeroSkill
@@ -29,11 +30,19 @@ public class WarriorHero : Warrior, IHeroSkill
     {
         if (Hp <= 0)
             return;
+        
         foreach (Character Unit in SkillManager.skillManager.Units)
         {
             if (!SameTeam(Unit.Team) && AttackRangeFucn(Unit.transform, attackAngle, AttackRange))
             {
                 Unit.Damaged(AttackDamage, Team);
+            }
+        }
+        foreach (Building building in SkillManager.skillManager.Buildings)
+        {
+            if (!SameTeam(building.Team) && AttackRangeFucn(building.transform, Range: AttackRange))
+            {
+                building.Damaged(AttackDamage, Team);
             }
         }
     }
@@ -42,9 +51,12 @@ public class WarriorHero : Warrior, IHeroSkill
 
     public void Skill1() //모든 전사의 공격속도와 이동속도 증가
     {
+        
         if (Hp <= 0)
             return;
-        WarriorBuff(skill1XSpeed,Team); //같은 팀 전사에게 버프 사용
+
+        WarriorBuff(skill1XSpeed, Team, Skill1Duration);
+
     }
 
     public void Skill2()
@@ -56,6 +68,13 @@ public class WarriorHero : Warrior, IHeroSkill
             if( !SameTeam(Unit.Team) && AttackRangeFucn(Unit.transform , Skill2Angle, Skill2Range))
             {
                 Unit.Damaged(Skill2Damage, Team);
+            }
+        }
+        foreach (Building building in SkillManager.skillManager.Buildings)
+        {
+            if (!SameTeam(building.Team) && AttackRangeFucn(building.transform, Range: Skill2Range))
+            {
+                building.Damaged(Skill2Damage, Team);
             }
         }
     }

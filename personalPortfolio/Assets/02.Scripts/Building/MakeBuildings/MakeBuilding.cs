@@ -36,7 +36,7 @@ public abstract class MakeBuilding : Building, IMake , IUpgrade
         }
     }
 
-    public abstract GameObject MakeUnitReturn(); //메이크 유닛을 만들어 스타트에 놓아 바로 메이크 유닛을 설정하도록 한다.
+    public abstract GameObject MakeUnitReturn(); //메이크 유닛을 만들어 스타트에 놓아 바로 메이크 유닛을 설정하도록 한다 ( 추상클래스로 만드는걸 강제 한다.)
 
 
 

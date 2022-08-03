@@ -34,7 +34,7 @@ public class Archer : Character
         throw new System.NotImplementedException();
     }
 
-    public override void RangeSet() //범위 세팅이 필요없습니다.
+    public override void RangeSet() //원거리 유닛은 범위 세팅이 필요없습니다.
     {
         return;
     }

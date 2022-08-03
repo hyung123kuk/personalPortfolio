@@ -117,7 +117,7 @@ public class AI : MonoBehaviour, IState
         TargetSet(Tar);
     }
 
-    public void TargetSet(GameObject Target) //다른 적이 공격하면 그 공격한 적으로 타겟을 바꾼다. 네비 온
+    public void TargetSet(GameObject Target) //다른 적이 공격하면 그 공격한 적으로 타겟을 바꾼다.
     {
       
         target = Target;

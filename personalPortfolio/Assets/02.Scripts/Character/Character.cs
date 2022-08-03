@@ -146,6 +146,7 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
                 targetAI.SendMessage("TargetSetting"); //타겟 재 세팅 메세지를 보냅니다.
             }
         }
+
     }
 
 

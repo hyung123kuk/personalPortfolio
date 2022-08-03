@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7921112915848281945}
   - component: {fileID: 7921112915849280921}
   - component: {fileID: 1066401201}
-  - component: {fileID: 2180317457950838864}
+  - component: {fileID: 2180355813770585996}
   m_Layer: 0
   m_Name: WarriorBuilding
   m_TagString: Untagged
@@ -96,7 +96,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6.6162887, y: 6.6356874, z: 5.4101963}
   m_Center: {x: 0.012111425, y: 0.011778596, z: 1.9719679}
---- !u!114 &2180317457950838864
+--- !u!114 &2180355813770585996
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -105,11 +105,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7921112915847340889}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 021b9170730f08c429a6968998eaf3f5, type: 3}
+  m_Script: {fileID: 11500000, guid: 8236f3a7261c5984ba68b85112a1e705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 0
+  maxHp: 1000
   hp: 0
   defense: 0
-  team: 0
-  makeCoolTime: 0
+  team: 1
+  makeCoolTime: 5

@@ -73,7 +73,8 @@ public class AI : MonoBehaviour, IState
         }
         
         nav.isStopped = true;
-
+        yield return new WaitForSeconds(2f);
+        gameObject.SetActive(false);
     }
 
     protected virtual void TargetSetting() // 아무런 영향이 없을때는 가장가까운 적을 공격한다. 
@@ -95,6 +96,7 @@ public class AI : MonoBehaviour, IState
                 {
                     
                     Tar = Enemy.gameObject;
+                    nearestDis = Dis;
                 }
             }
         }
@@ -107,6 +109,7 @@ public class AI : MonoBehaviour, IState
                 if (nearestDis > Dis || nearestDis == null)
                 {
                     Tar = EnemyBuilding.gameObject;
+                    nearestDis = Dis;
                 }
             }
         }
@@ -118,6 +121,8 @@ public class AI : MonoBehaviour, IState
     {
       
         target = Target;
+        if(target !=null)
+            character.RangeSet();
         
     }
 

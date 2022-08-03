@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Building : MonoBehaviour , IDamaged , IUpgrade
+public abstract class Building : MonoBehaviour , IDamaged
 {
     #region 최대체력, 체력, 방어력, 팀
     [SerializeField]
@@ -39,7 +39,7 @@ public abstract class Building : MonoBehaviour , IDamaged , IUpgrade
         
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         hp = maxHp;
 
@@ -68,7 +68,7 @@ public abstract class Building : MonoBehaviour , IDamaged , IUpgrade
             hp -= Damaged + defense;
             if (hp <= 0)
             {
-               
+                DieCh();
             }
         }
     }
@@ -80,12 +80,23 @@ public abstract class Building : MonoBehaviour , IDamaged , IUpgrade
             hp -= Damaged + defense;
             if (hp <= 0)
             {
-                
+                DieCh();
             }
         }
     }
-    public void Recover(int recoverHp) //체력회복
-    { Hp += recoverHp; }
 
-    public abstract void Upgrade();
+    private void DieCh()
+    {
+        
+        
+        AI[] allAI = FindObjectsOfType<AI>();
+        foreach (AI targetAI in allAI)
+        {
+            if (targetAI.target == gameObject) // 죽은 캐릭터가 타겟이라면
+            {
+                targetAI.SendMessage("TargetSetting"); //타겟 재 세팅 메세지를 보냅니다.
+            }
+        }
+    }
+
 }

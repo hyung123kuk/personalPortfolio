@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
-public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
+public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade 
 // 모든 캐릭터들은 체력,공격력,방어력,이동속도을 가지고 있습니다.  회복 할수 있습니다 ,  데미지를 입습니다.
 {
     #region 최대체력, 체력, 공격력, 방어력, 이동속도, 공격범위, 팀
@@ -106,8 +106,7 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
     }
 
 
-    public void Recover(int recoverHp) //체력회복
-    {hp += recoverHp;}
+
 
     
     public void Damaged(int Damaged) //함수 오버로딩으로 SendMessage는 한개의 인수밖에 보낼수 없어 사용했습니다.
@@ -207,4 +206,5 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
     }
 
     public abstract void Upgrade(); //업그레이드 가상함수 + 인터페이스 선언으로 각자 알아서 업그레이드를 하도록 한다.
+    public abstract void RangeSet(); //근거리 유닛일때 사용합니다.
 }

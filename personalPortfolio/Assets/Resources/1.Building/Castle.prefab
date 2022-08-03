@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8451867381485751110}
   - component: {fileID: 8451867381486717318}
   - component: {fileID: 922751809}
+  - component: {fileID: 2058396000}
   m_Layer: 0
   m_Name: Castle
   m_TagString: Untagged
@@ -95,3 +96,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 8.060579, y: 8.056876, z: 10.93462}
   m_Center: {x: 0.05851376, y: 0.0041360864, z: 4.940927}
+--- !u!114 &2058396000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8451867381484525382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e41328c91eef1643b8e6356c37d69b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp: 0
+  hp: 0
+  defense: 0
+  team: 0

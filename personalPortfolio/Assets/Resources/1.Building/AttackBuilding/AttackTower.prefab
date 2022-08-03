@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3194763884992926437}
   - component: {fileID: 3194763884994056229}
   - component: {fileID: 4512152946867822753}
+  - component: {fileID: 3853311401004864467}
   m_Layer: 0
   m_Name: AttackTower
   m_TagString: Untagged
@@ -95,3 +96,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.0214233, y: 4.0214243, z: 8.281539}
   m_Center: {x: 0, y: 0.00000011920932, z: 2.6434815}
+--- !u!114 &3853311401004864467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3194763884996316901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66f441400365e8a449e0cf59febd3024, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp: 0
+  hp: 0
+  defense: 0
+  team: 0
+  attackDamage: 0

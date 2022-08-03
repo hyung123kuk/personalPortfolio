@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackBuilding : Building , IAttack
+public abstract class AttackBuilding : Building , IAttack ,IUpgrade
 {
 
 
@@ -13,11 +13,7 @@ public class AttackBuilding : Building , IAttack
 
 
 
-    public override void Upgrade()
-    {
-
-    }
-
-
+    public abstract void Upgrade();
+    public abstract void Attack();//공격 구현해야합니다.
 
 }

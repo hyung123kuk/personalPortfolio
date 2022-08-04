@@ -131,4 +131,6 @@ public abstract class Building : MonoBehaviour , IDamaged ,IUpgrade
     }
 
     public abstract void Upgrade();
+
+
 }

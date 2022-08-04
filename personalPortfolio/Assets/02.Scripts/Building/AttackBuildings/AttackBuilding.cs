@@ -19,8 +19,10 @@ public abstract class AttackBuilding : Building , IAttack
     [Header("건물 공격쿨타임")]
 
     public float attackCoolTime;
-    
-    
+
+    [Header("공격 ON/OFF")]
+
+    public bool work = true; 
 
     protected override void OnEnable()
     {
@@ -38,6 +40,8 @@ public abstract class AttackBuilding : Building , IAttack
             yield return new WaitForSeconds(attackCoolTime);
             if (Hp <= 0)
                 break;
+            if (work == false)
+                continue;
 
             Attack();
 

@@ -114,4 +114,4 @@ MonoBehaviour:
   hp: 0
   defense: 0
   makeCoolTime: 5
-  posibleProduce: 1
+  posibleProduce: 0

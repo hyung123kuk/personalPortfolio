@@ -18,8 +18,11 @@ public class Castle : Building
     [SerializeField]
     public List<Character> units = new List<Character>();
 
-    public event TeamManager.UnitProduce unitProduce; //유닛생성 가능할때와 불가능할때 메이크빌딩에서 바로 적용되도록 event 선언했다.
-    private bool unitproduce=true; //상태가 달라지지 않으면 괜히 event를 불러와 시간이 걸리므로 이곳에서도 알수있게 선언해 주었다.
+    public event TeamManager.BuildingWork unitProduce; //유닛생성 가능할때와 불가능할때 메이크빌딩에서 바로 적용되도록 event 선언했다.
+    public event TeamManager.BuildingWork attackBuildingWork; //건물 공격에 관한 event
+
+    private bool unitproduce = true; //상태가 달라지지 않으면 괜히 event를 불러와 시간이 걸리므로 이곳에서도 알수있게 선언해 주었다.
+    private bool attackWork = true;
 
     protected override void OnEnable()
     {
@@ -66,5 +69,9 @@ public class Castle : Building
         }
     } //인구수 체크해서 생성 건물에 생성 가능한지 불가능한지 보내는 함수
 
+    public void AttackBuildingCheck(bool isattack)
+    {       
+        attackBuildingWork(isattack); //공격건물 어택에 관한 함수 
+    }
 
 }

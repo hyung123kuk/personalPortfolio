@@ -8,7 +8,7 @@ public class TeamManager : MonoBehaviour //같은팀,상대팀을 관리하는 클래스입니다
     public List<Castle> Castles = new List<Castle>();
     public static TeamManager teamManager;
 
-    public delegate void UnitProduce(bool isOn);
+    public delegate void BuildingWork(bool isOn); //건물 작동 ON/OFF용 델리게이트(Castle에서 관리한다.)
 
     private void Awake()
     {

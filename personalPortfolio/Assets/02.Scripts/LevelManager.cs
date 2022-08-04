@@ -28,7 +28,7 @@ public class LevelManager : MonoBehaviour //¸¸µç ÀÌÀ¯´Â EnableÀ» ÇÒ¶§ ¼ø¼­´ë·Î Ç
         enemyTeam2 = GameObject.Find("EnemyBuilding2");
 
         StartCoroutine(MybuildingSet());
-        StartCoroutine(EnemybuildingSet("1"));
+       
     }
 
     IEnumerator MybuildingSet()

@@ -6,41 +6,60 @@ using UnityEngine;
 public class WarriorHero : Warrior, IHeroSkill
 {
     [Header("영웅 능력")]
+
     public float attackAngle=80f;
 
-
+    [Header("스킬 1")]
     [SerializeField]
     private float skill1CoolTime;
     public float Skill1CoolTime { get { return skill1CoolTime; } set { skill1CoolTime = value; } }
-    public float Skill1Duration;
-    public float skill1XSpeed; //스킬1 속도배수
-    
-    public static event SkillManager.Buff WarriorBuff; //모든 Warrior스크립트에서 SpeedUp함수를 받았다.
-   
+    protected float prevSkill1CoolTime;
 
+    public float Skill1Duration;
+    protected float prevSkill1Duration;
+
+    public float skill1XSpeed; //스킬1 속도배수
+    protected float prevskill1XSpeed;
+
+    public static event SkillManager.Buff WarriorBuff; //모든 Warrior스크립트에서 SpeedUp함수를 받았다.
+
+    [Header("스킬 2")]
     [SerializeField]
     private float skill2CoolTime;
     public float Skill2CoolTime { get { return skill2CoolTime; } set { skill2CoolTime = value; } }
+    protected float prevSkill2CoolTime;
+
     public float Skill2Angle = 80f;
     public int Skill2Damage = 200;
+    protected int prevSkill2Damage;
     public float Skill2Range = 5f;
 
+
+    public override void Awake()
+    {
+        prevSkill1CoolTime = skill1CoolTime;
+        prevSkill1Duration = Skill1Duration;
+        prevskill1XSpeed = skill1XSpeed;
+        prevSkill2CoolTime = Skill2CoolTime;
+        prevSkill2Damage = Skill2Damage;
+        base.Awake();
+    }
 
     public override void AttackTarget(GameObject[] Targets)
     {
         if (Hp <= 0)
             return;
         
-        foreach (Character Unit in SkillManager.skillManager.Units)
+        foreach (Character Unit in TeamManager.teamManager.enemyTeamCharacter(Team))
         {
-            if (!SameTeam(Unit.Team) && AttackRangeFucn(Unit.transform, attackAngle, AttackRange))
+            if (AttackRangeFucn(Unit.transform, attackAngle, AttackRange))
             {
                 Unit.Damaged(AttackDamage, Team);
             }
         }
-        foreach (Building building in SkillManager.skillManager.Buildings)
+        foreach (Building building in TeamManager.teamManager.enemyTeamBuilding(Team))
         {
-            if (!SameTeam(building.Team) && AttackRangeFucn(building.transform, Range: AttackRange))
+            if (AttackRangeFucn(building.transform, Range: AttackRange))
             {
                 building.Damaged(AttackDamage, Team);
             }
@@ -63,16 +82,16 @@ public class WarriorHero : Warrior, IHeroSkill
     {
         if (Hp <= 0)
             return;
-        foreach (Character Unit in  SkillManager.skillManager.Units)
+        foreach (Character Unit in TeamManager.teamManager.enemyTeamCharacter(Team))
         {
-            if( !SameTeam(Unit.Team) && AttackRangeFucn(Unit.transform , Skill2Angle, Skill2Range))
+            if(AttackRangeFucn(Unit.transform , Skill2Angle, Skill2Range))
             {
                 Unit.Damaged(Skill2Damage, Team);
             }
         }
-        foreach (Building building in SkillManager.skillManager.Buildings)
+        foreach (Building building in TeamManager.teamManager.enemyTeamBuilding(Team))
         {
-            if (!SameTeam(building.Team) && AttackRangeFucn(building.transform, Range: Skill2Range))
+            if (AttackRangeFucn(building.transform, Range: Skill2Range))
             {
                 building.Damaged(Skill2Damage, Team);
             }

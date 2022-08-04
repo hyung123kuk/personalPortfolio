@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade 
 // 모든 캐릭터들은 체력,공격력,방어력,이동속도을 가지고 있습니다.  회복 할수 있습니다 ,  데미지를 입습니다.
 {
-    #region 최대체력, 체력, 공격력, 방어력, 이동속도, 공격범위, 팀
+    #region 최대체력, 체력, 공격력, 방어력, 이동속도, 공격범위, 팀, 인구수
     [Header("팀")]
     [SerializeField]
     private int team;
@@ -20,39 +20,54 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
 
         }
     } //팀을 넣으면 자동으로 색상 변경 및 레이어 설정
+    [Header("레벨")]
+    private int level;
+    public int Level { get { return level; } set { level = value; } }
+    [Header("인구수")]
+    public int Population;
 
-    [Header("캐릭터 기본능력치")]
+    [Header("체력/현재체력")]
     [SerializeField]
     private int maxHp; 
     public int MaxHp { get { return maxHp; } set { maxHp = value; } } //최대체력
-
+    protected int prevMaxHp;
     [SerializeField]
     private int hp; 
     public int Hp { get { return hp; } set { hp = value; } }//체력
 
+    [Header("공격력")]
     [SerializeField]
     private int attackDamage; 
     public int AttackDamage { get { return attackDamage; } set { attackDamage = value; } } //공격력
+    protected int prevAttackDamage;
 
+    [Header("방어력")]
     [SerializeField]
     private int defense; 
     public int Defense { get { return defense; } set { defense = value; } } //방어력
+    protected int prevDefense;
 
+    [Header("이동속도")]
     [SerializeField]
     private int speed; 
     public int Speed { get { return speed; } set { speed = value;} } //이동속도
+    protected int prevSpeed;
 
+    [Header("공격속도")]
     [SerializeField]
     private float attackSpeed;
     public float AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } } //공격속도
+    protected float prevAttackSpeed;
 
+    [Header("사거리")]
     [SerializeField]
     private int attackRange;
     public int AttackRange { get { return attackRange; } set { attackRange = value; } } //공격범위
 
-    public int Level { get; set; }
-
+    [Header("공격 후 대기시간")]
     public float attackDelay;
+
+    
     #endregion
 
 
@@ -63,6 +78,7 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
     private Material[] mat;
 
 
+
     public virtual void Awake()
     {
 
@@ -70,26 +86,44 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
         CharacterSkinnedMesh = GetComponentsInChildren<SkinnedMeshRenderer>();
         CharaterMesh = GetComponentsInChildren<MeshRenderer>();
         mat = Resources.LoadAll<Material>("0.TeamColor/CharacterColor");
-        
+        #region 업그레이드를 하기 위해 처음능력치를 미리 알아둔다.
+        prevMaxHp = maxHp;
+        prevAttackDamage = attackDamage;
+        prevAttackSpeed = attackSpeed;
+        prevDefense = defense;
+        prevSpeed = speed;
+        #endregion
 
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         hp = maxHp;
         SetTeamColor();
-        
+        UnitSet();
+        //Upgrade();
+
     }
 
     public virtual void Start()
     {
-        UnitSet();
+        
+    }
+
+    protected void OnDisable()
+    {
+        UnitUnSet();
     }
     public virtual void UnitSet() {
-        SkillManager.skillManager.Units.Add(this);
-    } //스킬매니저 유닛을 세팅한다.
 
-
+        TeamManager.teamManager.AddUnit(team, this);                //유닛을 더한후
+        TeamManager.teamManager.TeamCastle(team).populationCheck(); //인구수 체크
+    } 
+    public virtual void UnitUnSet()
+    {
+        TeamManager.teamManager.RemoveUnit(team, this);             //유닛을 뺀후
+        TeamManager.teamManager.TeamCastle(team).populationCheck(); //인구수 체크
+    }
     public void SetTeamColor() //팀 색상 설정
     {
         for (int i = 0; i < CharacterSkinnedMesh.Length; i++)
@@ -106,8 +140,6 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
     }
 
 
-
-
     
     public void Damaged(int Damaged) //함수 오버로딩으로 SendMessage는 한개의 인수밖에 보낼수 없어 사용했습니다.
     {
@@ -120,7 +152,6 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
             }
         }
     }
-
     public void Damaged(int Damaged,int team  = -1) //팀이 다르면 데미지 입는다. 기본적으로 팀없이 받는건 데미지를 입도록 했다.
     {
         if (team != Team && hp > 0)
@@ -134,10 +165,11 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
         }
     }
 
-    private void DieCh()
+
+    private void DieCh() //캐릭터가 죽었을때 사용하는 함수.
     {
         GetComponent<Animator>().SetTrigger("Die");
-        this.SendMessage("Die");
+        this.SendMessage("Die"); //AI에게 죽음을 알린다.
         AI[] allAI = FindObjectsOfType<AI>();
         foreach (AI targetAI in allAI)
         {
@@ -148,13 +180,6 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
         }
 
     }
-
-
-    public virtual void AttackTarget(GameObject[] Targets)
-    {
-
-    }
-
     public void Attack() //AI 1인공격 함수 (애니메이션에서 공격)
     {
         
@@ -175,23 +200,7 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
 
     }
 
-     public void SpeedUp(float xSpeed, int _team , float _duration) //같은 팀이면 공격속도,이동속도 가 증가합니다.
-    {
-        StartCoroutine(SpeedUpCoro(xSpeed, _team, _duration));
-    }
-    IEnumerator SpeedUpCoro(float xSpeed, int _team, float _duration)
-    {
-        if (Team == _team)
-        {
-            AttackSpeed *= xSpeed;
-            Speed *= (int)xSpeed;
-            yield return new WaitForSeconds(_duration);
-            AttackSpeed /= xSpeed;
-            Speed /= (int)xSpeed;
-        }
-    }
 
-    
     public bool SameTeam(int _team)  //팀이 같으면 True 다르면 False 반환하는 함수
     {
         if (team == _team)
@@ -199,6 +208,7 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
         else
             return false;
     }
+
     public bool AttackRangeFucn(Transform _Target,float Angle =90f,float Range = -1) // 타겟이 공격범위 내에 있는지 확인하는 함수
     {
         if (Range == -1) // 만약에 공격 거리를 입력하지 않았다면 기본 공격거리를 사용한다.
@@ -216,6 +226,28 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
 
     }
 
+
     public abstract void Upgrade(); //업그레이드 가상함수 + 인터페이스 선언으로 각자 알아서 업그레이드를 하도록 한다.
+
     public abstract void RangeSet(); //근거리 유닛일때 사용합니다.
+    public abstract void AttackTarget(GameObject[] Targets); //공격함수 구현은 캐릭터 별로 각자 하도록 한다. 
+
+    #region 스피드업 버프 함수
+    public void SpeedUp(float xSpeed, int _team, float _duration) //같은 팀이면 공격속도,이동속도 가 증가합니다.
+    {
+        StartCoroutine(SpeedUpCoro(xSpeed, _team, _duration));
+    }
+    IEnumerator SpeedUpCoro(float xSpeed, int _team, float _duration)
+    {
+        if (Team == _team)
+        {
+            AttackSpeed *= xSpeed;
+            Speed *= (int)xSpeed;
+            yield return new WaitForSeconds(_duration);
+            AttackSpeed /= xSpeed;
+            Speed /= (int)xSpeed;
+        }
+    }
+    #endregion
+
 }

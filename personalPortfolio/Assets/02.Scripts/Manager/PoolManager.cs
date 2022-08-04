@@ -12,11 +12,12 @@ public class PoolManager : MonoBehaviour
 
     GameObject warriorPrefab;
     GameObject Warriors;
-    List<GameObject> WarriorPool = new List<GameObject>();
+    
+    public List<GameObject> WarriorPool = new List<GameObject>();
 
     GameObject archerPrefab;
     GameObject Archers;
-    List<GameObject> ArcherPool = new List<GameObject>();
+    public List<GameObject> ArcherPool = new List<GameObject>();
 
 
 
@@ -29,7 +30,7 @@ public class PoolManager : MonoBehaviour
             Destroy(gameObject);
 
         arrowPrefab = Resources.Load<GameObject>("Arrow");
-        warriorPrefab = Resources.Load<GameObject>("2.Unit/Character/Worrior");
+        warriorPrefab = Resources.Load<GameObject>("2.Unit/Character/Warrior");
         archerPrefab = Resources.Load<GameObject>("2.Unit/Character/Archer");
 
 
@@ -75,7 +76,7 @@ public class PoolManager : MonoBehaviour
             warrior.SetActive(false);
         }
     }
-    public GameObject GetWarrior() // 호출하면 풀링된 화살하나를 보냅니다.
+    public GameObject GetWarrior() 
     {
         foreach (GameObject warrior in WarriorPool)
         {
@@ -86,14 +87,14 @@ public class PoolManager : MonoBehaviour
             }
         }
 
-        //만약 화살이 다 떨어지면 새로생성하고 다시 화살 받기
+        
         WarriorMake(10);
         return GetWarrior();
 
     }
     #endregion
     #region Archer 오브젝트 풀링 및 받기
-    public void ArcherMake(int count) //받은 count 만큼 화살을 만드는 함수입니다.
+    public void ArcherMake(int count) 
     {
         for (int i = 0; i < count; i++)
         {
@@ -102,7 +103,7 @@ public class PoolManager : MonoBehaviour
             archer.SetActive(false);
         }
     }
-    public GameObject GetArcher() // 호출하면 풀링된 화살하나를 보냅니다.
+    public GameObject GetArcher() 
     {
         foreach (GameObject archer in ArcherPool)
         {
@@ -113,7 +114,7 @@ public class PoolManager : MonoBehaviour
             }
         }
 
-        //만약 화살이 다 떨어지면 새로생성하고 다시 화살 받기
+      
         ArcherMake(10);
         return GetArcher();
 
@@ -121,9 +122,7 @@ public class PoolManager : MonoBehaviour
     #endregion
 
 
-
-
-
+    
 
 
 }

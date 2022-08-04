@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class AttackTower : AttackBuilding
 {
+    [Header("공격 나가는 위치")]
     public Transform Pos;
+    [Header("공격 타겟")]
     public GameObject Target;
     public override void Attack()
     {

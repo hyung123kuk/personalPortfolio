@@ -2,26 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Building : MonoBehaviour , IDamaged
+public abstract class Building : MonoBehaviour , IDamaged ,IUpgrade
 {
     #region 최대체력, 체력, 방어력, 팀
+    [Header("팀")]
+    [SerializeField]
+    private int team;
+    public int Team { get { return team; } set { team = value; SetTeamColor(); } } //팀설정, 색상설정, 레이어설정
+
+    [Header("레벨")]
+    [SerializeField]
+    private int level;
+    public int Level { get { return level; } set { level = value; } }
+
+    [Header("체력/현재체력")]
     [SerializeField]
     private int maxHp;
     public int MaxHp { get { return maxHp; } set { maxHp = value; } } //최대체력
+    protected int prevMaxHp;
 
     [SerializeField]
     private int hp;
     public int Hp { get { return hp; } set { hp = value; } }//체력
 
+    [Header("방어력")]
     [SerializeField]
     private int defense;
     public int Defense { get { return defense; } set { defense = value; } } //방어력
+    protected int prevDefense;
 
-    [SerializeField]
-    private int team;
-    public int Team { get { return team; } set { team = value; SetTeamColor();} } //팀설정, 색상설정, 레이어설정
-
-    public int Level { get; set; }
     #endregion
 
 
@@ -30,13 +39,17 @@ public abstract class Building : MonoBehaviour , IDamaged
     private MeshRenderer[] BuildingMesh;
     private Material[] mat;
 
-    private void Awake()
+    protected virtual void Awake()
     {
 
         BuildingSkinnedMesh = GetComponentsInChildren<SkinnedMeshRenderer>();
         BuildingMesh = GetComponentsInChildren<MeshRenderer>();
         mat = Resources.LoadAll<Material>("0.TeamColor/BuildingColor");
-        
+        #region 업그레이드를 하기 위해 처음능력치를 미리 알아둔다.
+        prevMaxHp = maxHp;
+        prevDefense = defense;
+        #endregion
+
     }
 
     protected virtual void OnEnable()
@@ -44,15 +57,25 @@ public abstract class Building : MonoBehaviour , IDamaged
         hp = maxHp;
 
         SetTeamColor();
+        BuildingSet();
+        //Upgrade();
+    }
+    private void OnDisable()
+    {
+        BuildingUnSet();
     }
     public virtual void Start()
     {
-        BuildingSet();
+        
     }
     public virtual void BuildingSet()
     {
-        SkillManager.skillManager.Buildings.Add(this);
-    } //스킬매니저 빌딩을 세팅한다.
+        TeamManager.teamManager.AddBuilding(team, this);
+    }
+    public virtual void BuildingUnSet()
+    {
+        TeamManager.teamManager.RemoveBuilding(team, this);
+    }
 
     public void SetTeamColor() //팀 색상 설정
     {
@@ -107,4 +130,5 @@ public abstract class Building : MonoBehaviour , IDamaged
         }
     }
 
+    public abstract void Upgrade();
 }

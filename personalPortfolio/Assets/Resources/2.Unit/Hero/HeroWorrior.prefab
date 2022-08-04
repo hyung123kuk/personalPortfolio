@@ -1334,7 +1334,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &805325341438050109
 Transform:
   m_ObjectHideFlags: 0
@@ -1485,19 +1485,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   team: 0
-  maxHp: 0
+  maxHp: 5000
   hp: 0
-  attackDamage: 0
+  attackDamage: 200
   defense: 0
   speed: 4
   attackSpeed: 0
-  attackRange: 4
+  attackRange: 5
+  Population: 1
   attackDelay: 0
   BuidingTargetRange: 6
-  UnitTargetRange: 0
   attackAngle: 80
   skill1CoolTime: 0
-  Skill1Duration: 0
+  Skill1Duration: 3
   skill1XSpeed: 2
   skill2CoolTime: 0
   Skill2Angle: 80
@@ -18528,7 +18528,7 @@ Transform:
   - {fileID: 1008500688896344512}
   m_Father: {fileID: 805325341438039999}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 12.141047, y: 2.622066, z: 159.25941}
 --- !u!1 &8047788121047562335
 GameObject:
   m_ObjectHideFlags: 0

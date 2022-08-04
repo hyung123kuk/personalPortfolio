@@ -58,7 +58,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3194763884996316901}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 13.766932, y: 1.4972879, z: 48.037148}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 113406105}
@@ -139,10 +139,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d575768952bd294f8a4508b9c9d9e46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  team: 0
+  level: 0
   maxHp: 1000
   hp: 0
   defense: 0
-  team: 0
   attackDamage: 20
   attackRange: 15
   attackCoolTime: 1

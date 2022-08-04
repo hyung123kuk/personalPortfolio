@@ -13,8 +13,10 @@ public class SkillManager : MonoBehaviour
 
 
     public List<Character> heros = new List<Character>();
-    public List<Character> Units = new List<Character>();
-    public List<Building> Buildings = new List<Building>();
+    /*public List<Character> Units = new List<Character>();
+    public List<Building> Buildings = new List<Building>();*/
+
+
 
     public void Awake()
     {
@@ -53,7 +55,6 @@ public class SkillManager : MonoBehaviour
             hero.SendMessage("Skill2Ani");
         }
     }
-
 
 
 

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Archer : Character
 {
+    [Header("화살나오는위치")]
     [SerializeField]
     Transform Pos;
 
@@ -17,6 +18,8 @@ public class Archer : Character
 
     public override void AttackTarget(GameObject[] Targets) //오버라이드로 궁수는 새로운 공격 함수 구성
     {
+        if (Targets == null)
+            return;
         transform.LookAt(Targets[0].transform); //타겟을 쳐다보고 쏜다.
         GameObject arrowObj = PoolManager.poolManager.GetArrow();
         Arrow arrow = arrowObj.GetComponentInChildren<Arrow>();
@@ -32,7 +35,7 @@ public class Archer : Character
 
     public override void Upgrade()
     {
-        throw new System.NotImplementedException();
+       
     }
 
     public override void RangeSet() //원거리 유닛은 범위 세팅이 필요없습니다.

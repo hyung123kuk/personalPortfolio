@@ -19,6 +19,10 @@ public class Player : MonoBehaviour ,IState
         rbody = GetComponent<Rigidbody>();
         character = GetComponent<Character>();
     }
+    private void OnEnable()
+    {
+        TouchPad.playerMovement = this;
+    }
 
     public void OnStickChange(Vector2 stickPos)
     {

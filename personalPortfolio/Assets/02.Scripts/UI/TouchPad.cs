@@ -11,14 +11,13 @@ public class TouchPad : MonoBehaviour
     public float _dragRadius = 100f;
     private bool _buttonPressed = false;
     [SerializeField]
-    private Player playerMovement;
+    public static Player playerMovement;
 
     private void OnEnable()
     {
         _touchPad = GetComponent<RectTransform>();
         _StartPos = _touchPad.position;
-        playerMovement =
-            FindObjectOfType<Player>();
+        
     }
 
     public void ButtonDown()

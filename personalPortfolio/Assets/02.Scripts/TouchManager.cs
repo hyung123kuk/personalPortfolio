@@ -20,6 +20,14 @@ public class TouchManager : MonoBehaviour, IPointerDownHandler ,IDragHandler , I
         }
     }
 
+    private void OnEnable()
+    {
+        
+    }
+    private void OnDisable()
+    {
+        
+    }
 
     public void OnDrag(PointerEventData eventData)
     {
@@ -46,6 +54,10 @@ public class TouchManager : MonoBehaviour, IPointerDownHandler ,IDragHandler , I
         if (hit.transform.gameObject.layer == LayerMask.NameToLayer("TEAM1") )
         {
             ClickBuilding = hit.transform.gameObject;
+            foreach (Building building in TeamManager.teamManager.TeamCastle(0).buildings)
+            {
+                building.GetComponent<BoxCollider>().size *= 2;
+            }
         }
 
     }
@@ -54,17 +66,23 @@ public class TouchManager : MonoBehaviour, IPointerDownHandler ,IDragHandler , I
         if (hit.transform.gameObject.layer == LayerMask.NameToLayer("GROUND"))
         {
             Vector3 moveVec = hit.point - ClickBuilding.transform.position;
-            if (true ) //움직이는 방향으로 레이를 쐇을때 아무것도 없으면 이동하도록 한다. 
-            {
-                ClickBuilding.transform.position = Vector3.Slerp(ClickBuilding.transform.position, hit.point, Time.deltaTime);
-            }
+
+
+            ClickBuilding.transform.position = hit.point;
         }
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         if (ClickBuilding != null)
+        {
             ClickBuilding = null;
+            foreach (Building building in TeamManager.teamManager.TeamCastle(0).buildings)
+            {
+                building.GetComponent<BoxCollider>().size /= 2;
+            }
+        }
         BuildingMoveOn = false;
+            
     }
 }

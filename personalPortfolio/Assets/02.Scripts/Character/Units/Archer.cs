@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Archer : Character
+
+public class Archer : Character , IUpgrade
 {
     [Header("화살나오는위치")]
     [SerializeField]
@@ -35,7 +36,7 @@ public class Archer : Character
 
     public override void Upgrade()
     {
-       
+        base.Upgrade();
     }
 
     public override void RangeSet() //원거리 유닛은 범위 세팅이 필요없습니다.

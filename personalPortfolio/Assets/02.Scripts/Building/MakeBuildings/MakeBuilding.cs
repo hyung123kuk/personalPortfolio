@@ -10,6 +10,7 @@ public abstract class MakeBuilding : Building, IMake
     public float MakeCoolTime { get {return makeCoolTime; } set { makeCoolTime = value; } }
 
     protected float prevMakeCoolTime;
+    public float levelMakeCoolTime;
 
     [Header("유닛 생성 ON/OFF")]
 
@@ -57,5 +58,7 @@ public abstract class MakeBuilding : Building, IMake
 
     public abstract GameObject MakeUnitReturn(); //메이크 유닛을 만들어 스타트에 놓아 바로 메이크 유닛을 설정하도록 한다 ( 추상클래스로 만드는걸 강제 한다.)
 
-    public override abstract void Upgrade(); //업그레이드는 각자 알아서 하도록 한다.
+    public override void Upgrade() {
+        makeCoolTime = prevMakeCoolTime + (Level * levelMakeCoolTime);
+        base.Upgrade(); } 
 }

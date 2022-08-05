@@ -1334,7 +1334,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &805325341438050109
 Transform:
   m_ObjectHideFlags: 0
@@ -1484,24 +1484,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e63f1d1194a80141b55600deb898bbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  image: {fileID: 21300000, guid: f9efc2b8e117b974a9fc382f63a5bbbe, type: 3}
+  Name: "\uC601\uC6C5\uC804\uC0AC"
   team: 0
-  maxHp: 5000
+  Population: 0
+  maxHp: 350
+  levelMaxHp: 0
   hp: 0
-  attackDamage: 200
-  defense: 0
+  attackDamage: 80
+  levelAttackDamage: 0
+  defense: 5
+  levelDefense: 0
   speed: 4
+  levelSpeed: 0
   attackSpeed: 0
+  levelAttackSpeed: 0
   attackRange: 5
-  Population: 1
   attackDelay: 0
-  BuidingTargetRange: 6
-  attackAngle: 80
   skill1CoolTime: 0
-  Skill1Duration: 3
-  skill1XSpeed: 2
+  levelSkill1CoolTime: 0
   skill2CoolTime: 0
+  levelSkill2CoolTime: 0
+  attackAngle: 80
+  Skill1Duration: 3
+  levelSkill1Duration: 0
+  skill1XSpeed: 2
+  levelskill1XSpeed: 0
   Skill2Angle: 80
   Skill2Damage: 200
+  levelSkill2Damage: 0
   Skill2Range: 5
 --- !u!1 &805325341438251157
 GameObject:

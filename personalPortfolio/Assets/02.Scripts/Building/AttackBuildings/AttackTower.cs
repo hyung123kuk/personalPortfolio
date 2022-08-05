@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackTower : AttackBuilding
+public class AttackTower : AttackBuilding , IUpgrade
 {
     [Header("공격 나가는 위치")]
     public Transform Pos;
@@ -36,7 +36,8 @@ public class AttackTower : AttackBuilding
 
     public override void Upgrade()
     {
-        throw new System.NotImplementedException();
+       
+        base.Upgrade();
     }
 
 

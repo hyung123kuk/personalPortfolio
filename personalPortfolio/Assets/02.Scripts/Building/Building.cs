@@ -2,8 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public abstract class Building : MonoBehaviour , IDamaged ,IUpgrade
 {
+    [Header("건물 이미지")]
+    public Sprite image;
+    [Header("건물 이름")]
+    public string Name;
     #region 최대체력, 체력, 방어력, 팀
     [Header("팀")]
     [SerializeField]
@@ -21,6 +26,8 @@ public abstract class Building : MonoBehaviour , IDamaged ,IUpgrade
     public int MaxHp { get { return maxHp; } set { maxHp = value; } } //최대체력
     protected int prevMaxHp;
 
+    public int levelMaxHp;
+
     [SerializeField]
     private int hp;
     public int Hp { get { return hp; } set { hp = value; } }//체력
@@ -31,13 +38,20 @@ public abstract class Building : MonoBehaviour , IDamaged ,IUpgrade
     public int Defense { get { return defense; } set { defense = value; } } //방어력
     protected int prevDefense;
 
+    public int levelDefense;
+
     #endregion
 
+    [Header("가격")]
+    public int SellPrice;
+    protected int prevlevelPrice;
 
+    public int levelPrice;
 
     private SkinnedMeshRenderer[] BuildingSkinnedMesh;
     private MeshRenderer[] BuildingMesh;
     private Material[] mat;
+
 
     protected virtual void Awake()
     {
@@ -48,6 +62,7 @@ public abstract class Building : MonoBehaviour , IDamaged ,IUpgrade
         #region 업그레이드를 하기 위해 처음능력치를 미리 알아둔다.
         prevMaxHp = maxHp;
         prevDefense = defense;
+        prevlevelPrice = levelPrice;
         #endregion
 
     }
@@ -130,7 +145,13 @@ public abstract class Building : MonoBehaviour , IDamaged ,IUpgrade
         }
     }
 
-    public abstract void Upgrade();
+    public virtual void Upgrade()
+    {
+        levelPrice = Level * levelPrice;
+        defense = prevDefense + (level * levelDefense);
+        MaxHp = prevMaxHp + (levelMaxHp * Level);
+
+    }
 
 
 }

@@ -108,12 +108,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e41328c91eef1643b8e6356c37d69b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 0
+  image: {fileID: 21300000, guid: 4327ef4e76ee4584594c86e8b9042be3, type: 3}
+  Name: "\uC131"
+  team: -1
   level: 0
   maxHp: 1000
+  levelMaxHp: 200
   hp: 0
   defense: 0
+  levelDefense: 1
+  SellPrice: 0
+  levelPrice: 500
   MaxbuildingNum: 2
+  levelBuildingNum: 1
   MaxUnitNum: 8
+  levelUnitNum: 4
   buildings: []
   units: []

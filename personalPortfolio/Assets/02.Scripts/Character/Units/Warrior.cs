@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Warrior : Character , IMelee 
+public class Warrior : Character , IMelee , IUpgrade
 {
     [Header("빌딩공격시 사거리")]
     public int BuidingTargetRange = 6;
@@ -34,7 +34,7 @@ public class Warrior : Character , IMelee
 
     public override void Upgrade()
     {
-        throw new System.NotImplementedException();
+        base.Upgrade();
     }
 
     public override void RangeSet()

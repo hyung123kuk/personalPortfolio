@@ -7225,21 +7225,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f327f0031242974b8868613e68bebe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  image: {fileID: 21300000, guid: 0d9bae15c64c7614bac7b5f9dfd50cbc, type: 3}
+  Name: "\uC601\uC6C5\uAD81\uC218"
   team: 0
-  maxHp: 0
+  Population: 0
+  maxHp: 250
+  levelMaxHp: 0
   hp: 0
-  attackDamage: 0
-  defense: 0
+  attackDamage: 80
+  levelAttackDamage: 0
+  defense: 5
+  levelDefense: 0
   speed: 4
+  levelSpeed: 0
   attackSpeed: 0
+  levelAttackSpeed: 0
   attackRange: 0
   attackDelay: 0
-  Pos: {fileID: 0}
   skill1CoolTime: 0
-  Skill1Duration: 0
-  skill1XSpeed: 2
+  levelSkill1CoolTime: 0
   skill2CoolTime: 0
-  SkillAngle: 70
+  levelSkill2CoolTime: 0
+  Skill1Duration: 0
+  levelSkill1Duration: 0
+  skill1XSpeed: 2
+  levelskill1XSpeed: 0
+  Skill2Angle: 80
+  Skill2Damage: 0
+  levelSkill2Damage: 0
 --- !u!1 &5442784291876442785
 GameObject:
   m_ObjectHideFlags: 0

@@ -10782,17 +10782,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 536a6cf59bc007142ae071b8c9d76e4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  image: {fileID: 21300000, guid: 7c39f283907156047afbf66f87146763, type: 3}
+  Name: "\uC804\uC0AC"
   team: 0
-  maxHp: 1000
-  hp: 100
-  attackDamage: 10
+  Population: 1
+  maxHp: 100
+  levelMaxHp: 0
+  hp: 0
+  attackDamage: 30
+  levelAttackDamage: 0
   defense: 0
+  levelDefense: 0
   speed: 4
+  levelSpeed: 0
   attackSpeed: 1
+  levelAttackSpeed: 0
   attackRange: 2
   attackDelay: 0.2
   BuidingTargetRange: 5
-  UnitTargetRange: 0
 --- !u!1 &1887142254515175757
 GameObject:
   m_ObjectHideFlags: 0

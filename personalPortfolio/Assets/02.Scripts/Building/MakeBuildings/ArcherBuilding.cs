@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArcherBuilding : MakeBuilding
+public class ArcherBuilding : MakeBuilding , IUpgrade
 {
     public override GameObject MakeUnitReturn()
     {
@@ -13,7 +13,7 @@ public class ArcherBuilding : MakeBuilding
 
     public override void Upgrade()
     {
-        throw new System.NotImplementedException();
+        base.Upgrade();
     }
 
 

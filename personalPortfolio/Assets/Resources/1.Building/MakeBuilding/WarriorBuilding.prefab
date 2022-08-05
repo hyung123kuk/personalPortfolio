@@ -108,10 +108,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8236f3a7261c5984ba68b85112a1e705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 1
+  image: {fileID: 21300000, guid: c0f27fdb6885de24697493d76d4ba9f0, type: 3}
+  Name: "\uC804\uC0AC\uC591\uC131\uC18C"
+  team: -1
   level: 0
-  maxHp: 1000
+  maxHp: 400
+  levelMaxHp: 40
   hp: 0
   defense: 0
+  levelDefense: 1
+  SellPrice: 1000
+  levelPrice: 200
   makeCoolTime: 5
+  levelMakeCoolTime: 0
   posibleProduce: 0

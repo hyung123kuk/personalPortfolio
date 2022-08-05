@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-
 public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade 
 // 모든 캐릭터들은 체력,공격력,방어력,이동속도을 가지고 있습니다.  회복 할수 있습니다 ,  데미지를 입습니다.
 {
+
+    [Header("캐릭터 이미지")]
+    public Sprite image;
+    [Header("캐릭터 이름")]
+    public string Name;
     #region 최대체력, 체력, 공격력, 방어력, 이동속도, 공격범위, 팀, 인구수
     [Header("팀")]
     [SerializeField]
@@ -31,6 +35,9 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
     private int maxHp; 
     public int MaxHp { get { return maxHp; } set { maxHp = value; } } //최대체력
     protected int prevMaxHp;
+
+    public int levelMaxHp;
+
     [SerializeField]
     private int hp; 
     public int Hp { get { return hp; } set { hp = value; } }//체력
@@ -41,11 +48,16 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
     public int AttackDamage { get { return attackDamage; } set { attackDamage = value; } } //공격력
     protected int prevAttackDamage;
 
+    public int levelAttackDamage;
+
+
     [Header("방어력")]
     [SerializeField]
     private int defense; 
     public int Defense { get { return defense; } set { defense = value; } } //방어력
     protected int prevDefense;
+
+    public int levelDefense;
 
     [Header("이동속도")]
     [SerializeField]
@@ -53,11 +65,15 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
     public int Speed { get { return speed; } set { speed = value;} } //이동속도
     protected int prevSpeed;
 
+    public int levelSpeed;
+
     [Header("공격속도")]
     [SerializeField]
     private float attackSpeed;
     public float AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } } //공격속도
     protected float prevAttackSpeed;
+
+    public int levelAttackSpeed;
 
     [Header("사거리")]
     [SerializeField]
@@ -67,11 +83,10 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
     [Header("공격 후 대기시간")]
     public float attackDelay;
 
-    
+
     #endregion
 
 
-    
 
     private SkinnedMeshRenderer[] CharacterSkinnedMesh;
     private MeshRenderer[] CharaterMesh;
@@ -227,9 +242,18 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
     }
 
 
-    public abstract void Upgrade(); //업그레이드 가상함수 + 인터페이스 선언으로 각자 알아서 업그레이드를 하도록 한다.
+    public virtual void Upgrade()
+    {
+        
+        defense = prevDefense + (level * levelDefense);
+        MaxHp = prevMaxHp + (levelMaxHp * Level);
+        attackDamage = prevAttackDamage + (levelAttackDamage * level);
+        speed = prevSpeed + (levelSpeed * level);
+        attackSpeed = prevAttackSpeed + (levelAttackSpeed * level);
 
-    public abstract void RangeSet(); //근거리 유닛일때 사용합니다.
+    }
+
+    public virtual void RangeSet() { } //근거리 유닛일때 사용합니다.
     public abstract void AttackTarget(GameObject[] Targets); //공격함수 구현은 캐릭터 별로 각자 하도록 한다. 
 
     #region 스피드업 버프 함수

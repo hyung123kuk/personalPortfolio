@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class AttackBuilding : Building , IAttack
+public abstract class AttackBuilding : Building , IAttack , IUpgrade
 {
 
 
@@ -11,14 +11,23 @@ public abstract class AttackBuilding : Building , IAttack
     private int attackDamage;
     public int AttackDamage { get { return attackDamage; } set { attackDamage = value; } } //공격력
     protected int prevAttackDamage;
+
+    public int levelAttackDamage;
+
     [Header("건물 공격범위")]
     [SerializeField]
     private int attackRange;
     public int AttackRange { get { return attackRange; } set { attackRange = value; } } //공격범위
     protected int prevAttackRange;
+
+    public int levelAttackRange;
+
     [Header("건물 공격쿨타임")]
 
     public float attackCoolTime;
+    protected float prevAttackCoolTime;
+
+    public float levelAttackCoolTime;
 
     [Header("공격 ON/OFF")]
 
@@ -30,6 +39,7 @@ public abstract class AttackBuilding : Building , IAttack
         base.OnEnable();
         prevAttackDamage = attackDamage;
         prevAttackRange = attackRange;
+        prevAttackCoolTime = attackCoolTime;
         StartCoroutine(AttackTarget());
     }
 
@@ -50,7 +60,11 @@ public abstract class AttackBuilding : Building , IAttack
 
 
 
-    public override abstract void Upgrade(); //업그레이드 각자 구현해야합니다.
+    public override void Upgrade() {
+        attackDamage = prevAttackDamage + (Level * levelAttackDamage);
+        attackRange = prevAttackRange + (Level * levelAttackRange);
+        attackCoolTime = prevAttackCoolTime + (Level * levelAttackCoolTime);
+        base.Upgrade();} 
 
     public abstract void Attack();//공격 각자 구현해야합니다.
 

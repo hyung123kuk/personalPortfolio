@@ -58,6 +58,10 @@ public class TouchManager : MonoBehaviour, IPointerDownHandler ,IDragHandler , I
             {
                 building.GetComponent<BoxCollider>().size *= 2;
             }
+            if (FindObjectOfType<ItemShop>())
+            {
+                FindObjectOfType<ItemShop>().BuildingSet(ClickBuilding.GetComponent<Building>());
+            }
         }
 
     }

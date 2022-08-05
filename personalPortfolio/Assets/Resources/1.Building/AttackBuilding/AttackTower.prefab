@@ -139,13 +139,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d575768952bd294f8a4508b9c9d9e46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 0
+  image: {fileID: 21300000, guid: e7cf472db41c20b4b9938ebdc4c32ee2, type: 3}
+  Name: "\uACF5\uACA9\uD0C0\uC6CC"
+  team: -1
   level: 0
-  maxHp: 1000
+  maxHp: 250
+  levelMaxHp: 100
   hp: 0
   defense: 0
+  levelDefense: 1
+  SellPrice: 500
+  levelPrice: 200
   attackDamage: 20
-  attackRange: 15
-  attackCoolTime: 1
+  levelAttackDamage: 5
+  attackRange: 10
+  levelAttackRange: 1
+  attackCoolTime: 2
+  levelAttackCoolTime: -0.1
+  work: 1
   Pos: {fileID: 113406105}
   Target: {fileID: 0}

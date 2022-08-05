@@ -2,18 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Castle : Building
+public class Castle : Building , IUpgrade
 {
     [Header("최대 건물 수")]
     public int MaxbuildingNum = 2;
     private int PrevBuildingNum;
+
+    public int levelBuildingNum;
+
     [Header("최대 유닛 수")]
     public int MaxUnitNum = 8;
     private int PrevUnitNum;
 
+    public int levelUnitNum;
+
     [Header("내 건물")]
     [SerializeField]
     public List<Building> buildings = new List<Building>();
+
     [Header("내 유닛")]
     [SerializeField]
     public List<Character> units = new List<Character>();
@@ -45,13 +51,24 @@ public class Castle : Building
 
     public override void Upgrade()
     {
-        MaxbuildingNum = PrevUnitNum + Level;
-        MaxUnitNum = PrevUnitNum + (4 * Level);
+        MaxbuildingNum = PrevUnitNum + (levelBuildingNum * Level);
+        MaxUnitNum = PrevUnitNum + (levelUnitNum * Level);
+        
+        base.Upgrade();
     }
 
     public void populationCheck()
     {
-        if (units.Count < MaxUnitNum) //유닛 개수가 최대 유닛 보다 작으면 유닛생성 가능 아니면 유닛생성 멈춤
+
+
+        int NowPopulation=0;
+        foreach(Character unit in units)
+        {
+            NowPopulation += unit.Population;
+        }
+
+
+        if (NowPopulation < MaxUnitNum) //유닛 개수가 최대 유닛 보다 작으면 유닛생성 가능 아니면 유닛생성 멈춤
         {
             if (!unitproduce) //이게 없으면 너무 많은 이벤트함수를 사용해야 하므로 걸어놓았다.
             {

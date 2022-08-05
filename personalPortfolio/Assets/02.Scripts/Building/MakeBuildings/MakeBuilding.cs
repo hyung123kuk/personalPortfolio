@@ -4,6 +4,9 @@ using UnityEngine;
 
 public abstract class MakeBuilding : Building, IMake
 {
+    [Header("생성 유닛")]
+    public GameObject makeUnit;
+
     [Header("유닛 만드는데 걸리는 시간")]
     [SerializeField]
     private float makeCoolTime;
@@ -15,6 +18,9 @@ public abstract class MakeBuilding : Building, IMake
     [Header("유닛 생성 ON/OFF")]
 
     public bool posibleProduce=true; //인구수에 따라 생산 불가능,생산 가능이 정해진다.
+
+
+    
 
     protected override void Awake()
     {

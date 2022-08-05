@@ -141,7 +141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: e7cf472db41c20b4b9938ebdc4c32ee2, type: 3}
   Name: "\uACF5\uACA9\uD0C0\uC6CC"
-  team: -1
+  team: 0
   level: 0
   maxHp: 250
   levelMaxHp: 100
@@ -151,7 +151,7 @@ MonoBehaviour:
   SellPrice: 500
   levelPrice: 200
   attackDamage: 20
-  levelAttackDamage: 5
+  levelAttackDamage: 10
   attackRange: 10
   levelAttackRange: 1
   attackCoolTime: 2

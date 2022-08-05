@@ -18,7 +18,7 @@ public abstract class Building : MonoBehaviour , IDamaged ,IUpgrade
     [Header("레벨")]
     [SerializeField]
     private int level;
-    public int Level { get { return level; } set { level = value; } }
+    public int Level { get { return level; } set { level = value; Upgrade(); } }
 
     [Header("체력/현재체력")]
     [SerializeField]
@@ -44,7 +44,7 @@ public abstract class Building : MonoBehaviour , IDamaged ,IUpgrade
 
     [Header("가격")]
     public int SellPrice;
-    protected int prevlevelPrice;
+    public int prevlevelPrice;
 
     public int levelPrice;
 
@@ -73,7 +73,7 @@ public abstract class Building : MonoBehaviour , IDamaged ,IUpgrade
 
         SetTeamColor();
         BuildingSet();
-        //Upgrade();
+        
     }
     private void OnDisable()
     {
@@ -147,7 +147,7 @@ public abstract class Building : MonoBehaviour , IDamaged ,IUpgrade
 
     public virtual void Upgrade()
     {
-        levelPrice = Level * levelPrice;
+        levelPrice = (Level+2)* (Level+1) * prevlevelPrice;
         defense = prevDefense + (level * levelDefense);
         MaxHp = prevMaxHp + (levelMaxHp * Level);
 

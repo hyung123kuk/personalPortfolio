@@ -29,7 +29,7 @@ public class Castle : Building , IUpgrade
 
     private bool unitproduce = true; //상태가 달라지지 않으면 괜히 event를 불러와 시간이 걸리므로 이곳에서도 알수있게 선언해 주었다.
     private bool attackWork = true;
-
+    int NowPopulation = 0;
     protected override void OnEnable()
     {
         TeamManager.teamManager.Castles.Add(this);
@@ -51,23 +51,17 @@ public class Castle : Building , IUpgrade
 
     public override void Upgrade()
     {
-        MaxbuildingNum = PrevUnitNum + (levelBuildingNum * Level);
+
+        MaxbuildingNum = PrevBuildingNum + (levelBuildingNum * Level);
         MaxUnitNum = PrevUnitNum + (levelUnitNum * Level);
-        
+        BuildingCheck(); UnitCheck();
         base.Upgrade();
     }
 
     public void populationCheck()
     {
-
-
-        int NowPopulation=0;
-        foreach(Character unit in units)
-        {
-            NowPopulation += unit.Population;
-        }
-
-
+        populNum();
+        UnitCheck();
         if (NowPopulation < MaxUnitNum) //유닛 개수가 최대 유닛 보다 작으면 유닛생성 가능 아니면 유닛생성 멈춤
         {
             if (!unitproduce) //이게 없으면 너무 많은 이벤트함수를 사용해야 하므로 걸어놓았다.
@@ -84,11 +78,37 @@ public class Castle : Building , IUpgrade
                 unitproduce = false;
             }
         }
+        
     } //인구수 체크해서 생성 건물에 생성 가능한지 불가능한지 보내는 함수
+
+    private void populNum()
+    {
+        NowPopulation = 0;
+        foreach (Character unit in units)
+        {
+            NowPopulation += unit.Population;
+        }
+    }
 
     public void AttackBuildingCheck(bool isattack)
     {       
         attackBuildingWork(isattack); //공격건물 어택에 관한 함수 
+    }
+
+    public void BuildingCheck()
+    {
+        if (gameObject.layer == LayerMask.NameToLayer("TEAM1"))
+        {
+            FindObjectOfType<GameUI>().BuildingSet(buildings.Count, MaxbuildingNum);
+        }
+    }
+
+    public void UnitCheck()
+    {
+        if (gameObject.layer == LayerMask.NameToLayer("TEAM1"))
+        {
+            FindObjectOfType<GameUI>().UnitSet(NowPopulation, MaxUnitNum);
+        }
     }
 
 }

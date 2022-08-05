@@ -26,7 +26,7 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
     } //팀을 넣으면 자동으로 색상 변경 및 레이어 설정
     [Header("레벨")]
     private int level;
-    public int Level { get { return level; } set { level = value; } }
+    public int Level { get { return level; } set { level = value; Upgrade(); } }
     [Header("인구수")]
     public int Population;
 
@@ -61,11 +61,11 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
 
     [Header("이동속도")]
     [SerializeField]
-    private int speed; 
-    public int Speed { get { return speed; } set { speed = value;} } //이동속도
-    protected int prevSpeed;
+    private float speed; 
+    public float Speed { get { return speed; } set { speed = value;} } //이동속도
+    protected float prevSpeed;
 
-    public int levelSpeed;
+    public float levelSpeed;
 
     [Header("공격속도")]
     [SerializeField]
@@ -73,7 +73,7 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
     public float AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } } //공격속도
     protected float prevAttackSpeed;
 
-    public int levelAttackSpeed;
+    public float levelAttackSpeed;
 
     [Header("사거리")]
     [SerializeField]
@@ -116,7 +116,7 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
         hp = maxHp;
         SetTeamColor();
         UnitSet();
-        //Upgrade();
+        
 
     }
 

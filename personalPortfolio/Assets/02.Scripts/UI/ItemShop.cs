@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemShop : MonoBehaviour
+public class ItemShop : MonoBehaviour ,IBuildingSet
 {
     [SerializeField]
-    Building SelectBuilding;
+    public Building SelectBuilding;
     [SerializeField]
     GameObject Menu;
     [SerializeField]
@@ -38,8 +38,14 @@ public class ItemShop : MonoBehaviour
     [SerializeField]
     Text Name;
 
+    [SerializeField]
+    GameObject BuyButton;
+    [SerializeField]
+    GameObject UpgradeButton;
+
     public void BackButton()
     {
+        ShopReset();
         Menu.SetActive(true);
         gameObject.SetActive(false);
     }
@@ -49,7 +55,8 @@ public class ItemShop : MonoBehaviour
         attackBuildings.AddRange(Resources.LoadAll<GameObject>("1.Building/AttackBuilding"));
         makeBuildings.AddRange(Resources.LoadAll<GameObject>("1.Building/MakeBuilding"));
     }
-
+    public void BuildingSet() //인터페이스 연결용
+    {    }
     public void BuildingSet(Building building)
     {
         SelectBuilding = building;
@@ -61,11 +68,15 @@ public class ItemShop : MonoBehaviour
 
         if (building.gameObject.layer == LayerMask.NameToLayer("TEAM1")) //내 빌딩이면
         {
-            price.text = (building.levelPrice * (building.Level + 1)).ToString();
+            price.text = (building.levelPrice).ToString();
+            BuyButton.SetActive(false);
+            UpgradeButton.SetActive(true);
         }
         else
         {
             price.text = building.SellPrice.ToString();
+            BuyButton.SetActive(true);
+            UpgradeButton.SetActive(false);
         }
         Name.text = building.Name;
 
@@ -83,9 +94,9 @@ public class ItemShop : MonoBehaviour
             AttackBuildingSet(building.GetComponent<AttackBuilding>());
         }
         #endregion
-
-
     }
+
+
 
     public void CastleSet(Castle castle)
     {
@@ -107,6 +118,55 @@ public class ItemShop : MonoBehaviour
         AttackBuildingMenu.SetActive(true);
     }
 
+    public void ItemBuy() //아이템 구매 버튼
+    {
+        if (SelectBuilding == null)
+            return;
 
+
+    }
+
+
+    public void ItemSell() //아이템 판매 버튼
+    {
+        if (SelectBuilding == null)
+            return;
+        if (SelectBuilding.GetComponent<Castle>()) //성은 팔지 못한다.
+            return;
+        
+
+        
+        FindObjectOfType<GameUI>().MoneySet(SelectBuilding.SellPrice);
+        Destroy(SelectBuilding.gameObject);
+        
+        ShopReset();
+        
+    }
+    public void Upgede() //업그레이드 버튼
+    {
+        if (SelectBuilding == null)
+            return;
+        if (SelectBuilding.levelPrice > FindObjectOfType<GameUI>().money)
+            return;
+
+        FindObjectOfType<GameUI>().MoneySet(-SelectBuilding.levelPrice);
+        SelectBuilding.Level++; //레벨올리면 자동으로 업그레이드 된다.
+        Building selbuild = SelectBuilding;
+        ShopReset();
+        BuildingSet(selbuild);
+    }
+
+    public void ShopReset()
+    {
+        CastleMenu.SetActive(false);
+        makeBuildingMenu.SetActive(false);
+        AttackBuildingMenu.SetActive(false);
+        level.text = "레벨 : ";
+        MaxHp.text = "체력 : ";
+        Defence.text = "방어 : ";
+        SelectBuilding = null;
+        Buildingimage.sprite = null;
+        price.text = "";
+    }
 
 }

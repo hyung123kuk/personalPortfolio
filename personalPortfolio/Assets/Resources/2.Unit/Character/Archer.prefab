@@ -7984,16 +7984,16 @@ MonoBehaviour:
   team: 0
   Population: 1
   maxHp: 70
-  levelMaxHp: 0
+  levelMaxHp: 15
   hp: 0
   attackDamage: 30
-  levelAttackDamage: 0
+  levelAttackDamage: 3
   defense: 0
-  levelDefense: 0
+  levelDefense: 1
   speed: 3
-  levelSpeed: 0
+  levelSpeed: 0.1
   attackSpeed: 1
-  levelAttackSpeed: 0
+  levelAttackSpeed: 0.05
   attackRange: 10
   attackDelay: 0.2
   Pos: {fileID: 783680254}

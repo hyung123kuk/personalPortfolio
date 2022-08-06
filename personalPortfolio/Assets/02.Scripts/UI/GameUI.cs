@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class GameUI : MonoBehaviour
 {
+    public static GameUI gameUI;
+
     [SerializeField]
     Text moneyText;
 
@@ -15,6 +17,13 @@ public class GameUI : MonoBehaviour
     [SerializeField]
     Text unitText;
 
+    private void Awake()
+    {
+        if (gameUI == null)
+            gameUI = this;
+        if (gameUI != this)
+            Destroy(gameObject);
+    }
 
     private void Start()
     {

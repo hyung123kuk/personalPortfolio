@@ -12,14 +12,11 @@ public class AddInfoCastle : MonoBehaviour ,IBuildingSet
     Text MaxUnitNum;
 
 
-    private void OnEnable()
-    {
-        BuildingSet();
-    }
 
-    public void BuildingSet()
+
+    public void BuildingSet(Building SelectBuilding)
     {
-        Castle building = FindObjectOfType<ItemShop>().SelectBuilding.GetComponent<Castle>();
+        Castle building = SelectBuilding.GetComponent<Castle>();
 
         MaxBuildingNum.text = "최대 건물 수 : " + (building.MaxbuildingNum).ToString() + "(+" + building.levelBuildingNum + ")";
         MaxUnitNum.text = "최대 유닛 수 : " + (building.MaxUnitNum).ToString() + "(+" + building.levelUnitNum + ")";

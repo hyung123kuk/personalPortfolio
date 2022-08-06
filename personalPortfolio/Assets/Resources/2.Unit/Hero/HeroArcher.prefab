@@ -7246,7 +7246,7 @@ MonoBehaviour:
   levelSkill1CoolTime: 0
   skill2CoolTime: 0
   levelSkill2CoolTime: 0
-  Skill1Duration: 0
+  Skill1Duration: 3
   levelSkill1Duration: 0
   skill1XSpeed: 2
   levelskill1XSpeed: 0

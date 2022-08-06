@@ -148,7 +148,8 @@ MonoBehaviour:
   hp: 0
   defense: 0
   levelDefense: 1
-  SellPrice: 500
+  buyPrice: 500
+  prevlevelPrice: 0
   levelPrice: 200
   attackDamage: 20
   levelAttackDamage: 10
@@ -156,6 +157,6 @@ MonoBehaviour:
   levelAttackRange: 1
   attackCoolTime: 2
   levelAttackCoolTime: -0.1
-  work: 1
+  work: 0
   Pos: {fileID: 113406105}
   Target: {fileID: 0}

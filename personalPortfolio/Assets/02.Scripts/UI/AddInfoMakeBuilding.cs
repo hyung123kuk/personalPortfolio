@@ -23,14 +23,10 @@ public class AddInfoMakeBuilding : MonoBehaviour ,IBuildingSet
     Text MoveSpeed;
 
 
-    private void OnEnable()
-    {
-        BuildingSet();
-    }
 
-    public void BuildingSet()
+    public void BuildingSet(Building SelectBuilding)
     {
-        MakeBuilding building = FindObjectOfType<ItemShop>().SelectBuilding.GetComponent<MakeBuilding>();
+        MakeBuilding building = SelectBuilding.GetComponent<MakeBuilding>();
         Character makeUnit = building.makeUnit.GetComponent<Character>();
 
         image.sprite = makeUnit.image;

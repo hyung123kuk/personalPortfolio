@@ -99,7 +99,7 @@ public class Castle : Building , IUpgrade
     {
         if (gameObject.layer == LayerMask.NameToLayer("TEAM1"))
         {
-            FindObjectOfType<GameUI>().BuildingSet(buildings.Count, MaxbuildingNum);
+            GameUI.gameUI.BuildingSet(buildings.Count, MaxbuildingNum);
         }
     }
 
@@ -107,7 +107,7 @@ public class Castle : Building , IUpgrade
     {
         if (gameObject.layer == LayerMask.NameToLayer("TEAM1"))
         {
-            FindObjectOfType<GameUI>().UnitSet(NowPopulation, MaxUnitNum);
+            GameUI.gameUI.UnitSet(NowPopulation, MaxUnitNum);
         }
     }
 

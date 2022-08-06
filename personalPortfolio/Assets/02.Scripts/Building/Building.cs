@@ -43,9 +43,9 @@ public abstract class Building : MonoBehaviour , IDamaged ,IUpgrade
     #endregion
 
     [Header("АЁАн")]
-    public int SellPrice;
+    public int buyPrice;
     public int prevlevelPrice;
-
+    public int sellPrice;
     public int levelPrice;
 
     private SkinnedMeshRenderer[] BuildingSkinnedMesh;
@@ -150,7 +150,20 @@ public abstract class Building : MonoBehaviour , IDamaged ,IUpgrade
         levelPrice = (Level+2)* (Level+1) * prevlevelPrice;
         defense = prevDefense + (level * levelDefense);
         MaxHp = prevMaxHp + (levelMaxHp * Level);
-
+        sellPrice = buyPrice;
+        for (int i =0;i<level; i++)
+        {
+            if (i == 0)
+            {
+                sellPrice += prevlevelPrice;
+            }
+            else
+            {
+                sellPrice += (i + 2) * (i + 1) * prevlevelPrice;
+            }
+        }
+        sellPrice = sellPrice *80 /100;
+        Debug.Log(sellPrice);
     }
 
 

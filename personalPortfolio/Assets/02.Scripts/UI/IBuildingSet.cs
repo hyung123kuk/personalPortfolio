@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IBuildingSet
 {
-    public void BuildingSet();
+    public void BuildingSet(Building building);
 }

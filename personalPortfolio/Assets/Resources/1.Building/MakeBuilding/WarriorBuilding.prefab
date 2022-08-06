@@ -117,7 +117,8 @@ MonoBehaviour:
   hp: 0
   defense: 0
   levelDefense: 1
-  SellPrice: 1000
+  buyPrice: 1000
+  prevlevelPrice: 0
   levelPrice: 200
   makeUnit: {fileID: 1887142254515175569, guid: 86ecceeb8cad2404a95bd7f54841ba5d, type: 3}
   makeCoolTime: 5

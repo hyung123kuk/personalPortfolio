@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArcherHero : Hero, IHeroSkill , IUpgrade
+public class ArcherHero : Hero, IHeroSkill ,IBuff,  IUpgrade
 {
     [Header("영웅 능력")]
 
     [Header("스킬 1")]
+    [SerializeField]
+    private float Skill1Duration; //스킬 지속시간
+    public float BuffDurationTIme { get { return Skill1Duration; } set { Skill1Duration = value; } }
 
-    public float Skill1Duration; //스킬 지속시간
     protected float prevSkill1Duration;
 
     public float levelSkill1Duration;
@@ -30,7 +32,7 @@ public class ArcherHero : Hero, IHeroSkill , IUpgrade
 
     public int levelSkill2Damage;
 
-
+  
 
     public override void Awake()
     {

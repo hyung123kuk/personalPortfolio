@@ -12,14 +12,11 @@ public class AddInfoAttackBuilding : MonoBehaviour , IBuildingSet
     [SerializeField]
     Text AttackCool;
 
-    private void OnEnable()
-    {
-        BuildingSet();
-    }
 
-    public void BuildingSet()
+
+    public void BuildingSet(Building SelectBuilding)
     {
-        AttackBuilding building = FindObjectOfType<ItemShop>().SelectBuilding.GetComponent<AttackBuilding>();
+        AttackBuilding building = SelectBuilding.GetComponent<AttackBuilding>();
         
         Damage.text = "공격력 : " + (building.AttackDamage + (building.Level * building.levelAttackDamage)).ToString() + "(+" + building.levelAttackDamage + ")";
         AttackRange.text = "공격범위 : " + (building.AttackRange + (building.Level * building.levelAttackRange)).ToString() + "(+" + building.levelAttackRange + ")";

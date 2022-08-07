@@ -16270,6 +16270,15 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Renderer_SetMaterial_m45DB63437410875B21
 	_il2cpp_icall_func = (Renderer_SetMaterial_m45DB63437410875B21F714779FC6D68827BF9497_ftn)il2cpp_codegen_resolve_icall ("UnityEngine.Renderer::SetMaterial(UnityEngine.Material)");
 	_il2cpp_icall_func(__this, ___m0);
 }
+// System.Void UnityEngine.Renderer::set_enabled(System.Boolean)
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Renderer_set_enabled_mFFBA418C428C1B2B151C77B879DD10C393D9D95B (Renderer_t58147AB5B00224FE1460FD47542DC0DA7EC9378C * __this, bool ___value0, const RuntimeMethod* method)
+{
+	typedef void (*Renderer_set_enabled_mFFBA418C428C1B2B151C77B879DD10C393D9D95B_ftn) (Renderer_t58147AB5B00224FE1460FD47542DC0DA7EC9378C *, bool);
+	static Renderer_set_enabled_mFFBA418C428C1B2B151C77B879DD10C393D9D95B_ftn _il2cpp_icall_func;
+	if (!_il2cpp_icall_func)
+	_il2cpp_icall_func = (Renderer_set_enabled_mFFBA418C428C1B2B151C77B879DD10C393D9D95B_ftn)il2cpp_codegen_resolve_icall ("UnityEngine.Renderer::set_enabled(System.Boolean)");
+	_il2cpp_icall_func(__this, ___value0);
+}
 // System.Int32 UnityEngine.Renderer::get_sortingLayerID()
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t Renderer_get_sortingLayerID_m668C1AA36751AF6655BAAD42BE7627E7950E48E8 (Renderer_t58147AB5B00224FE1460FD47542DC0DA7EC9378C * __this, const RuntimeMethod* method)
 {

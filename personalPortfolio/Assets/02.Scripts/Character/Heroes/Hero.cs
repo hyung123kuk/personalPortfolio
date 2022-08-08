@@ -2,22 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Hero : Character, IUpgrade, IHeroSkill
+public abstract class Hero : Character, IUpgrade, IHeroSkill , ICondition
 {
+    [Header("¿µ¿õ")]
+    public string condisionMessage;
+
     [SerializeField]
     private float skill1CoolTime; //½ºÅ³ ÄðÅ¸ÀÓ
     public float Skill1CoolTime { get { return skill1CoolTime; } set { skill1CoolTime = value; } }
     protected float prevSkill1CoolTime;
 
     public float levelSkill1CoolTime;
-
+    public bool isSkill1Cool;
     [SerializeField]
     private float skill2CoolTime;
     public float Skill2CoolTime { get { return skill2CoolTime; } set { skill2CoolTime = value; } }
+
+    private bool isCondition;
+    public bool IsCondition { get { return isCondition; } set { isCondition = value; } }
+
     protected float prevSkill2CoolTime;
 
     public float levelSkill2CoolTime;
-
+    public bool isSkill2Cool;
     public override void Awake()
     {
         prevSkill1CoolTime = skill1CoolTime;
@@ -33,9 +40,31 @@ public abstract class Hero : Character, IUpgrade, IHeroSkill
         throw new System.NotImplementedException();
     }
 
-    public abstract void Skill1();
+    public virtual void Skill1() {
+        StartCoroutine(Skill1());
 
-    public abstract void Skill2();
+        IEnumerator Skill1()
+        {
+            isSkill1Cool = true;
+            yield return new WaitForSeconds(skill1CoolTime);
+            isSkill1Cool = false;
+
+        }
+    }
+
+    public virtual void Skill2() { 
+    {
+        StartCoroutine(Skill2());
+
+        IEnumerator Skill2()
+        {
+            isSkill2Cool = true;
+            yield return new WaitForSeconds(skill2CoolTime);
+            isSkill2Cool = false;
+
+        }
+    }
+}
 
     public override void Upgrade()
     {
@@ -43,5 +72,10 @@ public abstract class Hero : Character, IUpgrade, IHeroSkill
         skill2CoolTime = prevSkill2CoolTime + (levelSkill2CoolTime * Level);
 
         base.Upgrade();
+    }
+
+    public virtual void ConditionSet()
+    {
+        
     }
 }

@@ -49,7 +49,7 @@ public class Player : MonoBehaviour ,IState
                 Speed.x = character.Speed * h;
                 Speed.z = character.Speed * v;
                 rbody.velocity = Speed;
-                if (h != 0 && v != 0)
+                if (h >= 0.01 || v >= 0.01)
                 {                  // 벡터값을 이용해서 회전을 하게 하는 함수
                     tr.rotation = Quaternion.LookRotation(new Vector3(h, 0f, v));
                     //바라보는 쪽으로 회전 한다.

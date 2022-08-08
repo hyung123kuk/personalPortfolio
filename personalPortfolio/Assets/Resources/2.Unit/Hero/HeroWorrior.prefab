@@ -1343,7 +1343,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 805325341438251023}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 27.14, y: 0, z: 47.67851}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 805325341437985369}
@@ -1487,6 +1487,7 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: f9efc2b8e117b974a9fc382f63a5bbbe, type: 3}
   Name: "\uC601\uC6C5\uC804\uC0AC"
   team: 0
+  level: 0
   Population: 0
   maxHp: 350
   levelMaxHp: 0
@@ -1501,6 +1502,8 @@ MonoBehaviour:
   levelAttackSpeed: 0
   attackRange: 5
   attackDelay: 0
+  condisionMessage: "\uC804\uC0AC\uC591\uC131\uC18C\uAC00 \uC874\uC7AC\uD558\uC9C0
+    \uC54A\uC2B5\uB2C8\uB2E4."
   skill1CoolTime: 0
   levelSkill1CoolTime: 0
   skill2CoolTime: 0

@@ -7,16 +7,16 @@ public class Menu : MonoBehaviour
     [SerializeField]
     GameObject itemShop;
     [SerializeField]
-    GameObject heroShop;
+    GameObject heroSelect;
 
     public void ItemShop()
     {
         itemShop.SetActive(true);
         gameObject.SetActive(false);
     }
-    public void HeroShop()
+    public void HeroSelect()
     {
-        heroShop.SetActive(true);
+        heroSelect.SetActive(true);
         gameObject.SetActive(false);
     }
 }

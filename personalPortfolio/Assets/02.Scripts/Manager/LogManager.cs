@@ -33,7 +33,7 @@ public class LogManager : MonoBehaviour
         while(logtext.color.a >= SpeedDisappear)
         {
             yield return new WaitForSeconds(SpeedDisappear);
-            LogTextColorMinus(SpeedDisappear*2); //*2 하면 0.5초간 보인다.
+            LogTextColorMinus(SpeedDisappear); //*2 하면 0.5초간 보인다.
 
         }
         LogTextColorReset(0);

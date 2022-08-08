@@ -9,12 +9,11 @@ public class SkillManager : MonoBehaviour
     
 
     public delegate void Buff(float xSpeed,int _team, float Duration);
- 
 
 
-    public List<Character> heros = new List<Character>();
-    /*public List<Character> Units = new List<Character>();
-    public List<Building> Buildings = new List<Building>();*/
+
+    public Hero hero;
+
 
 
 
@@ -31,29 +30,34 @@ public class SkillManager : MonoBehaviour
 
     public void AttackTarget()
     {
-        foreach (Character hero in heros)
-        {
+
             hero.AttackTarget(null);
             hero.GetComponent<Player>().AttackTarget();
-        }
+
     }
 
 
 
     public void Skill1()
     {
-        foreach(Character hero in heros)
+        if (hero.GetComponent<Hero>().isSkill1Cool)
         {
-            hero.SendMessage("Skill1Ani"); // Player스크립트에서 발생한다.
+            LogManager.logManager.Log("스킬 쿨타임입니다.");
+            return;
         }
+        hero.GetComponent<Player>().Skill1Ani();
+
     }
 
     public void Skill2()
     {
-        foreach (Character hero in heros)
+        if (hero.GetComponent<Hero>().isSkill2Cool)
         {
-            hero.SendMessage("Skill2Ani");
+            LogManager.logManager.Log("스킬 쿨타임입니다.");
+            return;
         }
+        hero.GetComponent<Player>().Skill2Ani();
+
     }
 
 

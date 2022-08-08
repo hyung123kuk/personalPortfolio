@@ -24,7 +24,13 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
 
         }
     } //팀을 넣으면 자동으로 색상 변경 및 레이어 설정
+
+    [Header("최대레벨")]
+    [SerializeField]
+    private int maxlevel;
+    public int MaxLevel { get { return maxlevel; } set { maxlevel = value; } }
     [Header("레벨")]
+    [SerializeField]
     private int level;
     public int Level { get { return level; } set { level = value; Upgrade(); } }
     [Header("인구수")]

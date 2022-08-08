@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class WarriorHero : Hero, IHeroSkill ,IBuff ,IUpgrade
+public class WarriorHero : Hero, IHeroSkill ,IBuff ,IUpgrade ,ICondition
 {
+
+
     [Header("영웅 능력")]
 
     public float attackAngle=80f;
@@ -14,6 +16,8 @@ public class WarriorHero : Hero, IHeroSkill ,IBuff ,IUpgrade
     [SerializeField]
     private float Skill1Duration; //스킬 지속시간
     public float BuffDurationTIme { get { return Skill1Duration; } set { Skill1Duration = value; } }
+
+
 
     protected float prevSkill1Duration;
  
@@ -77,9 +81,13 @@ public class WarriorHero : Hero, IHeroSkill ,IBuff ,IUpgrade
         if (Hp <= 0)
             return;
 
-        WarriorBuff(skill1XSpeed, Team, Skill1Duration);
+        if (WarriorBuff != null)
+        {
 
-    }
+            WarriorBuff(skill1XSpeed, Team, Skill1Duration);
+
+        }
+     }
 
     public override void Skill2()
     {
@@ -105,7 +113,7 @@ public class WarriorHero : Hero, IHeroSkill ,IBuff ,IUpgrade
 
     public override void UnitSet() //히어로 세팅
     {
-        SkillManager.skillManager.heros.Add(this);
+        SkillManager.skillManager.hero = this;
         base.UnitSet();
     }
 
@@ -118,5 +126,16 @@ public class WarriorHero : Hero, IHeroSkill ,IBuff ,IUpgrade
         base.Upgrade();
     }
 
-
+    public override void ConditionSet()
+    {
+        List<Building> buildings =  TeamManager.teamManager.TeamCastle(0).buildings;
+        IsCondition = false;        
+        foreach(Building building in buildings)
+        {
+            if (building.GetComponent<WarriorBuilding>()) //워리어 빌딩이 존재한다면 조건 완료
+            {
+                IsCondition = true;
+            }
+        }
+    }
 }

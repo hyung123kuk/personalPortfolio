@@ -102,7 +102,7 @@ public class TouchManager : MonoBehaviour, ITouch, IPointerDownHandler ,IDragHan
         Transform hitTr = hit.transform;
         if (hitTr.gameObject.layer == LayerMask.NameToLayer("BUYPOINT") && hitTr.GetComponent<Collider>().enabled ==true ) //구매 포인트를 눌렀을경우 , 콜라이더가 켜졌을경우
         {
-            GameUI.gameUI.MoneySet(-ItemShop.itemShop.SelectBuilding.buyPrice); //아이템 가격을 깎고
+            PlayerUI.playerUI.MoneySet(-ItemShop.itemShop.SelectBuilding.buyPrice); //아이템 가격을 깎고
             GameObject Buybuilding=Instantiate<GameObject>(ItemShop.itemShop.SelectBuilding.gameObject,ItemShop.itemShop.MyBuilding.transform);
             Buybuilding.transform.position = hitTr.position;
             Buybuilding.GetComponent<BoxCollider>().size *= 2;

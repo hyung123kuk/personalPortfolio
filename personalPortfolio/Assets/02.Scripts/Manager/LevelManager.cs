@@ -12,10 +12,16 @@ public class LevelManager : MonoBehaviour //¸¸µç ÀÌÀ¯´Â EnableÀ» ÇÒ¶§ ¼ø¼­´ë·Î Ç
     GameObject enemyTeam1;
     [SerializeField]
     GameObject enemyTeam2;
+
+    public int Maxlevel;
+    public int Nowlevel;
+
     [SerializeField]
     GameObject TouchScreen;
     [SerializeField]
     Building[] myTeamBuilding;
+    [SerializeField]
+    string level;
 
     private void Awake()
     {
@@ -27,6 +33,7 @@ public class LevelManager : MonoBehaviour //¸¸µç ÀÌÀ¯´Â EnableÀ» ÇÒ¶§ ¼ø¼­´ë·Î Ç
         myTeam = GameObject.Find("MyBuilding");
         enemyTeam1 = GameObject.Find("EnemyBuilding");
         enemyTeam2 = GameObject.Find("EnemyBuilding2");
+        Maxlevel = enemyTeam1.transform.childCount -1 ; //¸ðµç°³¼ö -1 (Ä³½½) ÀÌ ÃÖ´ë ·¹º§°ªÀÌ´Ù.
 
         StartCoroutine(MybuildingSet());
        
@@ -43,14 +50,26 @@ public class LevelManager : MonoBehaviour //¸¸µç ÀÌÀ¯´Â EnableÀ» ÇÒ¶§ ¼ø¼­´ë·Î Ç
         TouchScreen.SetActive(true);
     }
 
-    IEnumerator EnemybuildingSet(string level)
+    public void LevelSet(int _level)
+    {
+
+        enemyTeam1.transform.Find(level).gameObject.SetActive(false);
+        level = _level.ToString();
+        StartCoroutine(EnemybuildingSet(level));
+    }
+
+
+    public IEnumerator EnemybuildingSet(string level)
     {
         yield return new WaitForSeconds(0.1f);
         enemyTeam1.transform.Find("Castle").gameObject.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         enemyTeam1.transform.Find(level).gameObject.SetActive(true);
     }
-    IEnumerator Enemybuilding2Set(string level)
+
+
+
+    public IEnumerator Enemybuilding2Set(string level)
     {
         yield return new WaitForSeconds(0.1f);
         enemyTeam2.transform.Find("Castle").gameObject.SetActive(true);

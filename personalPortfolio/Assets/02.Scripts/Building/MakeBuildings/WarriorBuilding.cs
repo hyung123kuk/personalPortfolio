@@ -6,7 +6,7 @@ public class WarriorBuilding : MakeBuilding , IUpgrade
 {
     public override GameObject MakeUnitReturn()
     {
-        return PoolManager.poolManager.GetWarrior();
+        return PoolManager.poolManager.GetCharacter("Warrior");
     }
 
     public override void Upgrade() {

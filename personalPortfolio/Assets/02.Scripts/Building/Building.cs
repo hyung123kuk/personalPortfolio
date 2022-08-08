@@ -15,10 +15,16 @@ public abstract class Building : MonoBehaviour , IDamaged ,IUpgrade
     private int team;
     public int Team { get { return team; } set { team = value; SetTeamColor(); } } //팀설정, 색상설정, 레이어설정
 
+    [Header("최대레벨")]
+    [SerializeField]
+    private int maxlevel;
+    public int MaxLevel { get { return maxlevel; } set { maxlevel = value; } }
+
     [Header("레벨")]
     [SerializeField]
     private int level;
     public int Level { get { return level; } set { level = value; Upgrade(); } }
+
 
     [Header("체력/현재체력")]
     [SerializeField]
@@ -64,6 +70,7 @@ public abstract class Building : MonoBehaviour , IDamaged ,IUpgrade
         prevDefense = defense;
         prevlevelPrice = levelPrice;
         #endregion
+        sellPrice = buyPrice * 80 / 100;
 
     }
 
@@ -163,7 +170,7 @@ public abstract class Building : MonoBehaviour , IDamaged ,IUpgrade
             }
         }
         sellPrice = sellPrice *80 /100;
-        Debug.Log(sellPrice);
+
     }
 
 

@@ -6,7 +6,7 @@ public class ArcherBuilding : MakeBuilding , IUpgrade
 {
     public override GameObject MakeUnitReturn()
     {
-        return PoolManager.poolManager.GetArcher();
+        return PoolManager.poolManager.GetCharacter("Archer");
     }
 
 

@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2042045142
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2042045143}
+  m_Layer: 0
+  m_Name: Pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2042045143
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2042045142}
+  m_LocalRotation: {x: -0.5453263, y: 0.32321495, z: -0.39833263, w: 0.6629348}
+  m_LocalPosition: {x: 0.0000035188948, y: -0.000020137875, z: 0.0000013344417}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5442784291876194305}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -27.745, y: 77.185, z: -84.3}
 --- !u!1 &815415809302005208
 GameObject:
   m_ObjectHideFlags: 0
@@ -618,7 +648,7 @@ Transform:
   - {fileID: 6874536454258169360}
   m_Father: {fileID: 5442784291876205951}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 8.958258, y: -5.3298564, z: 161.06085}
 --- !u!1 &4410946925412134799
 GameObject:
   m_ObjectHideFlags: 0
@@ -7075,7 +7105,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5442784291876191853
 Transform:
   m_ObjectHideFlags: 0
@@ -7162,7 +7192,7 @@ Animator:
   m_GameObject: {fileID: 5442784291876442277}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 02ded044b8e0963439276550f50be6f9, type: 3}
-  m_Controller: {fileID: 9100000, guid: 1545ba011c3a4264faea258a66e0295f, type: 2}
+  m_Controller: {fileID: 9100000, guid: b59562ae9cf145143925cd161f8579bc, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 1
   m_ApplyRootMotion: 1
@@ -7246,13 +7276,17 @@ MonoBehaviour:
   levelSkill1CoolTime: 0
   skill2CoolTime: 0
   levelSkill2CoolTime: 0
+  Pos: {fileID: 2042045143}
   Skill1Duration: 3
   levelSkill1Duration: 0
   skill1XSpeed: 2
   levelskill1XSpeed: 0
-  Skill2Angle: 80
-  Skill2Damage: 0
+  Skill2Angle: 40
+  Skill2Damage: 30
   levelSkill2Damage: 0
+  Skill2ArrowNumber: 5
+  prevSkill2ArrowNumber: 0
+  levelSkill2ArrowNumber: 1
 --- !u!1 &5442784291876442785
 GameObject:
   m_ObjectHideFlags: 0
@@ -14485,7 +14519,8 @@ Transform:
   m_LocalRotation: {x: 0.00000013411045, y: 0.000000037252917, z: 0.000000050291423, w: 1}
   m_LocalPosition: {x: -0.000000048446655, y: -0.00000038757324, z: -0.00000021800994}
   m_LocalScale: {x: 0.9999997, y: 1, z: 1.0000001}
-  m_Children: []
+  m_Children:
+  - {fileID: 2042045143}
   m_Father: {fileID: 5442784291876235919}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

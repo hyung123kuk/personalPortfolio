@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArcherHero : Hero, IHeroSkill ,IBuff,  IUpgrade
+public class ArcherHero : Hero, IHeroSkill, IBuff, IUpgrade
 {
     [Header("영웅 능력")]
+    [SerializeField]
+    Transform Pos;
 
     [Header("스킬 1")]
     [SerializeField]
@@ -32,7 +34,10 @@ public class ArcherHero : Hero, IHeroSkill ,IBuff,  IUpgrade
 
     public int levelSkill2Damage;
 
-  
+    public int Skill2ArrowNumber;
+    public int prevSkill2ArrowNumber;
+    public int levelSkill2ArrowNumber;
+
 
     public override void Awake()
     {
@@ -40,6 +45,7 @@ public class ArcherHero : Hero, IHeroSkill ,IBuff,  IUpgrade
         prevSkill1Duration = Skill1Duration;
         prevskill1XSpeed = skill1XSpeed;
         prevSkill2Damage = Skill2Damage;
+        prevSkill2ArrowNumber = Skill2ArrowNumber;
 
         base.Awake();
     }
@@ -48,18 +54,44 @@ public class ArcherHero : Hero, IHeroSkill ,IBuff,  IUpgrade
     {
         if (Hp <= 0)
             return;
-        ArcherBuff(skill1XSpeed, Team , Skill1Duration); //같은 팀 아처 에게 버프 사용
+
+        if (ArcherBuff != null)
+        {
+            ArcherBuff(skill1XSpeed, Team, Skill1Duration); //같은 팀 아처 에게 버프 사용
+        }
+        base.Skill1();
     }
 
     public override void Skill2()
     {
-        List<Character> TargetList = new List<Character>();
+        if (Hp <= 0)
+            return;
+
+
+
+        float Angle = Skill2Angle / Skill2ArrowNumber;
+        for (int i = 0; i < Skill2ArrowNumber; i++)
+        {
+            GameObject arrowObj = PoolManager.poolManager.GetArrow();
+            Arrow arrow = arrowObj.GetComponentInChildren<Arrow>();
+            arrow.Team = Team;
+            arrow.Damaged(Skill2Damage);
+            arrow.gameObject.SetActive(true);
+            arrow.transform.position = Pos.position;
+            arrow.transform.rotation = Pos.rotation;
+            arrow.transform.rotation *= Quaternion.Euler(new Vector3(0f, 0f, 90f));
+            arrow.transform.Rotate(Vector3.forward * (-Skill2Angle + i * Angle * 2));
+
+            arrow.NonTagerSet();
+
+        }
+        base.Skill2();
 
 
     }
     public override void UnitSet() //히어로 세팅
     {
-        SkillManager.skillManager.heros.Add(this);
+        SkillManager.skillManager.hero = this;
         base.UnitSet();
     }
 
@@ -68,12 +100,21 @@ public class ArcherHero : Hero, IHeroSkill ,IBuff,  IUpgrade
         Skill1Duration = prevSkill1Duration + (levelSkill1Duration * Level);
         skill1XSpeed = prevskill1XSpeed + (levelskill1XSpeed * Level);
         Skill2Damage = prevSkill2Damage + (levelSkill2Damage * Level);
-
+        Skill2ArrowNumber = prevSkill2ArrowNumber + (levelSkill2ArrowNumber * Level);
         base.Upgrade();
     }
 
     public override void AttackTarget(GameObject[] Targets)
     {
-        throw new System.NotImplementedException();
+        GameObject arrowObj = PoolManager.poolManager.GetArrow();
+        Arrow arrow = arrowObj.GetComponentInChildren<Arrow>();
+        arrow.Team = Team;
+        arrow.Damaged(AttackDamage);
+        arrow.gameObject.SetActive(true);
+        arrow.transform.position = Pos.position;
+        arrow.transform.rotation = Pos.rotation;
+        arrow.transform.rotation *= Quaternion.Euler(new Vector3(0f, 0f, 88f));
+        arrow.NonTagerSet();
+
     }
 }

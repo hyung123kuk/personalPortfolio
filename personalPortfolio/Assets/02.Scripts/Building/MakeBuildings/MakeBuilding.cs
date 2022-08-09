@@ -26,18 +26,20 @@ public abstract class MakeBuilding : Building, IMake
     {
         base.Awake();
         prevMakeCoolTime = MakeCoolTime;
-        TeamManager.teamManager.TeamCastle(Team).unitProduce += UnitProduce;  //본인 팀의 캐슬의 지시를 받는다.
+        
     }
 
     protected override void OnEnable()
     {
-        base.OnEnable();
         
+        base.OnEnable();
+        TeamManager.teamManager.TeamCastle(Team).unitProduce += UnitProduce;  //본인 팀의 캐슬의 지시를 받는다.
         StartCoroutine(MakeUnit());        
     }
 
     public void UnitProduce(bool isOn)
     {
+        
         posibleProduce = isOn;
     } //유닛 생성 가능,불가능을 설정하는 함수
 

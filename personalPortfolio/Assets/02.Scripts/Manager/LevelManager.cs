@@ -23,6 +23,11 @@ public class LevelManager : MonoBehaviour //¸¸µç ÀÌÀ¯´Â EnableÀ» ÇÒ¶§ ¼ø¼­´ë·Î Ç
     [SerializeField]
     string level;
 
+    [SerializeField]
+    GameObject levelSelCanvas;
+    [SerializeField]
+    GameObject StartCanvas;
+
     private void Awake()
     {
         if (levelManager == null)
@@ -50,21 +55,45 @@ public class LevelManager : MonoBehaviour //¸¸µç ÀÌÀ¯´Â EnableÀ» ÇÒ¶§ ¼ø¼­´ë·Î Ç
         TouchScreen.SetActive(true);
     }
 
+    bool islevelSet;
     public void LevelSet(int _level)
     {
+        if (islevelSet)
+        {
+            LogManager.logManager.Log("ÀÌ¹Ì ·¹º§ ·ÎµùÁß ÀÔ´Ï´Ù.");
+            return;
+        }
 
-        enemyTeam1.transform.Find(level).gameObject.SetActive(false);
+        if (level != "-1")
+        {
+            enemyTeam1.transform.Find(level).gameObject.SetActive(false);
+        }
         level = _level.ToString();
         StartCoroutine(EnemybuildingSet(level));
     }
 
+    public void ResetButton()
+    {
+        if (level == "-1")
+        {
+            return;
+        }
+        enemyTeam1.transform.Find(level).gameObject.SetActive(false);
+        StartCoroutine(EnemybuildingSet(level));
+    }
 
     public IEnumerator EnemybuildingSet(string level)
     {
+        islevelSet = true;
+
         yield return new WaitForSeconds(0.1f);
         enemyTeam1.transform.Find("Castle").gameObject.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         enemyTeam1.transform.Find(level).gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        levelSelCanvas.SetActive(false);
+        StartCanvas.SetActive(true);
+        islevelSet = false;
     }
 
 

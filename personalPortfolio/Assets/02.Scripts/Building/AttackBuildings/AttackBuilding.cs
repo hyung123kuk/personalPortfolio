@@ -31,15 +31,21 @@ public abstract class AttackBuilding : Building , IAttack , IUpgrade
 
     [Header("공격 ON/OFF")]
 
-    public bool work = true; 
+    public bool work = true;
 
-    protected override void OnEnable()
+    protected override void Awake()
     {
-
-        base.OnEnable();
         prevAttackDamage = attackDamage;
         prevAttackRange = attackRange;
         prevAttackCoolTime = attackCoolTime;
+        base.Awake();
+    }
+
+    protected override void OnEnable()
+    {
+        
+        base.OnEnable();
+        TeamManager.teamManager.TeamCastle(Team).attackBuildingWork += UnitProduce;  //본인 팀의 캐슬의 지시를 받는다.
         StartCoroutine(AttackTarget());
     }
 
@@ -114,5 +120,8 @@ public abstract class AttackBuilding : Building , IAttack , IUpgrade
         }
         return Tr;
     }
-
+    public void UnitProduce(bool isOn)
+    {
+        work = isOn;
+    }
 }

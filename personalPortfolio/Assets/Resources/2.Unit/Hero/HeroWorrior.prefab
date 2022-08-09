@@ -1487,6 +1487,7 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: f9efc2b8e117b974a9fc382f63a5bbbe, type: 3}
   Name: "\uC601\uC6C5\uC804\uC0AC"
   team: 0
+  maxlevel: 0
   level: 0
   Population: 0
   maxHp: 350
@@ -1501,13 +1502,16 @@ MonoBehaviour:
   attackSpeed: 0
   levelAttackSpeed: 0
   attackRange: 5
-  attackDelay: 0
+  attackDelay: 0.8
   condisionMessage: "\uC804\uC0AC\uC591\uC131\uC18C\uAC00 \uC874\uC7AC\uD558\uC9C0
     \uC54A\uC2B5\uB2C8\uB2E4."
+  AttackReady: 1
   skill1CoolTime: 0
   levelSkill1CoolTime: 0
+  isSkill1Cool: 0
   skill2CoolTime: 0
   levelSkill2CoolTime: 0
+  isSkill2Cool: 0
   attackAngle: 80
   Skill1Duration: 3
   levelSkill1Duration: 0

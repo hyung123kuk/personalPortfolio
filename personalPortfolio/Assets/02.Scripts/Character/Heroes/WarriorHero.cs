@@ -56,7 +56,7 @@ public class WarriorHero : Hero, IHeroSkill ,IBuff ,IUpgrade ,ICondition
     {
         if (Hp <= 0)
             return;
-        
+        AttackReady = false;
         foreach (Character Unit in TeamManager.teamManager.enemyTeamCharacter(Team))
         {
             if (AttackRangeFucn(Unit.transform, attackAngle, AttackRange))
@@ -70,6 +70,14 @@ public class WarriorHero : Hero, IHeroSkill ,IBuff ,IUpgrade ,ICondition
             {
                 building.Damaged(AttackDamage, Team);
             }
+        }
+
+        StartCoroutine(attackSet());
+
+       IEnumerator attackSet()
+        {
+            yield return new WaitForSeconds(attackDelay);
+            AttackReady = true;
         }
     }
 

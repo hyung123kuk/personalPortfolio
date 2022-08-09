@@ -28,7 +28,7 @@ public class Castle : Building , IUpgrade
     public event TeamManager.BuildingWork attackBuildingWork; //건물 공격에 관한 event
 
     private bool unitproduce = true; //상태가 달라지지 않으면 괜히 event를 불러와 시간이 걸리므로 이곳에서도 알수있게 선언해 주었다.
-    private bool attackWork = true;
+   
     int NowPopulation = 0;
     protected override void OnEnable()
     {
@@ -36,14 +36,17 @@ public class Castle : Building , IUpgrade
         base.OnEnable();
     }
 
-
-    public override void Start()
+    protected override void Awake()
     {
         #region 기본 빌딩 숫자숫자와 유닛 개수를 저장한다.
         PrevBuildingNum = MaxbuildingNum;
         PrevUnitNum = MaxUnitNum;
         #endregion
+        base.Awake();
+    }
 
+    public override void Start()
+    { 
         base.Start();
         
        
@@ -51,15 +54,28 @@ public class Castle : Building , IUpgrade
 
     public override void Upgrade()
     {
-
+        
+        base.Upgrade();
         MaxbuildingNum = PrevBuildingNum + (levelBuildingNum * Level);
         MaxUnitNum = PrevUnitNum + (levelUnitNum * Level);
         BuildingCheck(); UnitCheck();
-        base.Upgrade();
+        
+    }
+
+    public void UnitOn(bool ison)
+    {
+
+        if (unitProduce != null)
+        {
+            unitProduce(ison); 
+        }
     }
 
     public void populationCheck()
     {
+        
+        if (unitProduce == null)
+            return;
         populNum();
         UnitCheck();
         if (NowPopulation < MaxUnitNum) //유닛 개수가 최대 유닛 보다 작으면 유닛생성 가능 아니면 유닛생성 멈춤
@@ -91,8 +107,12 @@ public class Castle : Building , IUpgrade
     }
 
     public void AttackBuildingCheck(bool isattack)
-    {       
-        attackBuildingWork(isattack); //공격건물 어택에 관한 함수 
+    {
+        
+        if (attackBuildingWork != null)
+        {
+            attackBuildingWork(isattack); //공격건물 어택에 관한 함수 
+        }
     }
 
     public void BuildingCheck()

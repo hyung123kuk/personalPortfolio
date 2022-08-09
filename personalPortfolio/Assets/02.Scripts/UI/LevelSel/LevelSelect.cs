@@ -11,7 +11,8 @@ public class LevelSelect : MonoBehaviour
     Sprite clearImage;
     [SerializeField]
     Sprite NonClearImage;
-    
+    [SerializeField]
+    List<GameObject> levelBoxList = new List<GameObject>();
 
     private void Awake()
     {
@@ -19,7 +20,8 @@ public class LevelSelect : MonoBehaviour
         for (int i = 0; i < LevelManager.levelManager.Maxlevel; i++)
         {
             GameObject level =  Instantiate(levelPrefab, transform);
-            if (LevelManager.levelManager.Nowlevel <= i+1) {
+            levelBoxList.Add(level);
+            if (LevelManager.levelManager.Nowlevel >= i) {
                 level.GetComponent<LevelPrefab>().PrefablevelSet(i + 1, clearImage);
             }
             else
@@ -28,6 +30,12 @@ public class LevelSelect : MonoBehaviour
             }
         }
     }
+
+    private void OnEnable()
+    {
+        
+    }
+
 
 
     void Start()

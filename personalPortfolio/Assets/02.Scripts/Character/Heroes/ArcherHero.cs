@@ -50,6 +50,27 @@ public class ArcherHero : Hero, IHeroSkill, IBuff, IUpgrade
         base.Awake();
     }
 
+    public override void AttackTarget(GameObject[] Targets)
+    {
+       
+        GameObject arrowObj = PoolManager.poolManager.GetArrow();
+        Arrow arrow = arrowObj.GetComponentInChildren<Arrow>();
+        arrow.Team = Team;
+        arrow.Damaged(AttackDamage);
+        arrow.gameObject.SetActive(true);
+        arrow.transform.position = Pos.position;
+        arrow.transform.rotation = Pos.rotation;
+        arrow.transform.rotation *= Quaternion.Euler(new Vector3(0f, 0f, 88f));
+        arrow.NonTagerSet();
+        StartCoroutine(attackSet());
+
+        IEnumerator attackSet()
+        {
+            yield return new WaitForSeconds(attackDelay);
+            AttackReady = true;
+        }
+    }
+
     public override void Skill1() //모든 궁수 이동속도 공격속도 상승
     {
         if (Hp <= 0)
@@ -67,7 +88,7 @@ public class ArcherHero : Hero, IHeroSkill, IBuff, IUpgrade
         if (Hp <= 0)
             return;
 
-
+        Debug.Log("1");
 
         float Angle = Skill2Angle / Skill2ArrowNumber;
         for (int i = 0; i < Skill2ArrowNumber; i++)
@@ -104,17 +125,18 @@ public class ArcherHero : Hero, IHeroSkill, IBuff, IUpgrade
         base.Upgrade();
     }
 
-    public override void AttackTarget(GameObject[] Targets)
-    {
-        GameObject arrowObj = PoolManager.poolManager.GetArrow();
-        Arrow arrow = arrowObj.GetComponentInChildren<Arrow>();
-        arrow.Team = Team;
-        arrow.Damaged(AttackDamage);
-        arrow.gameObject.SetActive(true);
-        arrow.transform.position = Pos.position;
-        arrow.transform.rotation = Pos.rotation;
-        arrow.transform.rotation *= Quaternion.Euler(new Vector3(0f, 0f, 88f));
-        arrow.NonTagerSet();
 
+
+    public override void ConditionSet()
+    {
+        List<Building> buildings = TeamManager.teamManager.TeamCastle(0).buildings;
+        IsCondition = false;
+        foreach (Building building in buildings)
+        {
+            if (building.GetComponent<ArcherBuilding>()) //워리어 빌딩이 존재한다면 조건 완료
+            {
+                IsCondition = true;
+            }
+        }
     }
 }

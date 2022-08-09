@@ -75,12 +75,10 @@ public abstract class Building : MonoBehaviour , IDamaged ,IUpgrade
     }
 
     protected virtual void OnEnable()
-    {
-        hp = maxHp;
-
+    {        
         SetTeamColor();
         BuildingSet();
-        
+        Upgrade();
     }
     private void OnDisable()
     {
@@ -92,7 +90,9 @@ public abstract class Building : MonoBehaviour , IDamaged ,IUpgrade
     }
     public virtual void BuildingSet()
     {
+        
         TeamManager.teamManager.AddBuilding(team, this);
+        
     }
     public virtual void BuildingUnSet()
     {
@@ -154,9 +154,10 @@ public abstract class Building : MonoBehaviour , IDamaged ,IUpgrade
 
     public virtual void Upgrade()
     {
-        levelPrice = (Level+2)* (Level+1) * prevlevelPrice;
+        levelPrice = (level + 2)* (level + 1) * prevlevelPrice;
         defense = prevDefense + (level * levelDefense);
-        MaxHp = prevMaxHp + (levelMaxHp * Level);
+        MaxHp = prevMaxHp + (levelMaxHp * level);
+        hp = maxHp;
         sellPrice = buyPrice;
         for (int i =0;i<level; i++)
         {

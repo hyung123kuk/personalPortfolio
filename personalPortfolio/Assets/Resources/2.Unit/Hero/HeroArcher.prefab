@@ -7105,7 +7105,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5442784291876191853
 Transform:
   m_ObjectHideFlags: 0
@@ -7258,6 +7258,8 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: 0d9bae15c64c7614bac7b5f9dfd50cbc, type: 3}
   Name: "\uC601\uC6C5\uAD81\uC218"
   team: 0
+  maxlevel: 0
+  level: 0
   Population: 0
   maxHp: 250
   levelMaxHp: 0
@@ -7271,18 +7273,23 @@ MonoBehaviour:
   attackSpeed: 0
   levelAttackSpeed: 0
   attackRange: 0
-  attackDelay: 0
+  attackDelay: 0.8
+  condisionMessage: "\uAD81\uC218\uC591\uC131\uC18C\uAC00 \uC874\uC7AC\uD558\uC9C0
+    \uC54A\uC2B5\uB2C8\uB2E4."
+  AttackReady: 1
   skill1CoolTime: 0
   levelSkill1CoolTime: 0
+  isSkill1Cool: 0
   skill2CoolTime: 0
   levelSkill2CoolTime: 0
+  isSkill2Cool: 0
   Pos: {fileID: 2042045143}
   Skill1Duration: 3
   levelSkill1Duration: 0
   skill1XSpeed: 2
   levelskill1XSpeed: 0
   Skill2Angle: 40
-  Skill2Damage: 30
+  Skill2Damage: 40
   levelSkill2Damage: 0
   Skill2ArrowNumber: 5
   prevSkill2ArrowNumber: 0

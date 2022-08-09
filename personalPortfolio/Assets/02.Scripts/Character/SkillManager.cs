@@ -30,9 +30,12 @@ public class SkillManager : MonoBehaviour
 
     public void AttackTarget()
     {
-
-            hero.AttackTarget(null);
+        if (hero.GetComponent<Hero>().AttackReady)
+        {
+            hero.GetComponent<Hero>().AttackReady = false;
+            
             hero.GetComponent<Player>().AttackTarget();
+        }
 
     }
 

@@ -7,6 +7,8 @@ public abstract class Hero : Character, IUpgrade, IHeroSkill , ICondition
     [Header("영웅")]
     public string condisionMessage;
 
+    public bool AttackReady;
+
     [SerializeField]
     private float skill1CoolTime; //스킬 쿨타임
     public float Skill1CoolTime { get { return skill1CoolTime; } set { skill1CoolTime = value; } }
@@ -18,7 +20,7 @@ public abstract class Hero : Character, IUpgrade, IHeroSkill , ICondition
     private float skill2CoolTime;
     public float Skill2CoolTime { get { return skill2CoolTime; } set { skill2CoolTime = value; } }
 
-    private bool isCondition;
+    private bool isCondition; //사용할수 있는 조건 선언해야한다.
     public bool IsCondition { get { return isCondition; } set { isCondition = value; } }
 
     protected float prevSkill2CoolTime;
@@ -74,8 +76,6 @@ public abstract class Hero : Character, IUpgrade, IHeroSkill , ICondition
         base.Upgrade();
     }
 
-    public virtual void ConditionSet()
-    {
-        
-    }
+    public abstract void ConditionSet();
+
 }

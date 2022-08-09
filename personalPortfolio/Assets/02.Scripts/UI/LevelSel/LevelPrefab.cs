@@ -18,12 +18,23 @@ public class LevelPrefab : MonoBehaviour
         PossibleImage.sprite = sprite;
         level = _level;
         levelText.text = level + " 단계";
-
+        
+    }
+    public void SpriteSet(Sprite sprite)
+    {
+        PossibleImage.sprite = sprite;
     }
 
     public void GameLevelSet()
     {
+        if (LevelManager.levelManager.Nowlevel < level-1)
+        {
+            LogManager.logManager.Log((LevelManager.levelManager.Nowlevel+1).ToString() + "단계를 먼저 클리어 해주세요");
+            return;
+        }
+
         LevelManager.levelManager.LevelSet(level);
+        
     }
 
 }

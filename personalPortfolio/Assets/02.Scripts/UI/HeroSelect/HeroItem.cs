@@ -34,6 +34,10 @@ public class HeroItem : MonoBehaviour
         {
             heroImage.color = Color.red;
         }
+        else
+        {
+            heroImage.color = Color.white;
+        }
         Destroy(heroCh);
     }
 

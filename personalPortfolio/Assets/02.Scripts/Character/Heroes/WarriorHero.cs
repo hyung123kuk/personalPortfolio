@@ -95,6 +95,7 @@ public class WarriorHero : Hero, IHeroSkill ,IBuff ,IUpgrade ,ICondition
             WarriorBuff(skill1XSpeed, Team, Skill1Duration);
 
         }
+        base.Skill1();
      }
 
     public override void Skill2()
@@ -115,6 +116,7 @@ public class WarriorHero : Hero, IHeroSkill ,IBuff ,IUpgrade ,ICondition
                 building.Damaged(Skill2Damage, Team);
             }
         }
+        base.Skill2();
     }
 
 

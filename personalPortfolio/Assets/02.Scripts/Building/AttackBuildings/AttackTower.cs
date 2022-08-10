@@ -10,7 +10,7 @@ public class AttackTower : AttackBuilding , IUpgrade
     public GameObject Target;
     public override void Attack()
     {
-        if (Target == null || Target.GetComponent<Character>().Hp<=0)
+        if (Target == null || Target.GetComponent<Character>().Hp<=0 || !AttackRangeFucn(Target.transform,Range:AttackRange))
         {
             Target = NearlyTargetSet();
         }

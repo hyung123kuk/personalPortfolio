@@ -24,12 +24,13 @@ public class Warrior : Character , IMelee , IUpgrade
         if (Targets == null)
             return;
 
-        foreach (GameObject target in Targets) //Damaged 인터페이스가 근거리일때는 적에게 데미지를, 원거리일때는 투사체에 데미지를 설정하는 역할을 한다.
+
+        transform.LookAt(Targets[0].transform);
+        if (AttackRangeFucn(Targets[0].transform))
         {
-            transform.LookAt(target.transform);
-            if (AttackRangeFucn(target.transform))
-                target.SendMessage("Damaged", AttackDamage);
+            Targets[0].SendMessage("Damaged", AttackDamage);
         }
+
     }
 
     public override void Upgrade()

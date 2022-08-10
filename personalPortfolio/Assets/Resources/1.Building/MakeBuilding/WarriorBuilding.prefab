@@ -123,6 +123,6 @@ MonoBehaviour:
   sellPrice: 0
   levelPrice: 200
   makeUnit: {fileID: 1887142254515175569, guid: 86ecceeb8cad2404a95bd7f54841ba5d, type: 3}
-  makeCoolTime: 5
+  makeCoolTime: 10
   levelMakeCoolTime: 0
   posibleProduce: 0

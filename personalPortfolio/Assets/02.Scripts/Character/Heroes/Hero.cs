@@ -47,7 +47,8 @@ public abstract class Hero : Character, IUpgrade, IHeroSkill , ICondition
 
         IEnumerator Skill1()
         {
-            isSkill1Cool = true;
+
+            
             yield return new WaitForSeconds(skill1CoolTime);
             isSkill1Cool = false;
 
@@ -60,7 +61,7 @@ public abstract class Hero : Character, IUpgrade, IHeroSkill , ICondition
 
         IEnumerator Skill2()
         {
-            isSkill2Cool = true;
+            
             yield return new WaitForSeconds(skill2CoolTime);
             isSkill2Cool = false;
 

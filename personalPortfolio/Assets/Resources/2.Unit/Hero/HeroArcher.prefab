@@ -7277,10 +7277,10 @@ MonoBehaviour:
   condisionMessage: "\uAD81\uC218\uC591\uC131\uC18C\uAC00 \uC874\uC7AC\uD558\uC9C0
     \uC54A\uC2B5\uB2C8\uB2E4."
   AttackReady: 1
-  skill1CoolTime: 0
+  skill1CoolTime: 5
   levelSkill1CoolTime: 0
   isSkill1Cool: 0
-  skill2CoolTime: 0
+  skill2CoolTime: 5
   levelSkill2CoolTime: 0
   isSkill2Cool: 0
   Pos: {fileID: 2042045143}

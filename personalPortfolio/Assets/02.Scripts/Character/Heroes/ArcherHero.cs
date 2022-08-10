@@ -69,6 +69,7 @@ public class ArcherHero : Hero, IHeroSkill, IBuff, IUpgrade
             yield return new WaitForSeconds(attackDelay);
             AttackReady = true;
         }
+
     }
 
     public override void Skill1() //모든 궁수 이동속도 공격속도 상승

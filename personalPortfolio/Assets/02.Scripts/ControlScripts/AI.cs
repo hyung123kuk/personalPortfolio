@@ -162,11 +162,13 @@ public class AI : MonoBehaviour, IState
     {
         if (attackPosible)
         {
-            
-            ani.SetTrigger("Attack");
-            ani.SetFloat("AttackSpeed", character.AttackSpeed );
-            ani.SetFloat("Speed", 0f);
-            nav.isStopped = true;
+            if (target != null)
+            {
+                ani.SetTrigger("Attack");
+                ani.SetFloat("AttackSpeed", character.AttackSpeed);
+                ani.SetFloat("Speed", 0f);
+                nav.isStopped = true;
+            }
             
         }
     }

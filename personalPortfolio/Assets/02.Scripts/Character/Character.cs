@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade 
 // 모든 캐릭터들은 체력,공격력,방어력,이동속도을 가지고 있습니다.  회복 할수 있습니다 ,  데미지를 입습니다.
@@ -98,7 +99,8 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
     private MeshRenderer[] CharaterMesh;
     private Material[] mat;
 
-
+    public GameObject Hpbar;
+    private Image hpBarImage;
 
     public virtual void Awake()
     {
@@ -114,21 +116,27 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
         prevDefense = defense;
         prevSpeed = speed;
         #endregion
-
+       
     }
 
     protected virtual void OnEnable()
     {
         hp = maxHp;
+        
         SetTeamColor();
         UnitSet();
-        
+       
 
     }
 
     public virtual void Start()
     {
+        Hpbar = Instantiate(Resources.Load<GameObject>("Hp_bar"));
+        Hpbar.GetComponent<CharacterHpBar>().targetTr = transform;
+        hpBarImage = Hpbar.transform.GetChild(1).GetComponent<Image>();
+        hpBarImage.fillAmount = 1.0f;
         
+
     }
 
     protected void OnDisable()
@@ -139,11 +147,23 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
 
         TeamManager.teamManager.AddUnit(team, this);                //유닛을 더한후
         TeamManager.teamManager.TeamCastle(team).populationCheck(); //인구수 체크
+        if (Hpbar != null)
+        {
+            Hpbar.SetActive(true);
+            hpBarImage.fillAmount = 1.0f;
+        }
+
+
+
     } 
     public virtual void UnitUnSet()
     {
         TeamManager.teamManager.RemoveUnit(team, this);             //유닛을 뺀후
         TeamManager.teamManager.TeamCastle(team).populationCheck(); //인구수 체크
+        if (Hpbar != null)
+            Hpbar.SetActive(false);
+        speed = prevSpeed;
+        attackSpeed = prevAttackSpeed;
     }
     public void SetTeamColor() //팀 색상 설정
     {
@@ -171,6 +191,11 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
             {
                 DieCh();
             }
+
+            if(hpBarImage!=null)
+                hpBarImage.fillAmount = (float)Hp / (float)MaxHp;
+
+            
         }
     }
     public void Damaged(int Damaged,int team  = -1) //팀이 다르면 데미지 입는다. 기본적으로 팀없이 받는건 데미지를 입도록 했다.
@@ -182,7 +207,8 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
             {
                 DieCh();
             }
-
+            if (hpBarImage != null)
+                hpBarImage.fillAmount = (float)Hp / (float)MaxHp;
         }
     }
 
@@ -199,6 +225,10 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
                 targetAI.SendMessage("TargetSetting"); //타겟 재 세팅 메세지를 보냅니다.
             }
         }
+        if (GetComponent<AI>()) //죽으면 타겟은 리셋
+        {
+            GetComponent<AI>().target = null;
+        }
 
     }
     public void Attack() //AI 1인공격 함수 (애니메이션에서 공격)
@@ -210,6 +240,7 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
             if (GetComponent<AI>().target != null)
             {
                 GameObject[] tr = { GetComponent<AI>().target };
+                if(AttackRangeFucn(tr[0].transform))
                 AttackTarget(tr);
                 GetComponent<AI>().AttackOff();
                 return;
@@ -265,19 +296,23 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
     #region 스피드업 버프 함수
     public void SpeedUp(float xSpeed, int _team, float _duration) //같은 팀이면 공격속도,이동속도 가 증가합니다.
     {
+        if (hp <= 0)
+            return;
+
         StartCoroutine(SpeedUpCoro(xSpeed, _team, _duration));
-    }
-    IEnumerator SpeedUpCoro(float xSpeed, int _team, float _duration)
-    {
-        if (Team == _team)
+        IEnumerator SpeedUpCoro(float xSpeed, int _team, float _duration)
         {
-            AttackSpeed *= xSpeed;
-            Speed *= (int)xSpeed;
-            yield return new WaitForSeconds(_duration);
-            AttackSpeed /= xSpeed;
-            Speed /= (int)xSpeed;
+            if (Team == _team)
+            {
+                AttackSpeed *= xSpeed;
+                Speed *= (int)xSpeed;
+                yield return new WaitForSeconds(_duration);
+                AttackSpeed /= xSpeed;
+                Speed /= (int)xSpeed;
+            }
         }
     }
+   
     #endregion
 
 }

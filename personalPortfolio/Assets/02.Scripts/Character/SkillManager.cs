@@ -48,6 +48,7 @@ public class SkillManager : MonoBehaviour
             LogManager.logManager.Log("스킬 쿨타임입니다.");
             return;
         }
+        hero.GetComponent<Hero>().isSkill1Cool = true;
         hero.GetComponent<Player>().Skill1Ani();
 
     }
@@ -59,6 +60,7 @@ public class SkillManager : MonoBehaviour
             LogManager.logManager.Log("스킬 쿨타임입니다.");
             return;
         }
+        hero.GetComponent<Hero>().isSkill2Cool = true;
         hero.GetComponent<Player>().Skill2Ani();
 
     }

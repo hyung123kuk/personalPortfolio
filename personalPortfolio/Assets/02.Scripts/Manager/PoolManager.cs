@@ -12,13 +12,14 @@ public class PoolManager : MonoBehaviour
 
 
 
-    #region 자동 오브젝트 풀링용
+    #region 자동 캐릭터 오브젝트 풀링용
 
-    GameObject[] Prefabs;
+   GameObject[] Prefabs;
     List<GameObject> Character = new List<GameObject>();
     public List<List<GameObject>> Pools = new List<List<GameObject>>();
     #endregion
 
+   
 
     public void Awake()
     {
@@ -29,6 +30,8 @@ public class PoolManager : MonoBehaviour
 
         arrowPrefab = Resources.Load<GameObject>("Arrow");
         Arrows = new GameObject("Arrows");
+
+
 
         Prefabs = Resources.LoadAll<GameObject>("2.Unit/Character");
         for (int i = 0; i < Prefabs.Length; i++)
@@ -87,6 +90,7 @@ public class PoolManager : MonoBehaviour
     }
 
     #endregion 
+
 
 
     #region 화살 오브젝트 풀링 및 받기

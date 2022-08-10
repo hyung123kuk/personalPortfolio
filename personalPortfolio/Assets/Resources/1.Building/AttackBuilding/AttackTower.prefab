@@ -153,7 +153,7 @@ MonoBehaviour:
   prevlevelPrice: 0
   sellPrice: 0
   levelPrice: 200
-  attackDamage: 20
+  attackDamage: 40
   levelAttackDamage: 10
   attackRange: 10
   levelAttackRange: 1

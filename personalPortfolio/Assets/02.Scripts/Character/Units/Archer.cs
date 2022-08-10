@@ -21,16 +21,17 @@ public class Archer : Character , IUpgrade
     {
         if (Targets == null)
             return;
-        transform.LookAt(Targets[0].transform); //Å¸°ÙÀ» ÃÄ´Ùº¸°í ½ð´Ù.
-        GameObject arrowObj = PoolManager.poolManager.GetArrow();
-        Arrow arrow = arrowObj.GetComponentInChildren<Arrow>();
-        arrow.Team = Team;
-        arrow.Damaged(AttackDamage);
-        arrow.gameObject.SetActive(true);
-        arrow.transform.position = Pos.position;
-        arrow.TargetSet(Targets[0]);
-        
-        
+        if (AttackRangeFucn(Targets[0].transform)){
+            transform.LookAt(Targets[0].transform); //Å¸°ÙÀ» ÃÄ´Ùº¸°í ½ð´Ù.
+            GameObject arrowObj = PoolManager.poolManager.GetArrow();
+            Arrow arrow = arrowObj.GetComponentInChildren<Arrow>();
+            arrow.Team = Team;
+            arrow.Damaged(AttackDamage);
+            arrow.gameObject.SetActive(true);
+            arrow.transform.position = Pos.position;
+            arrow.TargetSet(Targets[0]);
+
+        }
         
     }
 

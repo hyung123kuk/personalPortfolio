@@ -52,11 +52,19 @@ public class WarriorHero : Hero, IHeroSkill ,IBuff ,IUpgrade ,ICondition
         base.Awake();
     }
 
+    protected override void OnDisable()
+    {
+        
+        AttackReady = true;
+        base.OnDisable();
+    }
+
     public override void AttackTarget(GameObject[] Targets)
     {
         if (Hp <= 0)
             return;
-        AttackReady = false;
+
+        StartCoroutine(attackSet());
         foreach (Character Unit in TeamManager.teamManager.enemyTeamCharacter(Team))
         {
             if (AttackRangeFucn(Unit.transform, attackAngle, AttackRange))
@@ -72,7 +80,6 @@ public class WarriorHero : Hero, IHeroSkill ,IBuff ,IUpgrade ,ICondition
             }
         }
 
-        StartCoroutine(attackSet());
 
        IEnumerator attackSet()
         {

@@ -1493,16 +1493,17 @@ MonoBehaviour:
   maxHp: 350
   levelMaxHp: 0
   hp: 0
-  attackDamage: 80
+  attackDamage: 500
   levelAttackDamage: 0
   defense: 5
   levelDefense: 0
-  speed: 4
+  speed: 10
   levelSpeed: 0
   attackSpeed: 0
   levelAttackSpeed: 0
   attackRange: 5
   attackDelay: 0.8
+  Hpbar: {fileID: 0}
   condisionMessage: "\uC804\uC0AC\uC591\uC131\uC18C\uAC00 \uC874\uC7AC\uD558\uC9C0
     \uC54A\uC2B5\uB2C8\uB2E4."
   AttackReady: 1

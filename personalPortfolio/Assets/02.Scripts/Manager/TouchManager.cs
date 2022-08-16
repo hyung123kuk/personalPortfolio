@@ -69,6 +69,7 @@ public class TouchManager : MonoBehaviour, ITouch, IPointerDownHandler ,IDragHan
         if (BuildingMoveOn) //건물이 움직일때
         {
             BuildingMove();
+
         }
     }
 
@@ -90,8 +91,9 @@ public class TouchManager : MonoBehaviour, ITouch, IPointerDownHandler ,IDragHan
             ClickBuilding = null;
   
         }
+        
         BuildingMoveOn = false;
-            
+        SaveManager.saveManager.SaveBuilding(); //이동이 끝나면 저장
     }
 
     public void OnPointerClick(PointerEventData eventData) // 아이템 구매시 클릭하면 빌딩 만들어진다.
@@ -108,6 +110,7 @@ public class TouchManager : MonoBehaviour, ITouch, IPointerDownHandler ,IDragHan
             Buybuilding.GetComponent<BoxCollider>().size *= 2;
             ItemShop.itemShop.BuyBlock.SetActive(false);
             ItemShop.itemShop.Points.SetActive(false);
+            SaveManager.saveManager.SaveBuilding(); // 아이템 구매시 저장
         }
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class LevelSelect : MonoBehaviour
 {
+    public static LevelSelect levelSelect;
 
     GameObject levelPrefab;
     [SerializeField]
@@ -16,6 +17,11 @@ public class LevelSelect : MonoBehaviour
 
     private void Awake()
     {
+        if (levelSelect == null)
+            levelSelect = this;
+        else
+            Destroy(gameObject);
+
         levelPrefab = Resources.Load<GameObject>("LevelPrefab");
         for (int i = 0; i < LevelManager.levelManager.Maxlevel; i++)
         {
@@ -33,19 +39,26 @@ public class LevelSelect : MonoBehaviour
 
     private void OnEnable()
     {
-        
+        LevelBoxListSet();
     }
 
-
-
-    void Start()
+    public void LevelBoxListSet()
     {
-        
-    }
+        foreach(GameObject levelbox in levelBoxList)
+        {
+            
+            LevelPrefab levelPrefab = levelbox.GetComponent<LevelPrefab>();
+
+            if (LevelManager.levelManager.Nowlevel >= levelPrefab.level -1 )
+            {
+                levelPrefab.SpriteSet(clearImage);
+            }
+            else
+            {
+                levelPrefab.SpriteSet(NonClearImage);
+            }
 
 
-    void Update()
-    {
-        
+        }
     }
 }

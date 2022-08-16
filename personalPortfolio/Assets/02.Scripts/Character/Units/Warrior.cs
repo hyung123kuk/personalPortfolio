@@ -18,12 +18,17 @@ public class Warrior : Character , IMelee , IUpgrade
         UnitTargetRange = AttackRange;
     }
 
+    protected override void OnDisable()
+    {
+        WarriorHero.WarriorBuff -= SpeedUp;
+        base.OnDisable();
+    }
+
 
     public override void AttackTarget(GameObject[] Targets)
     {
         if (Targets == null)
             return;
-
 
         transform.LookAt(Targets[0].transform);
         if (AttackRangeFucn(Targets[0].transform))

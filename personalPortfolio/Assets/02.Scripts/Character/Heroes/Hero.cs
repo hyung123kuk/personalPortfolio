@@ -79,4 +79,10 @@ public abstract class Hero : Character, IUpgrade, IHeroSkill , ICondition
 
     public abstract void ConditionSet();
 
+    protected override void OnDisable()
+    {
+        isSkill1Cool = false;
+        isSkill2Cool = false;
+        base.OnDisable();
+    }
 }

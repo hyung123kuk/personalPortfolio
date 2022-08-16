@@ -25,16 +25,13 @@ public class PlayerUI : MonoBehaviour
             Destroy(gameObject);
     }
 
-    private void Start()
-    {
-        MoneySet();
-    }
+
 
     public void MoneySet(int _value= 0)
     {
         money += _value;
         moneyText.text = money.ToString();
-
+        SaveManager.saveManager.SaveMoney();
     }
 
     public void BuildingSet(int _nowBuilding, int _maxBuilding)

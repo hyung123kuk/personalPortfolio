@@ -139,9 +139,10 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
 
     }
 
-    protected void OnDisable()
+    protected virtual void OnDisable()
     {
         UnitUnSet();
+        DieCh();
     }
     public virtual void UnitSet() {
 
@@ -216,7 +217,10 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
     private void DieCh() //캐릭터가 죽었을때 사용하는 함수.
     {
         GetComponent<Animator>().SetTrigger("Die");
-        this.SendMessage("Die"); //AI에게 죽음을 알린다.
+        if (hp == 0)
+        {
+            this.SendMessage("Die"); //AI에게 죽음을 알린다.
+        }
         AI[] allAI = FindObjectsOfType<AI>();
         foreach (AI targetAI in allAI)
         {

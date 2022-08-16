@@ -57,13 +57,15 @@ public abstract class Building : MonoBehaviour , IDamaged ,IUpgrade
     private SkinnedMeshRenderer[] BuildingSkinnedMesh;
     private MeshRenderer[] BuildingMesh;
     private Material[] mat;
-
+    [SerializeField]
+    GameObject BuidingDieEffect;
 
     protected virtual void Awake()
     {
 
         BuildingSkinnedMesh = GetComponentsInChildren<SkinnedMeshRenderer>();
         BuildingMesh = GetComponentsInChildren<MeshRenderer>();
+        BuidingDieEffect = Resources.Load<GameObject>("BuildingDestroy");
         mat = Resources.LoadAll<Material>("0.TeamColor/BuildingColor");
         #region 업그레이드를 하기 위해 처음능력치를 미리 알아둔다.
         prevMaxHp = maxHp;
@@ -83,6 +85,7 @@ public abstract class Building : MonoBehaviour , IDamaged ,IUpgrade
     private void OnDisable()
     {
         BuildingUnSet();
+        DestroyBuilding();
     }
     public virtual void Start()
     {
@@ -121,7 +124,7 @@ public abstract class Building : MonoBehaviour , IDamaged ,IUpgrade
             hp -= Damaged + defense;
             if (hp <= 0)
             {
-                DieCh();
+                DestroyBuilding();
             }
         }
     }
@@ -133,23 +136,28 @@ public abstract class Building : MonoBehaviour , IDamaged ,IUpgrade
             hp -= Damaged + defense;
             if (hp <= 0)
             {
-                DieCh();
+                DestroyBuilding();
             }
         }
     }
 
-    private void DieCh()
+    protected virtual void DestroyBuilding()
     {
         
         
         AI[] allAI = FindObjectsOfType<AI>();
         foreach (AI targetAI in allAI)
         {
-            if (targetAI.target == gameObject) // 죽은 캐릭터가 타겟이라면
+            if (targetAI.target == gameObject) // 죽은 건물이 타겟이라면
             {
                 targetAI.SendMessage("TargetSetting"); //타겟 재 세팅 메세지를 보냅니다.
             }
         }
+
+        GameObject buildingDieEff=Instantiate<GameObject>(BuidingDieEffect, transform.position, Quaternion.identity);
+        Destroy(buildingDieEff, 1.5f);
+        gameObject.SetActive(false);
+
     }
 
     public virtual void Upgrade()

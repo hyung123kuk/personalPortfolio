@@ -18,8 +18,11 @@ public class LevelManager : MonoBehaviour //¸¸µç ÀÌÀ¯´Â EnableÀ» ÇÒ¶§ ¼ø¼­´ë·Î Ç
 
     [SerializeField]
     GameObject TouchScreen;
+
+
     [SerializeField]
-    Building[] myTeamBuilding;
+    List<Building> enemyTeamBuilding = new List<Building>(); // ºÎ¼­Áø °Ç¹°À» ´Ù½Ã true ÇØ¾ß ÇÏ¹Ç·Î ¹Ş¾Æ ³õ´Â´Ù.
+
     [SerializeField]
     string level;
 
@@ -28,21 +31,56 @@ public class LevelManager : MonoBehaviour //¸¸µç ÀÌÀ¯´Â EnableÀ» ÇÒ¶§ ¼ø¼­´ë·Î Ç
     [SerializeField]
     GameObject StartCanvas;
 
+
+    [SerializeField]
+    private GameObject[] buildings;
+
+    public void LoadToBuilding(string buildingName, int buildingLevel, Vector3 buildingPos)
+    {
+        for (int i = 0; i < buildings.Length; i++)
+        {
+
+            if(buildings[i].GetComponent<Building>().Name == buildingName)
+            {
+                if (buildings[i].GetComponent<Castle>()) 
+                {
+                    FindObjectOfType<Castle>().transform.position = buildingPos;
+                    FindObjectOfType<Castle>().Level = buildingLevel;
+                   
+                }
+                else
+                {
+                    GameObject building = Instantiate<GameObject>(buildings[i], myTeam.transform);
+                    building.transform.position = buildingPos;
+                    building.GetComponent<Building>().Level = buildingLevel;
+                  
+                }
+                break;
+
+            }
+        }
+    }
+
+
     private void Awake()
     {
         if (levelManager == null)
             levelManager = this;
         if (levelManager != this)
             Destroy(gameObject);
-
+        buildings = Resources.LoadAll<GameObject>("1.Building");
         myTeam = GameObject.Find("MyBuilding");
         enemyTeam1 = GameObject.Find("EnemyBuilding");
         enemyTeam2 = GameObject.Find("EnemyBuilding2");
         Maxlevel = enemyTeam1.transform.childCount -1 ; //¸ğµç°³¼ö -1 (Ä³½½) ÀÌ ÃÖ´ë ·¹º§°ªÀÌ´Ù.
 
+
+
         StartCoroutine(MybuildingSet());
        
     }
+
+
 
     IEnumerator MybuildingSet() //¼ø¼­´Â Ä³½½ÀÌ ¸¸µé¾îÁö°í -> ºôµùÀÌ ¸¸µé¾îÁö°í ( Ä³½½¿¡ ºôµù Ãß°¡¸¦ À§ÇØ) 
                                 //-> TouchScreenÀ» Å²´Ù (Ã³À½¿¡ ºôµù¸ğµå¿©¼­ °Ç¹°ÀÇ Äİ¶óÀÌ´õ Å©±â°¡ 2¹è°¡ µÇ¾î¾ß ÇÏ´Âµ¥ ¸ğµç °Ç¹°ÀÌ ³ª¿À°í³ª¼­ ÇØ¾ßÇÑ´Ù.)
@@ -50,12 +88,13 @@ public class LevelManager : MonoBehaviour //¸¸µç ÀÌÀ¯´Â EnableÀ» ÇÒ¶§ ¼ø¼­´ë·Î Ç
         yield return new WaitForSeconds(0.1f);
         myTeam.transform.Find("Castle").gameObject.SetActive(true);
         yield return new WaitForSeconds(0.1f);
-        myTeam.transform.Find("Building").gameObject.SetActive(true);
+        SaveManager.saveManager.LoadData();
+       
         yield return new WaitForSeconds(0.1f);
         TouchScreen.SetActive(true);
     }
 
-    bool islevelSet;
+    bool islevelSet; //·¹º§ÀÌ ÀÌ¹Ì ·ÎµùÁßÀÎ°¡? (·¹º§ ¼±ÅÃ½Ã Áßº¹Å¬¸¯ ¹æÁö)
     public void LevelSet(int _level)
     {
         if (islevelSet)
@@ -68,6 +107,7 @@ public class LevelManager : MonoBehaviour //¸¸µç ÀÌÀ¯´Â EnableÀ» ÇÒ¶§ ¼ø¼­´ë·Î Ç
         {
             enemyTeam1.transform.Find(level).gameObject.SetActive(false);
         }
+        SaveManager.saveManager.SaveBuilding(); // ³»°¡ °¡Áø ºôµù ¼¼ÆÃ(½ºÅ×ÀÌÁö ³¡³ª°í ´Ù½Ã ÄÑÁ®¾ß ÇÏ¹Ç·Î)
         level = _level.ToString();
         StartCoroutine(EnemybuildingSet(level));
     }
@@ -86,6 +126,7 @@ public class LevelManager : MonoBehaviour //¸¸µç ÀÌÀ¯´Â EnableÀ» ÇÒ¶§ ¼ø¼­´ë·Î Ç
     {
         islevelSet = true;
 
+        
         yield return new WaitForSeconds(0.1f);
         enemyTeam1.transform.Find("Castle").gameObject.SetActive(true);
         yield return new WaitForSeconds(0.1f);
@@ -94,6 +135,9 @@ public class LevelManager : MonoBehaviour //¸¸µç ÀÌÀ¯´Â EnableÀ» ÇÒ¶§ ¼ø¼­´ë·Î Ç
         levelSelCanvas.SetActive(false);
         StartCanvas.SetActive(true);
         islevelSet = false;
+
+        enemyTeamBuilding.Clear(); //¿ø·¡ ÀÖ´ø ·¹º§ÀÇ Àû ºôµùÀ» Á¦°ÅÇÑ´Ù.
+        enemyTeamBuilding.AddRange(enemyTeam1.GetComponentsInChildren<Building>()); //ÇöÀç ·¹º§ÀÇ Àû ºôµùÀ» ¸ğµÎ Ãß°¡ÇØ ³õ´Â´Ù.
     }
 
 
@@ -105,5 +149,76 @@ public class LevelManager : MonoBehaviour //¸¸µç ÀÌÀ¯´Â EnableÀ» ÇÒ¶§ ¼ø¼­´ë·Î Ç
         yield return new WaitForSeconds(0.1f);
         enemyTeam2.transform.Find(level).gameObject.SetActive(true);
     }
+
+
+    public IEnumerator gameEnd(int Team) //ÆĞ¹èÆÀÀÇ ¹øÈ£°¡ ¿Â´Ù.
+    {
+
+        TeamManager.teamManager.TeamCastle(0).AttackBuildingCheck(false); //°ø°İ ºôµù ¸ØÃã
+        TeamManager.teamManager.TeamCastle(0).UnitOn(false);              //»ı¼º ºôµù ¸ØÃã
+        TeamManager.teamManager.TeamCastle(1).AttackBuildingCheck(false); //Àû °ø°İ ºôµù ¸ØÃã
+        TeamManager.teamManager.TeamCastle(1).UnitOn(false);              //Àû »ı¼º ºôµù ¸ØÃã
+
+        List<Character> allch = new List<Character>(); //ÀüÅõ ¾À¿¡ ÀÖ´Â Ä³¸¯ÅÍ ¸ğµÎ »èÁ¦ 
+
+        allch.AddRange(GameObject.FindObjectsOfType<Character>());
+        Character teamhero = null;
+        foreach(Character ch in allch)
+        {
+            if (ch.GetComponent<Hero>() == null)
+            {
+                ch.gameObject.SetActive(false);
+            }
+            else
+            {
+                teamhero = ch;
+            }
+        }
+        if (teamhero != null) //¿µ¿õ Ä³¸¯ÅÍ´Â ¸¶Áö¸·¿¡ false ÇØ¼­ ÀÌº¥Æ®°¡ ¸ğµÎ ²¨ÁøÈÄ¿¡ Á¤»èÀ¸·Î ²¨Áö°Ô ÇÑ´Ù.
+        {
+            teamhero.gameObject.SetActive(false);
+        }
+
+        foreach (Building enemybuilding in enemyTeamBuilding) // »ó´ëÇÑ ¸ğµç Àû ºôµùÀ» true·Î ¹Ù²ã ³õ´Â´Ù. (´ÙÀ½¿¡ Å³¶§ ´Ù ÄÑÁ® ÀÖ¾î¾ß ÇÏ¹Ç·Î)
+        {
+            
+            enemybuilding.Hp = enemybuilding.MaxHp;
+            enemybuilding.gameObject.SetActive(false);         
+        }
+        yield return new WaitForSeconds(0.1f);
+        enemyTeam1.transform.Find(level).gameObject.SetActive(false); //¸ğµç Àû ºôµù ·¹º§À» false·Î ÇØ ²¨ ³õ´Â´Ù.
+        yield return new WaitForSeconds(0.1f);
+        enemyTeam1.transform.Find("Castle").gameObject.SetActive(false); //ÀûÆÀ ¼ºÀ» false·Î ²¨ ³õ´Â´Ù.
+        
+        foreach(Building myBuilding in SaveManager.saveManager.buildings)
+        {
+            if(!myBuilding.gameObject.activeSelf) //³» ºôµùÀÌ ²¨Á® ÀÖÀ¸¸é ´Ù½Ã Å²´Ù.
+            {
+                myBuilding.gameObject.SetActive(true);
+            }
+            myBuilding.Hp = myBuilding.MaxHp; //³»ºôµù Ã¼·ÂÀ» ¸ğµÎ ¿Ã·ÁÁØ´Ù.
+            
+        }
+
+
+        if (Team == 1) // °ÔÀÓ ½Â¸®½Ã
+        {
+            
+            if(int.Parse(level) == Nowlevel+1) //¿ø·¡ ²£´ø ·¹º§º¸´Ù ³ôÀ¸¸é ·¹º§¼¼ÆÃÈÄ ÀúÀå
+            {
+                Nowlevel = int.Parse(level);
+                SaveManager.saveManager.SaveLevel();
+            }
+            LogManager.logManager.Log("ÀüÀï¿¡¼­ ½Â¸® ÇÏ¿´½À´Ï´Ù.");
+
+        }
+        else //°ÔÀÓ ÆĞ¹è½Ã
+        {
+            LogManager.logManager.Log("ÀüÀï¿¡¼­ ÆĞ¹è ÇÏ¿´½À´Ï´Ù.");
+        }
+    }
+
+
+
 
 }

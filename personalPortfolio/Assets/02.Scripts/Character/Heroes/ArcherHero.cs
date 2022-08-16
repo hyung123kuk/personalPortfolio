@@ -49,6 +49,12 @@ public class ArcherHero : Hero, IHeroSkill, IBuff, IUpgrade
 
         base.Awake();
     }
+    protected override void OnDisable()
+    {
+
+        AttackReady = true;
+        base.OnDisable();
+    }
 
     public override void AttackTarget(GameObject[] Targets)
     {

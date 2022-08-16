@@ -15,7 +15,11 @@ public class Archer : Character , IUpgrade
         ArcherHero.ArcherBuff += SpeedUp;
         
     }
-
+    protected override void OnDisable()
+    {
+        ArcherHero.ArcherBuff -= SpeedUp;
+        base.OnDisable();
+    }
 
     public override void AttackTarget(GameObject[] Targets) //오버라이드로 궁수는 새로운 공격 함수 구성
     {

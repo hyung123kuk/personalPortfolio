@@ -131,4 +131,16 @@ public class Castle : Building , IUpgrade
         }
     }
 
+    protected override void DestroyBuilding()
+    {
+
+
+        if (Hp <= 0)
+        {
+            LevelManager.levelManager.StartCoroutine(LevelManager.levelManager.gameEnd(Team));
+            
+        }
+        base.DestroyBuilding();
+        
+    }
 }

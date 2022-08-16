@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class LevelPrefab : MonoBehaviour
 {
     [SerializeField]
-    int level;
+    public int level;
     [SerializeField]
     Image PossibleImage; // 진행 가능한지 안한지 보여주는 이미지
     [SerializeField]
@@ -22,6 +22,7 @@ public class LevelPrefab : MonoBehaviour
     }
     public void SpriteSet(Sprite sprite)
     {
+
         PossibleImage.sprite = sprite;
     }
 

@@ -214,7 +214,7 @@ public class ItemShop : MonoBehaviour ,IBuildingSet
         Destroy(SelectBuilding.gameObject);
         
         ShopReset();
-        
+        SaveManager.saveManager.SaveBuilding(); //아이템 팔때 저장
     }
     public void Upgede() //업그레이드 버튼
     {
@@ -236,6 +236,7 @@ public class ItemShop : MonoBehaviour ,IBuildingSet
         Building selbuild = SelectBuilding;
         ShopReset();
         BuildingSet(selbuild);
+        SaveManager.saveManager.SaveBuilding(); // 업그레이드 누를때 저장
     }
 
     public void ShopReset()

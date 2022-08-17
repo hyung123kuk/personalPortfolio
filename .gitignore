@@ -58,3 +58,11 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+personalPortfolio/Assets/02.Scripts/Manager/LevelManager.cs
+personalPortfolio/Assets/02.Scripts/Manager/PoolManager.cs
+personalPortfolio/Assets/02.Scripts/Manager/SoundManager.cs
+personalPortfolio/Assets/02.Scripts/Manager/SoundManager.cs.meta
+personalPortfolio/Assets/02.Scripts/UI/HeroSelect/HeroItem.cs
+personalPortfolio/Assets/02.Scripts/UI/HeroSelect/HeroSelect.cs
+personalPortfolio/Assets/02.Scripts/UI/LevelSel/LevelSelect.cs
+personalPortfolio/Assets/Resources/1.Building/AttackBuilding/AttackTower.prefab

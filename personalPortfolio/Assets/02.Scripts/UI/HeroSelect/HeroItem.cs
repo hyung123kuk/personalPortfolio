@@ -43,8 +43,8 @@ public class HeroItem : MonoBehaviour
 
     public void heroClick()
     {
-        GameObject heroCh = Instantiate<GameObject>(hero,HeroSelect.heroSelect.heroPosition.transform.position , Quaternion.identity);
-        heroCh.transform.Rotate(new Vector3(0, 90, 0));
+        GameObject heroCh = Instantiate<GameObject>(hero, TeamManager.teamManager.TeamCastle(0).PositionSet.transform.position , Quaternion.identity);
+        heroCh.transform.Rotate(new Vector3(0, 90, 0)); 
 
         Hero heroscript = heroCh.GetComponent<Hero>();
 

@@ -30,7 +30,8 @@ public class LevelManager : MonoBehaviour //¸¸µç ÀÌÀ¯´Â EnableÀ» ÇÒ¶§ ¼ø¼­´ë·Î Ç
     GameObject levelSelCanvas;
     [SerializeField]
     GameObject StartCanvas;
-
+    [SerializeField]
+    GameObject TouchControlCanvas;
 
     [SerializeField]
     private GameObject[] buildings;
@@ -162,22 +163,7 @@ public class LevelManager : MonoBehaviour //¸¸µç ÀÌÀ¯´Â EnableÀ» ÇÒ¶§ ¼ø¼­´ë·Î Ç
         List<Character> allch = new List<Character>(); //ÀüÅõ ¾À¿¡ ÀÖ´Â Ä³¸¯ÅÍ ¸ğµÎ »èÁ¦ 
 
         allch.AddRange(GameObject.FindObjectsOfType<Character>());
-        Character teamhero = null;
-        foreach(Character ch in allch)
-        {
-            if (ch.GetComponent<Hero>() == null)
-            {
-                ch.gameObject.SetActive(false);
-            }
-            else
-            {
-                teamhero = ch;
-            }
-        }
-        if (teamhero != null) //¿µ¿õ Ä³¸¯ÅÍ´Â ¸¶Áö¸·¿¡ false ÇØ¼­ ÀÌº¥Æ®°¡ ¸ğµÎ ²¨ÁøÈÄ¿¡ Á¤»èÀ¸·Î ²¨Áö°Ô ÇÑ´Ù.
-        {
-            teamhero.gameObject.SetActive(false);
-        }
+
 
         foreach (Building enemybuilding in enemyTeamBuilding) // »ó´ëÇÑ ¸ğµç Àû ºôµùÀ» true·Î ¹Ù²ã ³õ´Â´Ù. (´ÙÀ½¿¡ Å³¶§ ´Ù ÄÑÁ® ÀÖ¾î¾ß ÇÏ¹Ç·Î)
         {
@@ -200,25 +186,55 @@ public class LevelManager : MonoBehaviour //¸¸µç ÀÌÀ¯´Â EnableÀ» ÇÒ¶§ ¼ø¼­´ë·Î Ç
             
         }
 
+        Character teamhero = null;
+        foreach (Character ch in allch)
+        {
+            if (ch.GetComponent<Hero>() == null)
+            {
+                ch.gameObject.SetActive(false);
+            }
+            else
+            {
+                teamhero = ch;
+            }
+        }
+
+       
 
         if (Team == 1) // °ÔÀÓ ½Â¸®½Ã
         {
-            
-            if(int.Parse(level) == Nowlevel+1) //¿ø·¡ ²£´ø ·¹º§º¸´Ù ³ôÀ¸¸é ·¹º§¼¼ÆÃÈÄ ÀúÀå
-            {
-                Nowlevel = int.Parse(level);
-                SaveManager.saveManager.SaveLevel();
-            }
-            LogManager.logManager.Log("ÀüÀï¿¡¼­ ½Â¸® ÇÏ¿´½À´Ï´Ù.");
+            Win();
 
         }
         else //°ÔÀÓ ÆĞ¹è½Ã
         {
-            LogManager.logManager.Log("ÀüÀï¿¡¼­ ÆĞ¹è ÇÏ¿´½À´Ï´Ù.");
+            Lose();
+        }
+
+        levelSelCanvas.SetActive(true);
+        TouchControlCanvas.SetActive(false);
+        if (teamhero != null) //¿µ¿õ Ä³¸¯ÅÍ´Â ¸¶Áö¸·¿¡ false ÇØ¼­ ÀÌº¥Æ®°¡ ¸ğµÎ ²¨ÁøÈÄ¿¡ Á¤»óÀ¸·Î ²¨Áö°Ô ÇÑ´Ù. + 
+        {
+            teamhero.gameObject.SetActive(false);
+            teamhero.gameObject.SetActive(true);
+            teamhero.transform.position = TeamManager.teamManager.TeamCastle(0).PositionSet.transform.position;
         }
     }
 
 
 
+    private void Lose()
+    {
+        LogManager.logManager.Log("ÀüÀï¿¡¼­ ÆĞ¹è ÇÏ¿´½À´Ï´Ù.");
+    }
 
+    private void Win()
+    {
+        if (int.Parse(level) == Nowlevel + 1) //¿ø·¡ ²£´ø ·¹º§º¸´Ù ³ôÀ¸¸é ·¹º§¼¼ÆÃÈÄ ÀúÀå
+        {
+            Nowlevel = int.Parse(level);
+            SaveManager.saveManager.SaveLevel();
+        }
+        LogManager.logManager.Log("ÀüÀï¿¡¼­ ½Â¸® ÇÏ¿´½À´Ï´Ù.");
+    }
 }

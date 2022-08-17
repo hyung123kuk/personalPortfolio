@@ -10,7 +10,9 @@ public class PoolManager : MonoBehaviour
     GameObject Arrows;
     List<GameObject> ArrowPool = new List<GameObject>();
 
-
+    GameObject SFXPrefab;
+    GameObject SFXs;
+    List<GameObject> SFXPool = new List<GameObject>();
 
     #region 자동 캐릭터 오브젝트 풀링용
 
@@ -31,6 +33,9 @@ public class PoolManager : MonoBehaviour
         arrowPrefab = Resources.Load<GameObject>("Arrow");
         Arrows = new GameObject("Arrows");
 
+        SFXPrefab = Resources.Load<GameObject>("SFX");
+        SFXs = new GameObject("SFXs");
+        SFXMake(10);
 
 
         Prefabs = Resources.LoadAll<GameObject>("2.Unit/Character");
@@ -122,5 +127,32 @@ public class PoolManager : MonoBehaviour
     #endregion
 
 
+    #region SFX 오브젝트 풀링 및 받기
+    public void SFXMake(int count) 
+    {
+        for (int i = 0; i < count; i++)
+        {
+            GameObject sfx = Instantiate<GameObject>(SFXPrefab, SFXs.transform);
+            SFXPool.Add(sfx);
+            sfx.SetActive(false);
+        }
+    }
+    public GameObject GetSFX() 
+    {
+        foreach (GameObject sfx in SFXPool)
+        {
+            if (!sfx.activeSelf)
+            {
+
+                return sfx;
+            }
+        }
+
+
+        SFXMake(10);
+        return GetSFX();
+
+    }
+    #endregion
 
 }

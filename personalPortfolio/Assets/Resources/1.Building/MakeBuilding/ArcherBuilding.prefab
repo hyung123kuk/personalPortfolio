@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &158688873904056574
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1827362667993992568}
+  m_Layer: 0
+  m_Name: MakePos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1827362667993992568
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 158688873904056574}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.1, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 802254948613843006}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &802254948613682206
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,6 +42,7 @@ GameObject:
   - component: {fileID: 802254948612515870}
   - component: {fileID: 802254948611418846}
   - component: {fileID: 1059524719}
+  - component: {fileID: 8803287199299594173}
   - component: {fileID: 243305612135356975}
   m_Layer: 0
   m_Name: ArcherBuilding
@@ -30,7 +61,8 @@ Transform:
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1827362667993992568}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
@@ -96,6 +128,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6.736253, y: 6.657968, z: 4.695601}
   m_Center: {x: 0.072093606, y: -0.03884519, z: 1.6146704}
+--- !u!208 &8803287199299594173
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 802254948613682206}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 3.3680003, y: 3.3290002, z: 2.348}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.072000004, y: -0.039, z: 1.6150001}
+  m_TimeToStationary: 0.5
 --- !u!114 &243305612135356975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,7 +170,9 @@ MonoBehaviour:
   prevlevelPrice: 0
   sellPrice: 0
   levelPrice: 300
+  BuidingDieEffect: {fileID: 0}
   makeUnit: {fileID: 1482663311322321540, guid: 2cc34bd442a06064d96df17bd0ef67b6, type: 3}
   makeCoolTime: 15
   levelMakeCoolTime: 0
   posibleProduce: 0
+  MakePos: {fileID: 0}

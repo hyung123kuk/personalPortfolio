@@ -23,8 +23,7 @@ public class HeroSelect : MonoBehaviour
     List<GameObject> Heros = new List<GameObject>();
     [SerializeField]
     List<GameObject> Items = new List<GameObject>();
-    [SerializeField]
-    public GameObject heroPosition; //영웅이 나오는 위치
+
 
     private void Awake()
     {

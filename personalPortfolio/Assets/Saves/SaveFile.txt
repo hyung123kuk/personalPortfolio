@@ -1,1 +1,1 @@
-{"buildingName":["성","궁수양성소"],"buildingLevel":[0,0],"buildingPos":[{"x":-30.0,"y":0.0,"z":53.5},{"x":-6.040179252624512,"y":0.0,"z":56.96782302856445}],"gameLevel":1,"money":0}
+{"buildingName":["성","전사양성소"],"buildingLevel":[0,0],"buildingPos":[{"x":-10.842135429382325,"y":0.0,"z":68.83928680419922},{"x":-15.0,"y":0.0,"z":46.0}],"gameLevel":7,"money":1400}

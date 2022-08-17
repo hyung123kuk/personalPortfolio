@@ -15,6 +15,11 @@ public class LevelSelect : MonoBehaviour
     [SerializeField]
     List<GameObject> levelBoxList = new List<GameObject>();
 
+    [SerializeField]
+    GameObject BuildUICanvas;
+    [SerializeField]
+    GameObject GameUICanvas;
+
     private void Awake()
     {
         if (levelSelect == null)
@@ -60,5 +65,13 @@ public class LevelSelect : MonoBehaviour
 
 
         }
+    }
+
+    public void Backbutton()
+    {
+        Destroy(FindObjectOfType<Hero>().gameObject);
+        GameUICanvas.SetActive(false);
+        BuildUICanvas.SetActive(true);
+        
     }
 }

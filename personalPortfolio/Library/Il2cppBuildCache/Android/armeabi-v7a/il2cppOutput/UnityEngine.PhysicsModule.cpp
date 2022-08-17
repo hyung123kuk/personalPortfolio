@@ -1398,6 +1398,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void BoxCollider_set_size_Injected_m7A8B807F4
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
+<<<<<<< Updated upstream
 // System.Boolean UnityEngine.Collider::get_enabled()
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool Collider_get_enabled_m03B73B5C97033F939387D1785BDF2619CADAEEB0 (Collider_t5E81E43C2ECA0209A7C4528E84A632712D192B02 * __this, const RuntimeMethod* method)
 {
@@ -1408,6 +1409,8 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool Collider_get_enabled_m03B73B5C97033F9393
 	bool icallRetVal = _il2cpp_icall_func(__this);
 	return icallRetVal;
 }
+=======
+>>>>>>> Stashed changes
 // System.Void UnityEngine.Collider::set_enabled(System.Boolean)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Collider_set_enabled_m047B4D830755CD36671F7A60BFAA9C0D61F6C4A1 (Collider_t5E81E43C2ECA0209A7C4528E84A632712D192B02 * __this, bool ___value0, const RuntimeMethod* method)
 {

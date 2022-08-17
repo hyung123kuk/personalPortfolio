@@ -2323,6 +2323,7 @@ extern const Il2CppTypeDefinitionSizes g_typeDefinitionSize2307;
 extern const Il2CppTypeDefinitionSizes g_typeDefinitionSize2308;
 extern const Il2CppTypeDefinitionSizes g_typeDefinitionSize2309;
 extern const Il2CppTypeDefinitionSizes g_typeDefinitionSize2310;
+<<<<<<< Updated upstream
 extern const Il2CppTypeDefinitionSizes g_typeDefinitionSize2311;
 extern const Il2CppTypeDefinitionSizes g_typeDefinitionSize2312;
 extern const Il2CppTypeDefinitionSizes g_typeDefinitionSize2313;
@@ -2339,6 +2340,9 @@ extern const Il2CppTypeDefinitionSizes g_typeDefinitionSize2323;
 extern const Il2CppTypeDefinitionSizes g_typeDefinitionSize2324;
 extern const Il2CppTypeDefinitionSizes g_typeDefinitionSize2325;
 IL2CPP_EXTERN_C_CONST Il2CppTypeDefinitionSizes* g_Il2CppTypeDefinitionSizesTable[2326] = 
+=======
+IL2CPP_EXTERN_C_CONST Il2CppTypeDefinitionSizes* g_Il2CppTypeDefinitionSizesTable[2311] = 
+>>>>>>> Stashed changes
 {
 	(&g_typeDefinitionSize0),
 	(&g_typeDefinitionSize1),
@@ -4651,6 +4655,7 @@ IL2CPP_EXTERN_C_CONST Il2CppTypeDefinitionSizes* g_Il2CppTypeDefinitionSizesTabl
 	(&g_typeDefinitionSize2308),
 	(&g_typeDefinitionSize2309),
 	(&g_typeDefinitionSize2310),
+<<<<<<< Updated upstream
 	(&g_typeDefinitionSize2311),
 	(&g_typeDefinitionSize2312),
 	(&g_typeDefinitionSize2313),
@@ -4666,4 +4671,6 @@ IL2CPP_EXTERN_C_CONST Il2CppTypeDefinitionSizes* g_Il2CppTypeDefinitionSizesTabl
 	(&g_typeDefinitionSize2323),
 	(&g_typeDefinitionSize2324),
 	(&g_typeDefinitionSize2325),
+=======
+>>>>>>> Stashed changes
 };

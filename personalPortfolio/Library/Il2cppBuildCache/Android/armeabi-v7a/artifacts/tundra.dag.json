@@ -18,6 +18,7 @@
       "DebugActionIndex": 0
     },
     {
+<<<<<<< Updated upstream
       "Annotation": "Il2Cpp C:/aaaBuildPopol/Library/Il2cppBuildCache/Android/armeabi-v7a/Native/armeabi-v7a/libil2cpp.so",
       "Action": "\"C:\\Program Files\\Unity\\Hub\\Editor\\2020.3.30f1\\Editor\\Data\\il2cpp/build/deploy/netcoreapp3.1/il2cpp.exe\" --convert-to-cpp --emit-null-checks --enable-array-bounds-check --dotnetprofile=\"unityaot\" --compile-cpp --libil2cpp-static --platform=\"Android\" --architecture=\"ARMv7\" --configuration=\"Release\" --outputpath=\"C:\\aaaBuildPopol\\Library\\Il2cppBuildCache\\Android\\armeabi-v7a\\Native\\armeabi-v7a\\libil2cpp.so\" --cachedirectory=\"C:\\aaaBuildPopol\\Assets\\..\\Library\\il2cpp_android_armeabi-v7a/il2cpp_cache\" --additional-include-directories=\"C:/Program Files/Unity/Hub/Editor/2020.3.30f1/Editor/Data/PlaybackEngines/AndroidPlayer/Tools\\bdwgc/include\" --additional-include-directories=\"C:/Program Files/Unity/Hub/Editor/2020.3.30f1/Editor/Data/PlaybackEngines/AndroidPlayer/Tools\\libil2cpp/include\" --baselib-directory=\"C:/Program Files/Unity/Hub/Editor/2020.3.30f1/Editor/Data/PlaybackEngines/AndroidPlayer\\Variations\\il2cpp\\Release\\StaticLibs\\armeabi-v7a\" --avoid-dynamic-library-copy --tool-chain-path=\"C:/Program Files/Unity/Hub/Editor/2020.3.30f1/Editor/Data/PlaybackEngines/AndroidPlayer/NDK\" --incremental-g-c-time-slice=3 --profiler-report --map-file-parser=\"C:/Program Files/Unity/Hub/Editor/2020.3.30f1/Editor/Data/Tools/MapFileParser/MapFileParser.exe\" --directory=C:/aaaBuildPopol/Temp/StagingArea/assets/bin/Data/Managed --generatedcppdir=C:/aaaBuildPopol/Library/Il2cppBuildCache/Android/armeabi-v7a/il2cppOutput --stats-output-dir=C:/aaaBuildPopol/Library/Il2cppBuildCache/Android/armeabi-v7a/il2cppStats",
       "Inputs": [
@@ -46,13 +47,47 @@
         "C:/aaaBuildPopol/Temp/StagingArea/assets/bin/Data/Managed/UnityEngine.TilemapModule.dll",
         "C:/aaaBuildPopol/Temp/StagingArea/assets/bin/Data/Managed/UnityEngine.UI.dll",
         "C:/aaaBuildPopol/Temp/StagingArea/assets/bin/Data/Managed/UnityEngine.UIModule.dll",
+=======
+      "Annotation": "Il2Cpp C:/Users/임경아/Documents/GitHub/personalPortfolio/personalPortfolio/Library/Il2cppBuildCache/Android/armeabi-v7a/Native/armeabi-v7a/libil2cpp.so",
+      "Action": "\"C:\\Program Files\\Unity\\Hub\\Editor\\2020.3.30f1\\Editor\\Data\\il2cpp/build/deploy/netcoreapp3.1/il2cpp.exe\" --convert-to-cpp --emit-null-checks --enable-array-bounds-check --dotnetprofile=\"unityaot\" --compile-cpp --libil2cpp-static --platform=\"Android\" --architecture=\"ARMv7\" --configuration=\"Release\" --outputpath=\"C:\\Users\\임경아\\Documents\\GitHub\\personalPortfolio\\personalPortfolio\\Library\\Il2cppBuildCache\\Android\\armeabi-v7a\\Native\\armeabi-v7a\\libil2cpp.so\" --cachedirectory=\"C:\\Users\\임경아\\DOCUME~1\\GitHub\\PERSON~1\\PERSON~1\\Assets\\..\\Library\\IL2CPP~2/IL2CPP~1\" --additional-include-directories=\"C:/Program Files/Unity/Hub/Editor/2020.3.30f1/Editor/Data/PlaybackEngines/AndroidPlayer/Tools\\bdwgc/include\" --additional-include-directories=\"C:/Program Files/Unity/Hub/Editor/2020.3.30f1/Editor/Data/PlaybackEngines/AndroidPlayer/Tools\\libil2cpp/include\" --baselib-directory=\"C:/Program Files/Unity/Hub/Editor/2020.3.30f1/Editor/Data/PlaybackEngines/AndroidPlayer\\Variations\\il2cpp\\Release\\StaticLibs\\armeabi-v7a\" --avoid-dynamic-library-copy --tool-chain-path=\"C:/Program Files/Unity/Hub/Editor/2020.3.30f1/Editor/Data/PlaybackEngines/AndroidPlayer/NDK\" --incremental-g-c-time-slice=3 --profiler-report --map-file-parser=\"C:/Program Files/Unity/Hub/Editor/2020.3.30f1/Editor/Data/Tools/MapFileParser/MapFileParser.exe\" --directory=\"C:/Users/임경아/DOCUME~1/GitHub/PERSON~1/PERSON~1/Temp/STAGIN~1/assets/bin/Data/Managed\" --generatedcppdir=\"C:/Users/임경아/DOCUME~1/GitHub/PERSON~1/PERSON~1/Library/IL2CPP~1/Android/ARMEAB~1/il2cppOutput\" --stats-output-dir=\"C:/Users/임경아/DOCUME~1/GitHub/PERSON~1/PERSON~1/Library/IL2CPP~1/Android/ARMEAB~1/il2cppStats\"",
+      "Inputs": [
+        "C:/Users/임경아/DOCUME~1/GitHub/PERSON~1/PERSON~1/Temp/STAGIN~1/assets/bin/Data/Managed",
+        "C:/Users/임경아/DOCUME~1/GitHub/PERSON~1/PERSON~1/Temp/STAGIN~1/assets/bin/Data/Managed/Assembly-CSharp.dll",
+        "C:/Users/임경아/DOCUME~1/GitHub/PERSON~1/PERSON~1/Temp/STAGIN~1/assets/bin/Data/Managed/Mono.Security.dll",
+        "C:/Users/임경아/DOCUME~1/GitHub/PERSON~1/PERSON~1/Temp/STAGIN~1/assets/bin/Data/Managed/mscorlib.dll",
+        "C:/Users/임경아/DOCUME~1/GitHub/PERSON~1/PERSON~1/Temp/STAGIN~1/assets/bin/Data/Managed/System.Configuration.dll",
+        "C:/Users/임경아/DOCUME~1/GitHub/PERSON~1/PERSON~1/Temp/STAGIN~1/assets/bin/Data/Managed/System.Core.dll",
+        "C:/Users/임경아/DOCUME~1/GitHub/PERSON~1/PERSON~1/Temp/STAGIN~1/assets/bin/Data/Managed/System.dll",
+        "C:/Users/임경아/DOCUME~1/GitHub/PERSON~1/PERSON~1/Temp/STAGIN~1/assets/bin/Data/Managed/System.Xml.dll",
+        "C:/Users/임경아/DOCUME~1/GitHub/PERSON~1/PERSON~1/Temp/STAGIN~1/assets/bin/Data/Managed/UnityEngine.AIModule.dll",
+        "C:/Users/임경아/DOCUME~1/GitHub/PERSON~1/PERSON~1/Temp/STAGIN~1/assets/bin/Data/Managed/UnityEngine.AndroidJNIModule.dll",
+        "C:/Users/임경아/DOCUME~1/GitHub/PERSON~1/PERSON~1/Temp/STAGIN~1/assets/bin/Data/Managed/UnityEngine.AnimationModule.dll",
+        "C:/Users/임경아/DOCUME~1/GitHub/PERSON~1/PERSON~1/Temp/STAGIN~1/assets/bin/Data/Managed/UnityEngine.AudioModule.dll",
+        "C:/Users/임경아/DOCUME~1/GitHub/PERSON~1/PERSON~1/Temp/STAGIN~1/assets/bin/Data/Managed/UnityEngine.CoreModule.dll",
+        "C:/Users/임경아/DOCUME~1/GitHub/PERSON~1/PERSON~1/Temp/STAGIN~1/assets/bin/Data/Managed/UnityEngine.dll",
+        "C:/Users/임경아/DOCUME~1/GitHub/PERSON~1/PERSON~1/Temp/STAGIN~1/assets/bin/Data/Managed/UnityEngine.GridModule.dll",
+        "C:/Users/임경아/DOCUME~1/GitHub/PERSON~1/PERSON~1/Temp/STAGIN~1/assets/bin/Data/Managed/UnityEngine.IMGUIModule.dll",
+        "C:/Users/임경아/DOCUME~1/GitHub/PERSON~1/PERSON~1/Temp/STAGIN~1/assets/bin/Data/Managed/UnityEngine.InputLegacyModule.dll",
+        "C:/Users/임경아/DOCUME~1/GitHub/PERSON~1/PERSON~1/Temp/STAGIN~1/assets/bin/Data/Managed/UnityEngine.Physics2DModule.dll",
+        "C:/Users/임경아/DOCUME~1/GitHub/PERSON~1/PERSON~1/Temp/STAGIN~1/assets/bin/Data/Managed/UnityEngine.PhysicsModule.dll",
+        "C:/Users/임경아/DOCUME~1/GitHub/PERSON~1/PERSON~1/Temp/STAGIN~1/assets/bin/Data/Managed/UnityEngine.SharedInternalsModule.dll",
+        "C:/Users/임경아/DOCUME~1/GitHub/PERSON~1/PERSON~1/Temp/STAGIN~1/assets/bin/Data/Managed/UnityEngine.SpriteShapeModule.dll",
+        "C:/Users/임경아/DOCUME~1/GitHub/PERSON~1/PERSON~1/Temp/STAGIN~1/assets/bin/Data/Managed/UnityEngine.TextRenderingModule.dll",
+        "C:/Users/임경아/DOCUME~1/GitHub/PERSON~1/PERSON~1/Temp/STAGIN~1/assets/bin/Data/Managed/UnityEngine.TilemapModule.dll",
+        "C:/Users/임경아/DOCUME~1/GitHub/PERSON~1/PERSON~1/Temp/STAGIN~1/assets/bin/Data/Managed/UnityEngine.UI.dll",
+        "C:/Users/임경아/DOCUME~1/GitHub/PERSON~1/PERSON~1/Temp/STAGIN~1/assets/bin/Data/Managed/UnityEngine.UIModule.dll",
+>>>>>>> Stashed changes
         "C:/Program Files/Unity/Hub/Editor/2020.3.30f1/Editor/Data/Tools/MapFileParser/MapFileParser.exe",
         "C:/Program Files/Unity/Hub/Editor/2020.3.30f1/Editor/Data/PlaybackEngines/AndroidPlayer/Variations/il2cpp/Release/StaticLibs/armeabi-v7a/baselib.a",
         "C:/Program Files/Unity/Hub/Editor/2020.3.30f1/Editor/Data/PlaybackEngines/AndroidPlayer/Variations/il2cpp/Release/StaticLibs/armeabi-v7a/libunityruntime.a",
         "\"C:/Program Files/Unity/Hub/Editor/2020.3.30f1/Editor/Data/il2cpp/build/deploy/netcoreapp3.1/il2cpp.exe\""
       ],
       "Outputs": [
+<<<<<<< Updated upstream
         "C:/aaaBuildPopol/Library/Il2cppBuildCache/Android/armeabi-v7a/Native/armeabi-v7a/libil2cpp.so"
+=======
+        "C:/Users/임경아/Documents/GitHub/personalPortfolio/personalPortfolio/Library/Il2cppBuildCache/Android/armeabi-v7a/Native/armeabi-v7a/libil2cpp.so"
+>>>>>>> Stashed changes
       ],
       "TargetDirectories": [],
       "PassIndex": 0,
@@ -67,6 +102,7 @@
   ],
   "FileSignatures": [
     {
+<<<<<<< Updated upstream
       "File": "../../../../../Program Files/Unity/Hub/Editor/2020.3.30f1/Editor/Data/PlaybackEngines/AndroidPlayer/Tools/bdwgc/include"
     },
     {
@@ -77,6 +113,18 @@
     },
     {
       "File": "../../../../Temp/StagingArea/assets/bin/Data/Managed"
+=======
+      "File": "../../../../../../../../../../Program Files/Unity/Hub/Editor/2020.3.30f1/Editor/Data/PlaybackEngines/AndroidPlayer/Tools/bdwgc/include"
+    },
+    {
+      "File": "../../../../../../../../../../Program Files/Unity/Hub/Editor/2020.3.30f1/Editor/Data/PlaybackEngines/AndroidPlayer/Tools/libil2cpp/include"
+    },
+    {
+      "File": "../../../../../../../../../../Program Files/Unity/Hub/Editor/2020.3.30f1/Editor/Data/PlaybackEngines/AndroidPlayer/Variations/il2cpp/Release/StaticLibs/armeabi-v7a"
+    },
+    {
+      "File": "../../../../../../../../DOCUME~1/GitHub/PERSON~1/PERSON~1/Temp/STAGIN~1/assets/bin/Data/Managed"
+>>>>>>> Stashed changes
     },
     {
       "File": "artifacts/buildprogram/tundra_buildprogram.dag.json"
@@ -90,10 +138,17 @@
   ],
   "GlobSignatures": [
     {
+<<<<<<< Updated upstream
       "Path": "../../../../Temp/StagingArea/assets/bin/Data/Managed"
     },
     {
       "Path": "../../../../../Program Files/Unity/Hub/Editor/2020.3.30f1/Editor/Data/PlaybackEngines/AndroidPlayer/Variations/il2cpp/Release/StaticLibs/armeabi-v7a",
+=======
+      "Path": "../../../../../../../../DOCUME~1/GitHub/PERSON~1/PERSON~1/Temp/STAGIN~1/assets/bin/Data/Managed"
+    },
+    {
+      "Path": "../../../../../../../../../../Program Files/Unity/Hub/Editor/2020.3.30f1/Editor/Data/PlaybackEngines/AndroidPlayer/Variations/il2cpp/Release/StaticLibs/armeabi-v7a",
+>>>>>>> Stashed changes
       "Recurse": 1
     }
   ],

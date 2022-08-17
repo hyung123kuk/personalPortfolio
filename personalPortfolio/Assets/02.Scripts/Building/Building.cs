@@ -86,6 +86,7 @@ public abstract class Building : MonoBehaviour , IDamaged ,IUpgrade
     {
         BuildingUnSet();
         DestroyBuilding();
+
     }
     public virtual void Start()
     {
@@ -125,6 +126,10 @@ public abstract class Building : MonoBehaviour , IDamaged ,IUpgrade
             if (hp <= 0)
             {
                 DestroyBuilding();
+                if (team == 1)
+                {
+                    PlayerUI.playerUI.MoneySet(sellPrice / 5); //판매가의 5분의1만큼의 돈이 들어감.
+                }
             }
         }
     }
@@ -137,6 +142,10 @@ public abstract class Building : MonoBehaviour , IDamaged ,IUpgrade
             if (hp <= 0)
             {
                 DestroyBuilding();
+                if (team == 1)
+                {
+                    PlayerUI.playerUI.MoneySet(sellPrice / 5); //판매가의 5분의1만큼의 돈이 들어감.
+                }
             }
         }
     }
@@ -156,7 +165,11 @@ public abstract class Building : MonoBehaviour , IDamaged ,IUpgrade
 
         GameObject buildingDieEff=Instantiate<GameObject>(BuidingDieEffect, transform.position, Quaternion.identity);
         Destroy(buildingDieEff, 1.5f);
-        gameObject.SetActive(false);
+        if (hp <= 0) 
+        {
+            gameObject.SetActive(false);
+            
+        }
 
     }
 

@@ -19,6 +19,8 @@ public abstract class MakeBuilding : Building, IMake
 
     public bool posibleProduce=true; //인구수에 따라 생산 불가능,생산 가능이 정해진다.
 
+    [SerializeField]
+    Transform MakePos;
 
     
 
@@ -26,7 +28,9 @@ public abstract class MakeBuilding : Building, IMake
     {
         base.Awake();
         prevMakeCoolTime = MakeCoolTime;
-        
+        MakePos = transform.GetChild(0);
+
+
     }
 
     protected override void OnEnable()
@@ -56,7 +60,7 @@ public abstract class MakeBuilding : Building, IMake
             
 
             GameObject Unit = MakeUnitReturn();
-            Unit.transform.position = transform.position + transform.forward * 5f;
+            Unit.transform.position = MakePos.position;
             Unit.GetComponent<Character>().Team = Team;
             Unit.GetComponent<Character>().Level = Level;
             yield return new WaitForSeconds(0.01f);

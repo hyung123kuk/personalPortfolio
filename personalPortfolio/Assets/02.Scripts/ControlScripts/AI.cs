@@ -27,6 +27,7 @@ public class AI : MonoBehaviour, IState
         state = IState.State.Idle;
         
         nav.stoppingDistance = character.AttackRange;
+        target = null;
         StartCoroutine(AIState());
     }
 

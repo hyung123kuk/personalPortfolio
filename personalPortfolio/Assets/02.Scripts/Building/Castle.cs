@@ -30,6 +30,9 @@ public class Castle : Building , IUpgrade
     private bool unitproduce = true; //상태가 달라지지 않으면 괜히 event를 불러와 시간이 걸리므로 이곳에서도 알수있게 선언해 주었다.
    
     int NowPopulation = 0;
+
+    [SerializeField]
+    public GameObject PositionSet;
     protected override void OnEnable()
     {
         TeamManager.teamManager.Castles.Add(this);

@@ -142,7 +142,7 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
     protected virtual void OnDisable()
     {
         UnitUnSet();
-        DieCh();
+        
     }
     public virtual void UnitSet() {
 
@@ -217,7 +217,7 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
     private void DieCh() //캐릭터가 죽었을때 사용하는 함수.
     {
         GetComponent<Animator>().SetTrigger("Die");
-        if (hp == 0)
+        if (hp <= 0)
         {
             this.SendMessage("Die"); //AI에게 죽음을 알린다.
         }
@@ -229,10 +229,7 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
                 targetAI.SendMessage("TargetSetting"); //타겟 재 세팅 메세지를 보냅니다.
             }
         }
-        if (GetComponent<AI>()) //죽으면 타겟은 리셋
-        {
-            GetComponent<AI>().target = null;
-        }
+
 
     }
     public void Attack() //AI 1인공격 함수 (애니메이션에서 공격)
@@ -265,7 +262,7 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
             return false;
     }
 
-    public bool AttackRangeFucn(Transform _Target,float Angle =90f,float Range = -1) // 타겟이 공격범위 내에 있는지 확인하는 함수
+    public bool AttackRangeFucn(Transform _Target,float Angle =180f,float Range = -1) // 타겟이 공격범위 내에 있는지 확인하는 함수
     {
         if (Range == -1) // 만약에 공격 거리를 입력하지 않았다면 기본 공격거리를 사용한다.
             Range = attackRange;
@@ -274,7 +271,7 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
 
         float angle  = Vector3.Angle(_Target.position - transform.position, transform.forward);
 
-        if (Vector3.Distance(_Target.position, transform.position) <= Range + 0.2f && ((angle <= Angle)))
+        if (Vector3.Distance(_Target.position, transform.position) <= Range + 1.0f && ((angle <= Angle)))
         {            
             return true;
         }

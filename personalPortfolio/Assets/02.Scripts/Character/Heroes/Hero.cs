@@ -4,18 +4,28 @@ using UnityEngine;
 
 public abstract class Hero : Character, IUpgrade, IHeroSkill , ICondition
 {
+   
     [Header("영웅")]
     public string condisionMessage;
 
-    public bool AttackReady;
+    private bool attackReady = true;
+    public bool AttackReady
+    {
+        get { return attackReady; }
+        set { attackReady = value; }
+    }
 
+    [Header("스킬1쿨타임/감소량")]
     [SerializeField]
     private float skill1CoolTime; //스킬 쿨타임
     public float Skill1CoolTime { get { return skill1CoolTime; } set { skill1CoolTime = value; } }
     protected float prevSkill1CoolTime;
 
     public float levelSkill1CoolTime;
-    public bool isSkill1Cool;
+
+    public bool isSkill1Cool { get; set; }
+
+    [Header("스킬2쿨타임/감소량")]
     [SerializeField]
     private float skill2CoolTime;
     public float Skill2CoolTime { get { return skill2CoolTime; } set { skill2CoolTime = value; } }
@@ -26,7 +36,9 @@ public abstract class Hero : Character, IUpgrade, IHeroSkill , ICondition
     protected float prevSkill2CoolTime;
 
     public float levelSkill2CoolTime;
-    public bool isSkill2Cool;
+
+    public bool isSkill2Cool { get; set; }
+
     public override void Awake()
     {
         prevSkill1CoolTime = skill1CoolTime;

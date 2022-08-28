@@ -37,7 +37,8 @@ public class Arrow : MonoBehaviour, IDamaged
         tr = GetComponent<Transform>();
         mat = Resources.LoadAll<Material>("0.TeamColor/Color");
         myCol = GetComponent<Collider>();
-        Invoke("Disable", 4f);
+       
+        
     }
 
 
@@ -72,6 +73,7 @@ public class Arrow : MonoBehaviour, IDamaged
 
         tr.LookAt(Target.transform);
         tr.rotation *= Quaternion.Euler(new Vector3(0f, 90f, 0f));
+        Invoke("Disable", 4f); SoundManager.soundManager.SFXPlay("Arrow");
     }
 
 
@@ -79,7 +81,7 @@ public class Arrow : MonoBehaviour, IDamaged
     {
         rbody.AddForce(-transform.right * ArrowSpeed * 13, ForceMode.Impulse);
 
-
+        Invoke("Disable", 4f); SoundManager.soundManager.SFXPlay("Arrow");
     }
 
 
@@ -89,7 +91,7 @@ public class Arrow : MonoBehaviour, IDamaged
         col.gameObject.SendMessage("Damaged", damage);
         myCol.enabled = false;
         Invoke("Disable", 2f);
-
+        SoundManager.soundManager.SFXPlay("ArrowHit");
     }
     private void Disable()
     {

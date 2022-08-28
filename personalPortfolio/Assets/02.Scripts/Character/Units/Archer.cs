@@ -12,8 +12,13 @@ public class Archer : Character , IUpgrade
     public override void Start()
     {
         base.Start();
-        ArcherHero.ArcherBuff += SpeedUp;
         
+        
+    }
+    protected override void OnEnable()
+    {
+        ArcherHero.ArcherBuff += SpeedUp;
+        base.OnEnable();
     }
     protected override void OnDisable()
     {
@@ -23,9 +28,12 @@ public class Archer : Character , IUpgrade
 
     public override void AttackTarget(GameObject[] Targets) //오버라이드로 궁수는 새로운 공격 함수 구성
     {
+
+
+
         if (Targets == null)
             return;
-        if (AttackRangeFucn(Targets[0].transform)){
+        if (AttackRangeFucn(Targets[0].transform,Range : 20)){
             transform.LookAt(Targets[0].transform); //타겟을 쳐다보고 쏜다.
             GameObject arrowObj = PoolManager.poolManager.GetArrow();
             Arrow arrow = arrowObj.GetComponentInChildren<Arrow>();
@@ -46,6 +54,6 @@ public class Archer : Character , IUpgrade
 
     public override void RangeSet() //원거리 유닛은 범위 세팅이 필요없습니다.
     {
-        return;
+       
     }
 }

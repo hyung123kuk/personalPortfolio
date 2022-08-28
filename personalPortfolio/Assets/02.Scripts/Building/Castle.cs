@@ -35,7 +35,19 @@ public class Castle : Building , IUpgrade
     public GameObject PositionSet;
     protected override void OnEnable()
     {
-        TeamManager.teamManager.Castles.Add(this);
+        bool has =false;
+        foreach(Castle castle in TeamManager.teamManager.Castles)
+        {
+            if(castle == this)
+            {
+                has = true;
+                break;
+            }
+        }
+        if (!has)
+        {
+            TeamManager.teamManager.Castles.Add(this);
+        }
         base.OnEnable();
     }
 
@@ -65,6 +77,8 @@ public class Castle : Building , IUpgrade
         
     }
 
+
+
     public void UnitOn(bool ison)
     {
 
@@ -72,6 +86,7 @@ public class Castle : Building , IUpgrade
         {
             unitProduce(ison); 
         }
+
     }
 
     public void populationCheck()

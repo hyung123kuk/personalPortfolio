@@ -63,7 +63,7 @@ public class WarriorHero : Hero, IHeroSkill ,IBuff ,IUpgrade ,ICondition
     {
         if (Hp <= 0)
             return;
-
+        SoundManager.soundManager.SFXPlay("Warrior");
         StartCoroutine(attackSet());
         foreach (Character Unit in TeamManager.teamManager.enemyTeamCharacter(Team))
         {
@@ -95,10 +95,10 @@ public class WarriorHero : Hero, IHeroSkill ,IBuff ,IUpgrade ,ICondition
         
         if (Hp <= 0)
             return;
-
+        SoundManager.soundManager.SFXPlay("WarriorSkill1");
         if (WarriorBuff != null)
         {
-
+           
             WarriorBuff(skill1XSpeed, Team, Skill1Duration);
 
         }
@@ -109,6 +109,7 @@ public class WarriorHero : Hero, IHeroSkill ,IBuff ,IUpgrade ,ICondition
     {
         if (Hp <= 0)
             return;
+        SoundManager.soundManager.SFXPlay("WarriorSkill2");
         foreach (Character Unit in TeamManager.teamManager.enemyTeamCharacter(Team))
         {
             if(AttackRangeFucn(Unit.transform , Skill2Angle, Skill2Range))
@@ -145,14 +146,6 @@ public class WarriorHero : Hero, IHeroSkill ,IBuff ,IUpgrade ,ICondition
 
     public override void ConditionSet()
     {
-        List<Building> buildings =  TeamManager.teamManager.TeamCastle(0).buildings;
-        IsCondition = false;        
-        foreach(Building building in buildings)
-        {
-            if (building.GetComponent<WarriorBuilding>()) //워리어 빌딩이 존재한다면 조건 완료
-            {
-                IsCondition = true;
-            }
-        }
+        IsCondition = true;
     }
 }

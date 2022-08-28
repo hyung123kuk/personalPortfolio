@@ -65,6 +65,7 @@ public class ItemShop : MonoBehaviour ,IBuildingSet
         ShopReset();
         Menu.SetActive(true);
         gameObject.SetActive(false);
+        SoundManager.soundManager.SFXPlay("UIButton");
     }
 
     private void Awake() //판매 아이템을 Resources에 추가하면 자동으로 판매아이템에 올라오도록 만듬.
@@ -93,6 +94,7 @@ public class ItemShop : MonoBehaviour ,IBuildingSet
 
     public void BuildingSet(Building building)
     {
+        SoundManager.soundManager.SFXPlay("UIButton");
         SelectBuilding = building;
         Buildingimage.sprite = building.image;
         level.text = "레벨 : " + building.Level.ToString() ;
@@ -193,7 +195,7 @@ public class ItemShop : MonoBehaviour ,IBuildingSet
             LogManager.logManager.Log("돈이 부족합니다.");
             return;
         }
-
+        SoundManager.soundManager.SFXPlay("Buy");
         Points.SetActive(true);
         BuyBlock.SetActive(true);
     }
@@ -210,7 +212,7 @@ public class ItemShop : MonoBehaviour ,IBuildingSet
         }
 
 
-        PlayerUI.playerUI.MoneySet(SelectBuilding.sellPrice);
+        PlayerUI.playerUI.MoneySet(SelectBuilding.SellPrice);
         Destroy(SelectBuilding.gameObject);
         
         ShopReset();
@@ -230,7 +232,7 @@ public class ItemShop : MonoBehaviour ,IBuildingSet
             LogManager.logManager.Log("건물이 이미 최대 레벨입니다.");
             return;
         }
-
+        SoundManager.soundManager.SFXPlay("Upgrade");
         PlayerUI.playerUI.MoneySet(-SelectBuilding.levelPrice);
         SelectBuilding.Level++; //레벨올리면 자동으로 업그레이드 된다.
         Building selbuild = SelectBuilding;

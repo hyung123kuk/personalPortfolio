@@ -9,7 +9,7 @@ public class LevelManager : MonoBehaviour //¸¸µç ÀÌÀ¯´Â EnableÀ» ÇÒ¶§ ¼ø¼­´ë·Î Ç
     [SerializeField]
     GameObject myTeam;
     [SerializeField]
-    GameObject enemyTeam1;
+    public GameObject enemyTeam1;
     [SerializeField]
     GameObject enemyTeam2;
 
@@ -24,7 +24,7 @@ public class LevelManager : MonoBehaviour //¸¸µç ÀÌÀ¯´Â EnableÀ» ÇÒ¶§ ¼ø¼­´ë·Î Ç
     List<Building> enemyTeamBuilding = new List<Building>(); // ºÎ¼­Áø °Ç¹°À» ´Ù½Ã true ÇØ¾ß ÇÏ¹Ç·Î ¹Ş¾Æ ³õ´Â´Ù.
 
     [SerializeField]
-    string level;
+    public string level;
 
     [SerializeField]
     GameObject levelSelCanvas;
@@ -92,6 +92,7 @@ public class LevelManager : MonoBehaviour //¸¸µç ÀÌÀ¯´Â EnableÀ» ÇÒ¶§ ¼ø¼­´ë·Î Ç
         SaveManager.saveManager.LoadData();
        
         yield return new WaitForSeconds(0.1f);
+
         TouchScreen.SetActive(true);
     }
 
@@ -107,6 +108,7 @@ public class LevelManager : MonoBehaviour //¸¸µç ÀÌÀ¯´Â EnableÀ» ÇÒ¶§ ¼ø¼­´ë·Î Ç
         if (level != "-1")
         {
             enemyTeam1.transform.Find(level).gameObject.SetActive(false);
+          
         }
         SaveManager.saveManager.SaveBuilding(); // ³»°¡ °¡Áø ºôµù ¼¼ÆÃ(½ºÅ×ÀÌÁö ³¡³ª°í ´Ù½Ã ÄÑÁ®¾ß ÇÏ¹Ç·Î)
         level = _level.ToString();
@@ -127,9 +129,46 @@ public class LevelManager : MonoBehaviour //¸¸µç ÀÌÀ¯´Â EnableÀ» ÇÒ¶§ ¼ø¼­´ë·Î Ç
     {
         islevelSet = true;
 
-        
         yield return new WaitForSeconds(0.1f);
         enemyTeam1.transform.Find("Castle").gameObject.SetActive(true);
+        int lv = int.Parse(level);
+        yield return new WaitForSeconds(0.1f);
+
+        if (lv >= 0 && lv <= 4)
+        {
+            enemyTeam1.transform.Find("Castle").GetComponent<Castle>().Level = 0;
+        }
+        else if(lv >= 5 && lv <= 7)
+        {
+            enemyTeam1.transform.Find("Castle").GetComponent<Castle>().Level = 1;
+        }
+        else if (lv >= 8 && lv <= 10)
+        {
+            enemyTeam1.transform.Find("Castle").GetComponent<Castle>().Level = 2;
+        }
+        else if (lv >= 11 && lv <= 15)
+        {
+            enemyTeam1.transform.Find("Castle").GetComponent<Castle>().Level = 3;
+        }
+        else if (lv >= 16 && lv <= 19)
+        {
+            enemyTeam1.transform.Find("Castle").GetComponent<Castle>().Level = 4;
+        }
+        else if (lv >= 20 && lv <= 23)
+        {
+            enemyTeam1.transform.Find("Castle").GetComponent<Castle>().Level = 5;
+        }
+        else if (lv >= 24 && lv <= 27)
+        {
+            enemyTeam1.transform.Find("Castle").GetComponent<Castle>().Level = 6;
+        }
+        else
+        {
+            enemyTeam1.transform.Find("Castle").GetComponent<Castle>().Level = 7;
+        }
+
+
+
         yield return new WaitForSeconds(0.1f);
         enemyTeam1.transform.Find(level).gameObject.SetActive(true);
         yield return new WaitForSeconds(0.1f);
@@ -160,19 +199,20 @@ public class LevelManager : MonoBehaviour //¸¸µç ÀÌÀ¯´Â EnableÀ» ÇÒ¶§ ¼ø¼­´ë·Î Ç
         TeamManager.teamManager.TeamCastle(1).AttackBuildingCheck(false); //Àû °ø°İ ºôµù ¸ØÃã
         TeamManager.teamManager.TeamCastle(1).UnitOn(false);              //Àû »ı¼º ºôµù ¸ØÃã
 
-        List<Character> allch = new List<Character>(); //ÀüÅõ ¾À¿¡ ÀÖ´Â Ä³¸¯ÅÍ ¸ğµÎ »èÁ¦ 
-
-        allch.AddRange(GameObject.FindObjectsOfType<Character>());
 
 
+
+
+        enemyTeam1.transform.Find(level).gameObject.SetActive(false); //¸ğµç Àû ºôµù ·¹º§À» false·Î ÇØ ²¨ ³õ´Â´Ù.
         foreach (Building enemybuilding in enemyTeamBuilding) // »ó´ëÇÑ ¸ğµç Àû ºôµùÀ» true·Î ¹Ù²ã ³õ´Â´Ù. (´ÙÀ½¿¡ Å³¶§ ´Ù ÄÑÁ® ÀÖ¾î¾ß ÇÏ¹Ç·Î)
         {
             
             enemybuilding.Hp = enemybuilding.MaxHp;
-            enemybuilding.gameObject.SetActive(false);         
+            if (enemybuilding.GetComponent<Castle>() == null)
+            {
+                enemybuilding.gameObject.SetActive(true);
+            }
         }
-        yield return new WaitForSeconds(0.1f);
-        enemyTeam1.transform.Find(level).gameObject.SetActive(false); //¸ğµç Àû ºôµù ·¹º§À» false·Î ÇØ ²¨ ³õ´Â´Ù.
         yield return new WaitForSeconds(0.1f);
         enemyTeam1.transform.Find("Castle").gameObject.SetActive(false); //ÀûÆÀ ¼ºÀ» false·Î ²¨ ³õ´Â´Ù.
         
@@ -187,6 +227,10 @@ public class LevelManager : MonoBehaviour //¸¸µç ÀÌÀ¯´Â EnableÀ» ÇÒ¶§ ¼ø¼­´ë·Î Ç
         }
 
         Character teamhero = null;
+
+        List<Character> allch = new List<Character>(); //ÀüÅõ ¾À¿¡ ÀÖ´Â Ä³¸¯ÅÍ ¸ğµÎ »èÁ¦ 
+
+        allch.AddRange(GameObject.FindObjectsOfType<Character>());
         foreach (Character ch in allch)
         {
             if (ch.GetComponent<Hero>() == null)
@@ -235,6 +279,8 @@ public class LevelManager : MonoBehaviour //¸¸µç ÀÌÀ¯´Â EnableÀ» ÇÒ¶§ ¼ø¼­´ë·Î Ç
             Nowlevel = int.Parse(level);
             SaveManager.saveManager.SaveLevel();
         }
-        LogManager.logManager.Log("ÀüÀï¿¡¼­ ½Â¸® ÇÏ¿´½À´Ï´Ù.");
+        SoundManager.soundManager.SFXPlay("Win");
+       
+        
     }
 }

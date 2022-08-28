@@ -55,12 +55,14 @@ public class HeroSelect : MonoBehaviour
     {
         Menu.SetActive(true);
         gameObject.SetActive(false);
+        SoundManager.soundManager.SFXPlay("UIButton");
     }
 
     public void LevelSelect() //히어로 선택도 완료 되고 레벨 고르기 시작
     {
         levelChiceMenu.SetActive(true);
         BuildingCanvas.SetActive(false);
-        
+        SoundManager.soundManager.SFXPlay("HeroSet");
+
     }
 }

@@ -72,6 +72,6 @@ public class LevelSelect : MonoBehaviour
         Destroy(FindObjectOfType<Hero>().gameObject);
         GameUICanvas.SetActive(false);
         BuildUICanvas.SetActive(true);
-        
+        SoundManager.soundManager.SFXPlay("UIButton");
     }
 }

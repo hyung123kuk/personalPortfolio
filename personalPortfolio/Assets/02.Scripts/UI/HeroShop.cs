@@ -11,6 +11,7 @@ public class HeroShop : MonoBehaviour
     {
         Menu.SetActive(true);
         gameObject.SetActive(false);
+        SoundManager.soundManager.SFXPlay("UIButton");
     }
 
 }

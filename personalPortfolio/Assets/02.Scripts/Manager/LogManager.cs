@@ -24,7 +24,7 @@ public class LogManager : MonoBehaviour
         LogTextColorReset(1);
         StopAllCoroutines();
         StartCoroutine(DisappearText());
-
+        SoundManager.soundManager.SFXPlay("Error");
     }
 
     public float SpeedDisappear; //이것 만큼 기다렸다 이것만큼 깎는다 (1초간 텍스트가 보이게된다 a가 1부터 0까지 이므로)

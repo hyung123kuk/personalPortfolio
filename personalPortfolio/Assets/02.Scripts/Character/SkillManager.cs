@@ -58,6 +58,7 @@ public class SkillManager : MonoBehaviour
         if (hero.GetComponent<Hero>().isSkill2Cool)
         {
             LogManager.logManager.Log("스킬 쿨타임입니다.");
+
             return;
         }
         hero.GetComponent<Hero>().isSkill2Cool = true;

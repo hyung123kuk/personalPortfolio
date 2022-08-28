@@ -35,7 +35,7 @@ public class LevelPrefab : MonoBehaviour
         }
 
         LevelManager.levelManager.LevelSet(level);
-        
+        SoundManager.soundManager.SFXPlay("LevelSet");
     }
 
 }

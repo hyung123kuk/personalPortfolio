@@ -83,8 +83,10 @@ public class ArcherHero : Hero, IHeroSkill, IBuff, IUpgrade
         if (Hp <= 0)
             return;
 
+        SoundManager.soundManager.SFXPlay("ArcherSkill1");
         if (ArcherBuff != null)
         {
+            
             ArcherBuff(skill1XSpeed, Team, Skill1Duration); //같은 팀 아처 에게 버프 사용
         }
         base.Skill1();
@@ -95,8 +97,7 @@ public class ArcherHero : Hero, IHeroSkill, IBuff, IUpgrade
         if (Hp <= 0)
             return;
 
-        Debug.Log("1");
-
+        SoundManager.soundManager.SFXPlay("ArcherSkill2");
         float Angle = Skill2Angle / Skill2ArrowNumber;
         for (int i = 0; i < Skill2ArrowNumber; i++)
         {
@@ -113,6 +114,7 @@ public class ArcherHero : Hero, IHeroSkill, IBuff, IUpgrade
             arrow.NonTagerSet();
 
         }
+
         base.Skill2();
 
 

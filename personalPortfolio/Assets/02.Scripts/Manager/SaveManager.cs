@@ -45,16 +45,22 @@ public class SaveManager : MonoBehaviour
 
     public void SaveMoney()
     {
+
         data.money = PlayerUI.playerUI.money;
-        string json = JsonUtility.ToJson(data);
-        File.WriteAllText(SAVE_DATA_DIRECTORY + SAVE_FILENAME, json);
+        string json = JsonUtility.ToJson(data,true);
+        //File.WriteAllText(SAVE_DATA_DIRECTORY + SAVE_FILENAME, json);
+        string path = Path.Combine(Application.persistentDataPath, "data.json");
+        File.WriteAllText(path, json);
+ 
     }
 
     public void SaveLevel()
     {
         data.gameLevel = LevelManager.levelManager.Nowlevel;
         string json = JsonUtility.ToJson(data);
-        File.WriteAllText(SAVE_DATA_DIRECTORY + SAVE_FILENAME, json);
+        //File.WriteAllText(SAVE_DATA_DIRECTORY + SAVE_FILENAME, json);
+        string path = Path.Combine(Application.persistentDataPath, "data.json");
+        File.WriteAllText(path, json);
     }
 
     public void SaveBuilding()
@@ -76,26 +82,41 @@ public class SaveManager : MonoBehaviour
         }
 
         string json = JsonUtility.ToJson(data);
-        File.WriteAllText(SAVE_DATA_DIRECTORY + SAVE_FILENAME, json);
+        //File.WriteAllText(SAVE_DATA_DIRECTORY + SAVE_FILENAME, json);
+        string path = Path.Combine(Application.persistentDataPath, "data.json");
+        File.WriteAllText(path, json);
     }
     
     
     public void LoadData()
     {
-        if (File.Exists(SAVE_DATA_DIRECTORY + SAVE_FILENAME))
+
+        
+        if (Path.Combine(Application.persistentDataPath, "data.json") !=null)
         {
-            string loadJson = File.ReadAllText(SAVE_DATA_DIRECTORY + SAVE_FILENAME);
-            data = JsonUtility.FromJson<Data>(loadJson);
-
-            for (int i = 0; i < data.buildingName.Count; i++)
+            try
             {
-                LevelManager.levelManager.LoadToBuilding(data.buildingName[i], data.buildingLevel[i], data.buildingPos[i]);
-            }
-            LevelManager.levelManager.Nowlevel = data.gameLevel;
-            PlayerUI.playerUI.money = data.money;
-            PlayerUI.playerUI.MoneySet();
+                string path = Path.Combine(Application.persistentDataPath, "data.json");
+                string loadJson = File.ReadAllText(path);
+                data = JsonUtility.FromJson<Data>(loadJson);
 
-            LogManager.logManager.Log("세이브 데이터를 불러 왔습니다.");
+                for (int i = 0; i < data.buildingName.Count; i++)
+                {
+                    LevelManager.levelManager.LoadToBuilding(data.buildingName[i], data.buildingLevel[i], data.buildingPos[i]);
+                }
+                LevelManager.levelManager.Nowlevel = data.gameLevel;
+                PlayerUI.playerUI.money = data.money;
+                PlayerUI.playerUI.MoneySet();
+
+                LogManager.logManager.Log("세이브 데이터를 불러 왔습니다.");
+            }
+            catch
+            {
+
+                PlayerUI.playerUI.MoneySet(1000);
+
+                LogManager.logManager.Log("세이브 데이터가 없습니다.");
+            }
 
         }
         else //처음에 주는 아이템은 여기에 넣는다.
@@ -106,6 +127,7 @@ public class SaveManager : MonoBehaviour
             LogManager.logManager.Log("세이브 데이터가 없습니다.");
 
         }
+        
     }
 
     

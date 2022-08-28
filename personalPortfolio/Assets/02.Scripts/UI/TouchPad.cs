@@ -13,11 +13,17 @@ public class TouchPad : MonoBehaviour
     [SerializeField]
     public static Player playerMovement;
 
-    private void OnEnable()
+    private void Start()
     {
         _touchPad = GetComponent<RectTransform>();
         _StartPos = _touchPad.position;
-        
+    }
+    private void OnDisable()
+    {
+        _touchPad.position = _StartPos;
+        _buttonPressed = false;
+        FindObjectOfType<Player>().OnStickChange(new Vector2(0, 0));
+
     }
 
     public void ButtonDown()
@@ -50,6 +56,11 @@ public class TouchPad : MonoBehaviour
             foreach (Touch _touch in Input.touches)//입력된 터치 좌표를 담는 배열
             {
                 i++;
+
+                if (_touch.position.x >= Screen.width / 2 || _touch.position.y >= Screen.height / 2) //만약에 일정 범위 밖에있는 터치라면 무시한다.
+                    continue;
+
+
                 Vector2 touchPos = new Vector2(_touch.position.x, _touch.position.y);
 
                 if (_touch.phase == TouchPhase.Began) //시작 터치일때
@@ -63,7 +74,9 @@ public class TouchPad : MonoBehaviour
                         _touchId = i;
                     }
                 }
-                if (_touch.phase == TouchPhase.Moved || _touch.phase == TouchPhase.Stationary)
+                Debug.Log(_touch.position.x < Screen.width / 2);
+                Debug.Log(_touch.position.y < Screen.height / 2);
+                if ((_touch.phase == TouchPhase.Moved || _touch.phase == TouchPhase.Stationary) && _touch.position.x<Screen.width/2 && _touch.position.y <Screen.height/2)
                 //현재 백그라운 원안에서 움직이고 있거나/ 원안에서 멈추고 있는경우라면
                 {
 
@@ -72,7 +85,7 @@ public class TouchPad : MonoBehaviour
                         HandleInput(touchPos);
                     }
                 }
-                if (_touch.phase == TouchPhase.Ended) //터치패드의 터치가 끝났다면
+                if (_touch.phase == TouchPhase.Ended && _touch.position.x < Screen.width / 2 && _touch.position.y < Screen.height / 2) //터치패드의 터치가 끝났다면
                 {
                     _touchId = -1;
                 }

@@ -2,20 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Warrior : Character , IMelee , IUpgrade
+public class Warrior : Character, IMelee, IUpgrade
 {
     [Header("빌딩공격시 사거리")]
-    public int BuidingTargetRange = 6;
+    [SerializeField]
+    private int buidingTargetRange = 6;
 
-    private int UnitTargetRange;
+    public int UnitTargetRange { get; set; }
+
+    public int BuildingTargetRange { get { return buidingTargetRange; } set { buidingTargetRange = value; } }
 
 
+    public override void Awake()
+    {
+        UnitTargetRange = AttackRange;
+        base.Awake();
+    }
 
     public override void Start()
     {
         base.Start(); 
+    }
+    protected override void OnEnable()
+    {
         WarriorHero.WarriorBuff += SpeedUp;
-        UnitTargetRange = AttackRange;
+        base.OnEnable();
     }
 
     protected override void OnDisable()
@@ -29,7 +40,7 @@ public class Warrior : Character , IMelee , IUpgrade
     {
         if (Targets == null)
             return;
-
+        SoundManager.soundManager.SFXPlay("Warrior");
         transform.LookAt(Targets[0].transform);
         if (AttackRangeFucn(Targets[0].transform))
         {
@@ -48,7 +59,7 @@ public class Warrior : Character , IMelee , IUpgrade
         
         if (GetComponent<AI>().target.GetComponent<Building>())
         {
-            AttackRange = BuidingTargetRange;
+            AttackRange = buidingTargetRange;
         }
         else
         {

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade 
+public abstract class Character : MonoBehaviour, IAttack, IDamaged, IUpgrade
 // 모든 캐릭터들은 체력,공격력,방어력,이동속도을 가지고 있습니다.  회복 할수 있습니다 ,  데미지를 입습니다.
 {
 
@@ -14,7 +14,6 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
     public string Name;
     #region 최대체력, 체력, 공격력, 방어력, 이동속도, 공격범위, 팀, 인구수
     [Header("팀")]
-    [SerializeField]
     private int team;
     public int Team
     {
@@ -27,11 +26,9 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
     } //팀을 넣으면 자동으로 색상 변경 및 레이어 설정
 
     [Header("최대레벨")]
-    [SerializeField]
     private int maxlevel;
     public int MaxLevel { get { return maxlevel; } set { maxlevel = value; } }
     [Header("레벨")]
-    [SerializeField]
     private int level;
     public int Level { get { return level; } set { level = value; Upgrade(); } }
     [Header("인구수")]
@@ -39,19 +36,19 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
 
     [Header("체력/현재체력")]
     [SerializeField]
-    private int maxHp; 
+    private int maxHp;
     public int MaxHp { get { return maxHp; } set { maxHp = value; } } //최대체력
     protected int prevMaxHp;
 
     public int levelMaxHp;
 
-    [SerializeField]
-    private int hp; 
+
+    private int hp;
     public int Hp { get { return hp; } set { hp = value; } }//체력
 
     [Header("공격력")]
     [SerializeField]
-    private int attackDamage; 
+    private int attackDamage;
     public int AttackDamage { get { return attackDamage; } set { attackDamage = value; } } //공격력
     protected int prevAttackDamage;
 
@@ -60,7 +57,7 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
 
     [Header("방어력")]
     [SerializeField]
-    private int defense; 
+    private int defense;
     public int Defense { get { return defense; } set { defense = value; } } //방어력
     protected int prevDefense;
 
@@ -68,8 +65,8 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
 
     [Header("이동속도")]
     [SerializeField]
-    private float speed; 
-    public float Speed { get { return speed; } set { speed = value;} } //이동속도
+    private float speed;
+    public float Speed { get { return speed; } set { speed = value; } } //이동속도
     protected float prevSpeed;
 
     public float levelSpeed;
@@ -99,13 +96,14 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
     private MeshRenderer[] CharaterMesh;
     private Material[] mat;
 
-    public GameObject Hpbar;
+    private GameObject hpBar;
+
     private Image hpBarImage;
 
     public virtual void Awake()
     {
 
-        
+
         CharacterSkinnedMesh = GetComponentsInChildren<SkinnedMeshRenderer>();
         CharaterMesh = GetComponentsInChildren<MeshRenderer>();
         mat = Resources.LoadAll<Material>("0.TeamColor/CharacterColor");
@@ -116,27 +114,21 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
         prevDefense = defense;
         prevSpeed = speed;
         #endregion
-       
+        HpbarSet();
     }
 
     protected virtual void OnEnable()
     {
         hp = maxHp;
-        
+
         SetTeamColor();
         UnitSet();
-       
+
 
     }
 
     public virtual void Start()
-    {
-        Hpbar = Instantiate(Resources.Load<GameObject>("Hp_bar"));
-        Hpbar.GetComponent<CharacterHpBar>().targetTr = transform;
-        hpBarImage = Hpbar.transform.GetChild(1).GetComponent<Image>();
-        hpBarImage.fillAmount = 1.0f;
-        
-
+    { 
     }
 
     protected virtual void OnDisable()
@@ -148,9 +140,9 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
 
         TeamManager.teamManager.AddUnit(team, this);                //유닛을 더한후
         TeamManager.teamManager.TeamCastle(team).populationCheck(); //인구수 체크
-        if (Hpbar != null)
+        if (hpBar != null)
         {
-            Hpbar.SetActive(true);
+            hpBar.SetActive(true);
             hpBarImage.fillAmount = 1.0f;
         }
 
@@ -161,8 +153,8 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
     {
         TeamManager.teamManager.RemoveUnit(team, this);             //유닛을 뺀후
         TeamManager.teamManager.TeamCastle(team).populationCheck(); //인구수 체크
-        if (Hpbar != null)
-            Hpbar.SetActive(false);
+        if (hpBar != null)
+            hpBar.SetActive(false);
         speed = prevSpeed;
         attackSpeed = prevAttackSpeed;
     }
@@ -187,6 +179,7 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
     {
         if (hp > 0)
         {
+            SoundManager.soundManager.SFXPlay("UnitHit");
             hp -= Damaged+defense;
             if (hp <= 0)
             {
@@ -203,6 +196,7 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
     {
         if (team != Team && hp > 0)
         {
+            SoundManager.soundManager.SFXPlay("UnitHit");
             hp -= Damaged+ defense;
             if (hp <= 0)
             {
@@ -288,10 +282,14 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
         attackDamage = prevAttackDamage + (levelAttackDamage * level);
         speed = prevSpeed + (levelSpeed * level);
         attackSpeed = prevAttackSpeed + (levelAttackSpeed * level);
-
+        if (hpBar == null)
+        {
+            HpbarSet();
+        }
+        hpBar.transform.GetChild(2).GetComponent<Text>().text = level.ToString();
     }
 
-    public virtual void RangeSet() { } //근거리 유닛일때 사용합니다.
+    public abstract void RangeSet(); //근거리 유닛일때 사용합니다.
     public abstract void AttackTarget(GameObject[] Targets); //공격함수 구현은 캐릭터 별로 각자 하도록 한다. 
 
     #region 스피드업 버프 함수
@@ -313,7 +311,13 @@ public abstract class Character : MonoBehaviour, IAttack, IDamaged , IUpgrade
             }
         }
     }
-   
-    #endregion
 
+    #endregion
+    private void HpbarSet()
+    {
+        hpBar = Instantiate(Resources.Load<GameObject>("BuildingHp_bar"));
+        hpBar.GetComponent<CharacterHpBar>().targetTr = transform;
+        hpBarImage = hpBar.transform.GetChild(1).GetComponent<Image>();
+        hpBarImage.fillAmount = 1.0f;
+    }
 }

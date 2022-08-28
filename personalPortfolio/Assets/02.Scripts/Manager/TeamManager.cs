@@ -116,6 +116,7 @@ public class TeamManager : MonoBehaviour //같은팀,상대팀을 관리하는 클래스입니다
                 {
                     castle.buildings.Add(build);
                     castle.BuildingCheck();
+
                 }
             }
         }

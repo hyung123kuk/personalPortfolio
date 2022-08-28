@@ -13,10 +13,12 @@ public class Menu : MonoBehaviour
     {
         itemShop.SetActive(true);
         gameObject.SetActive(false);
+        SoundManager.soundManager.SFXPlay("UIButton");
     }
     public void HeroSelect()
     {
         heroSelect.SetActive(true);
         gameObject.SetActive(false);
+        SoundManager.soundManager.SFXPlay("UIButton");
     }
 }

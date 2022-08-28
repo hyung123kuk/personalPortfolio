@@ -16,6 +16,7 @@ public class TouchManager : MonoBehaviour, ITouch, IPointerDownHandler ,IDragHan
 
     private void OnEnable() //빌딩 세팅 모드에서는 모든 빌딩의 박스콜라이더 크기를 2배한다. (건물 겹쳐짐 방지를 위해)
     {
+
         foreach (Building building in TeamManager.teamManager.TeamCastle(0).buildings)
         {
             building.GetComponent<BoxCollider>().size *= 2;
@@ -45,6 +46,7 @@ public class TouchManager : MonoBehaviour, ITouch, IPointerDownHandler ,IDragHan
             if (FindObjectOfType<ItemShop>() && !ItemShop.itemShop.BuyBlock.activeSelf)
             {
                 ItemShop.itemShop.BuildingSet(ClickBuilding.GetComponent<Building>());
+                SoundManager.soundManager.SFXPlay("BuildingUp");
             }
         }
 
@@ -66,6 +68,7 @@ public class TouchManager : MonoBehaviour, ITouch, IPointerDownHandler ,IDragHan
 
     private void Update()
     {
+
         if (BuildingMoveOn) //건물이 움직일때
         {
             BuildingMove();
@@ -89,7 +92,7 @@ public class TouchManager : MonoBehaviour, ITouch, IPointerDownHandler ,IDragHan
         if (ClickBuilding != null) // 움직이는 건물은 없어진다.
         {
             ClickBuilding = null;
-  
+            SoundManager.soundManager.SFXPlay("BuildingDown");
         }
         
         BuildingMoveOn = false;

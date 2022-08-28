@@ -21,6 +21,6 @@ public class Item : MonoBehaviour
     public void ItemClick()
     {
         ItemShop.itemShop.BuildingSet(item);
-
+        SoundManager.soundManager.SFXPlay("UIButton");
     }
 }

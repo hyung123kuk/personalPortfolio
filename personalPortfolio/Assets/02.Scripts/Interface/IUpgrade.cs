@@ -8,5 +8,4 @@ public interface IUpgrade
     public int MaxLevel { get; set; }
     public abstract void Upgrade();
 
-
 }

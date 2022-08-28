@@ -12,8 +12,11 @@ public class StartCanvas : MonoBehaviour
     GameObject JoystickCanvas;
     public void BackButton()
     {
+        LevelManager.levelManager.enemyTeam1.transform.Find(LevelManager.levelManager.level).gameObject.SetActive(false);
         levelSelCanvas.SetActive(true);
         startCanvas.SetActive(false);
+        
+        SoundManager.soundManager.SFXPlay("UIButton");
     }
 
     public void StartButton()
@@ -23,13 +26,14 @@ public class StartCanvas : MonoBehaviour
         TeamManager.teamManager.TeamCastle(1).UnitOn(true);
         TeamManager.teamManager.TeamCastle(0).AttackBuildingCheck(true);
         TeamManager.teamManager.TeamCastle(1).AttackBuildingCheck(true);
-
+        SoundManager.soundManager.SFXPlay("UIButton");
         StartCoroutine(start());
         IEnumerator start()
         {
             yield return new WaitForSeconds(0.1f);
             startCanvas.SetActive(false);
         }
+
        
     }
 }

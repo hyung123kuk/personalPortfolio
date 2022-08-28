@@ -158,21 +158,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: c0f27fdb6885de24697493d76d4ba9f0, type: 3}
   Name: "\uC804\uC0AC\uC591\uC131\uC18C"
-  team: 0
   maxlevel: 10
-  level: 0
   maxHp: 400
   levelMaxHp: 40
-  hp: 0
   defense: 0
   levelDefense: 1
   buyPrice: 1000
-  prevlevelPrice: 0
-  sellPrice: 0
   levelPrice: 200
-  BuidingDieEffect: {fileID: 0}
   makeUnit: {fileID: 1887142254515175569, guid: 86ecceeb8cad2404a95bd7f54841ba5d, type: 3}
-  makeCoolTime: 10
+  makeCoolTime: 9
   levelMakeCoolTime: 0
   posibleProduce: 0
   MakePos: {fileID: 0}

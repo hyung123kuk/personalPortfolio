@@ -10801,7 +10801,8 @@ MonoBehaviour:
   levelAttackSpeed: 0.03
   attackRange: 2
   attackDelay: 0.2
-  BuidingTargetRange: 5
+  Hpbar: {fileID: 0}
+  BuidingTargetRange: 6
 --- !u!1 &1887142254515175757
 GameObject:
   m_ObjectHideFlags: 0
